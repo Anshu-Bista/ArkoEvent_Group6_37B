@@ -27,11 +27,12 @@ public class UserDao {
 
     //Sign Up
     public void signUp(UserData user){
-        String sql = "INSERT into users(username, email, password) values(?, ?, ?)";
+        String sql = "INSERT into users(username, email, password, phone) values(?, ?, ?, ?)";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)){
             pstmt.setString(1, user.getUsername());
             pstmt.setString(2, user.getEmail());
             pstmt.setString(3, user.getPassword());  
+            pstmt.setString(4, user.getPhone());  
         }
         catch(SQLException ex){
             Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE,null, ex);
@@ -41,15 +42,36 @@ public class UserDao {
         }
     }
 
+
     //Checks if the user is present
     public boolean checkUser(UserData user){
         Connection conn = mysql.openConnection();
         String sql ="SELECT* FROM users where email = ? or username = ?";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)){
             pstmt.setString(1, user.getEmail());
-            pstmt.setString(2, user.getUsername());
+            pstmt.setString(2, user.getUsername());  
+            pstmt.setString(3, user.getPhone());  
             ResultSet result = pstmt.executeQuery();
             return result.next();
+        }
+        catch(SQLException ex){
+            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally{
+            mysql.closeConnection(conn);
+        }
+        return false;
+    }
+
+    //Log In
+    public boolean login(String email, String password){
+        Connection conn = mysql.openConnection();
+        String sql ="SELECT* FROM users where email = ? or password = ?";
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)){
+            pstmt.setString(1, email);
+            pstmt.setString(2, password);
+            ResultSet result = pstmt.executeQuery();
+            return result.next(); 
         }
         catch(SQLException ex){
             Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
@@ -142,4 +164,54 @@ public class UserDao {
         }
         return false;
     }
+
+    //Profile
+    public UserData getProfile(String email){
+        Connection conn = mysql.openConnection();
+        String sql ="SELECT username, email, phone, account_status, profile_image, registration_date FROM users where email = ?";
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)){
+            pstmt.setString(1, email);
+            ResultSet result = pstmt.executeQuery();
+            if (result.next()){
+                UserData user = new UserData();
+                user.setUsername(result.getString("username"));               
+                user.setEmail(result.getString("email"));
+                user.setPhone(result.getString("phone"));
+                user.setStatus(result.getString("account_status"));        
+                user.setProfileImage(result.getBytes("profile_image"));
+                user.setRegistrationDate(result.getString("registration_date"));
+            } 
+        }
+        catch(SQLException ex){
+            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally{
+            mysql.closeConnection(conn);
+        }
+        return null;
+    }
+
+    public boolean updateProfile(UserData user){
+        Connection conn = mysql.openConnection();
+        String sql ="UPDATE users SET username = ?, phone = ?, account_status = ?, profile_image = ? WHERE email = ?";
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)){
+            pstmt.setString(1, user.getUsername());
+            pstmt.setString(2, user.getPhone());  
+            pstmt.setString(3, user.getStatus());            
+            pstmt.setBytes(4, user.getProfileImage());  
+            pstmt.setString(5, user.getEmail());  
+
+            int rows = pstmt.executeUpdate();
+            return rows > 0; // success if atleast one row was updated
+
+        }
+        catch(SQLException ex){
+            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally{
+            mysql.closeConnection(conn);
+        }
+        return false;
+    }
+
 }
