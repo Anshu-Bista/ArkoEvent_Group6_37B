@@ -4,6 +4,8 @@
  */
 package Model;
 
+import java.sql.Timestamp;
+
 /**
  *
  * @author hp
@@ -13,11 +15,22 @@ public class UserData {
     private String username;
     private String email;
     private String password;
+    private String phone;
+    private String confirmPassword;
+    private String status;
+    private byte[] profileImage;
+    private Timestamp registrationDate;
+
     
-    public UserData(String username, String email, String password){
+    public UserData(String username, String email, String password, String confirmPassword, String phone, byte[] profileImage, String status, Timestamp registrationDate){
         this.username = username;
         this.email = email;
         this.password = password;   
+        this.confirmPassword = confirmPassword;
+        this.phone = phone;
+        this.profileImage = profileImage;
+        this.status = (status != null)? status : "active";
+        this.registrationDate = (registrationDate != null)? registrationDate : new Timestamp(System.currentTimeMillis());
     }
     
    
@@ -48,5 +61,43 @@ public class UserData {
     }
     public void setId(int id){
         this.id = id;
+    }
+
+    public String getConfirmPassword(){
+        return confirmPassword;
+    }
+    public void setConfirmPassword(String confirmPassword){
+        this.confirmPassword = confirmPassword;
+    }
+
+    public int getPhone(){
+        return phone;
+    }
+    public void setPhone(String phone){
+        this.phone = phone;
+    }
+
+    
+    public int getStatus(){
+        return status;
+    }
+    public void setStatus(String status){
+        this.status = status;
+    }
+
+    
+    public Timestamp getRegistrationDate(){
+        return registrationDate;
+    }
+    public void setRegistrationDate(Timestamp registrationDate){
+        this.registrationDate = registrationDate;
+    }
+
+    
+    public byte[] getProfileImage(){
+        return profileImage;
+    }
+    public void setProfileImage(byte[] profileImage){
+        this.profileImage = profileImage;
     }
 }

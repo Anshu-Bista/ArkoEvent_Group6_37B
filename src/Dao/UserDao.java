@@ -27,12 +27,18 @@ public class UserDao {
 
     //Sign Up
     public void signUp(UserData user){
-        String sql = "INSERT into users(username, email, password, phone) values(?, ?, ?, ?)";
+        if (!user.getPassword().equals(user.getConfirmPassword())){
+            throw new IllegalArgumentException("Passwords donot match.");
+        }
+        String sql = "INSERT into users(username, email, password, phone, account_status, registration_date) values(?, ?, ?, ?, ?, ?)";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)){
             pstmt.setString(1, user.getUsername());
             pstmt.setString(2, user.getEmail());
             pstmt.setString(3, user.getPassword());  
-            pstmt.setString(4, user.getPhone());  
+            pstmt.setString(4, user.getPhone());    
+            pstmt.setString(5, user.getStatus());    
+            pstmt.setTimestamp(6, user.getRegistrationDate());  
+            pstmt.executeUpdate();
         }
         catch(SQLException ex){
             Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE,null, ex);
@@ -49,8 +55,7 @@ public class UserDao {
         String sql ="SELECT* FROM users where email = ? or username = ?";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)){
             pstmt.setString(1, user.getEmail());
-            pstmt.setString(2, user.getUsername());  
-            pstmt.setString(3, user.getPhone());  
+            pstmt.setString(2, user.getUsername());    
             ResultSet result = pstmt.executeQuery();
             return result.next();
         }
@@ -66,7 +71,7 @@ public class UserDao {
     //Log In
     public boolean login(String email, String password){
         Connection conn = mysql.openConnection();
-        String sql ="SELECT* FROM users where email = ? or password = ?";
+        String sql ="SELECT* FROM users where email = ? AND password = ?";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)){
             pstmt.setString(1, email);
             pstmt.setString(2, password);
@@ -146,7 +151,10 @@ public class UserDao {
     }
 
     //update password and clear reset code nad timestamp
-    public boolean updatePassword(String email, String newPassword){
+    public boolean updatePassword(String email, String newPassword, String confirmPassword){
+        if (!newPassword.equals(confirmPassword)){
+            return false;
+        }
         Connection conn = mysql.openConnection();
         String sql ="UPDATE users SET password = ?, reset_code = null, reset_code_timestamp = null WHERE email = ?";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)){
@@ -179,7 +187,8 @@ public class UserDao {
                 user.setPhone(result.getString("phone"));
                 user.setStatus(result.getString("account_status"));        
                 user.setProfileImage(result.getBytes("profile_image"));
-                user.setRegistrationDate(result.getString("registration_date"));
+                user.setRegistrationDate(result.getTimestamp("registration_date"));
+                return user;
             } 
         }
         catch(SQLException ex){
@@ -191,7 +200,7 @@ public class UserDao {
         return null;
     }
 
-    public boolean updateProfile(UserData user){
+    public void updateProfile(UserData user){
         Connection conn = mysql.openConnection();
         String sql ="UPDATE users SET username = ?, phone = ?, account_status = ?, profile_image = ? WHERE email = ?";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)){
@@ -200,10 +209,7 @@ public class UserDao {
             pstmt.setString(3, user.getStatus());            
             pstmt.setBytes(4, user.getProfileImage());  
             pstmt.setString(5, user.getEmail());  
-
-            int rows = pstmt.executeUpdate();
-            return rows > 0; // success if atleast one row was updated
-
+            pstmt.executeUpdate();
         }
         catch(SQLException ex){
             Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
@@ -211,7 +217,6 @@ public class UserDao {
         finally{
             mysql.closeConnection(conn);
         }
-        return false;
     }
 
 }
