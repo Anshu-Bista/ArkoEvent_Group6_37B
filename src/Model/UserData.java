@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Model;
+package model;
 
 import java.sql.Timestamp;
 
@@ -70,7 +70,7 @@ public class UserData {
         this.confirmPassword = confirmPassword;
     }
 
-    public int getPhone(){
+    public String getPhone(){
         return phone;
     }
     public void setPhone(String phone){
@@ -78,7 +78,7 @@ public class UserData {
     }
 
     
-    public int getStatus(){
+    public String getStatus(){
         return status;
     }
     public void setStatus(String status){

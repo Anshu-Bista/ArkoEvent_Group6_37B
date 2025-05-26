@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Dao;
+package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,9 +13,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.time.ZoneId;
 
-
-import Database.MySqlConnection;
-import Model.UserData;
+import database.MySqlConnection;
+import model.UserData;
 
 /**
  *
@@ -181,7 +180,7 @@ public class UserDao {
             pstmt.setString(1, email);
             ResultSet result = pstmt.executeQuery();
             if (result.next()){
-                UserData user = new UserData();
+                UserData user = new UserData( );
                 user.setUsername(result.getString("username"));               
                 user.setEmail(result.getString("email"));
                 user.setPhone(result.getString("phone"));
