@@ -8,5 +8,4 @@ package Dao;
  *
  * @author Ekta Thapa
  */
-public class UserDao {
-    
+

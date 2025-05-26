@@ -15,6 +15,18 @@ public class Reset extends javax.swing.JFrame {
      */
     public Reset() {
         initComponents();
+}
+    public Reset(String username) {
+    this.user=username;
+    intComponents();
+
+}
+    public static void main(String[] args) {
+        System.out.println("Reset program started");
+        // Add your logic here
+    }
+}
+
     }
 
     /**
@@ -89,6 +101,11 @@ public class Reset extends javax.swing.JFrame {
 
         ResetPassword.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         ResetPassword.setText("Reset password");
+        ResetPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ResetPasswordActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout rightLayout = new javax.swing.GroupLayout(right);
         right.setLayout(rightLayout);
@@ -179,7 +196,7 @@ public class Forgot extends javax.swing.JFrame{
     Connection con= null;
     ResultSet rs= null;
     PreparedStatement pst =null;
-    
+    Public string user;
 }
 private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         String query = "select * from frogotpassjava where username=? and password=?";
@@ -624,6 +641,28 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
     private void ConfirmpasswordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ConfirmpasswordFocusGained
         // TODO add your handling code here:
     }//GEN-LAST:event_ConfirmpasswordFocusGained
+
+    private void ResetPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResetPasswordActionPerformed
+        // TODO add your handling code here:
+    if(txtResetpass.getText()==txtVerResetPass.getText()) {
+    try{
+    String updateQuery = "UPDATE forgotpassjava SET password=? WHERE username="+user+"";
+    con=DriverManager.getConnection("jbdc:mysql://localhost?forgotpassjava","root","");
+    pst=con.prepareStatement(updateQuery);
+    pst.setString(1, txtVerResetPass.getText());
+    pst.executeUpdate();
+    JOptionpane.showMessageDialog(null, "Reset Successfully");
+    
+
+} catch(Exception ex){
+JoptionPane.showMessageDialog(null, ex);
+
+}
+}else{  
+      JOptionPane.ShowMessageDialog(null, "password do not match");
+}
+}
+    }//GEN-LAST:event_ResetPasswordActionPerformed
 
     /**
      * @param args the command line arguments

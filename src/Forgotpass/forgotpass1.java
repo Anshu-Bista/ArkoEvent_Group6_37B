@@ -23,7 +23,8 @@ public class forgotpass1 extends javax.swing.JFrame {
 
     }
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)
+{
         public class forgotpass {
     
 
@@ -99,6 +100,16 @@ public class Forgot extends javax.swing.JFrame{
         ResetPassword.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 ResetPasswordMouseMoved(evt);
+            }
+        });
+        ResetPassword.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                ResetPasswordMousePressed(evt);
+            }
+        });
+        ResetPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ResetPasswordActionPerformed(evt);
             }
         });
 
@@ -225,6 +236,7 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
 
     /**
      * Creates new form forgotpass1
+     *
      */
     public forgotpass1() {
         initComponents();
@@ -591,7 +603,8 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
 
     private void jButton1MouseMoved(java.awt.event.MouseEvent evt) {                                    
         // TODO add your handling code here:
-      
+      jLabel3.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
     }                                   
 
     /**
@@ -641,6 +654,17 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
 }
 
     }//GEN-LAST:event_EmailAddressFocusGained
+
+    private void ResetPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResetPasswordActionPerformed
+
+    }//GEN-LAST:event_ResetPasswordActionPerformed
+
+    private void ResetPasswordMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ResetPasswordMousePressed
+       Sendcode sc= new Sendcode();
+       this.setVisible(false);
+       sc.setVisible(true);
+       
+    }//GEN-LAST:event_ResetPasswordMousePressed
 
     /**
      * @param args the command line arguments

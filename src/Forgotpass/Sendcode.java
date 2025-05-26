@@ -11,7 +11,7 @@ package Forgotpass;
 public class Sendcode extends javax.swing.JFrame {
 
     /**
-     * Creates new form Sendcode
+     * Creates new form Sendcode()
      */
     public Sendcode() {
         initComponents();
@@ -47,6 +47,11 @@ public class Sendcode extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton1.setText("Verify");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton1);
         jButton1.setBounds(530, 140, 150, 27);
         jPanel1.add(jTextField1);
@@ -92,6 +97,11 @@ public class Sendcode extends javax.swing.JFrame {
 
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton2.setText("<Back");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton2);
         jButton2.setBounds(410, 0, 80, 27);
 
@@ -113,6 +123,22 @@ public class Sendcode extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+   
+}
+
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    if(integer.valueof(txtVer.getText())==randomCode) {
+    Reset rs = new Reset(txtEmail.getText());
+    rs.setVisible(true);
+    this.setVisible(false);
+
+} else{  
+        JOptionpane.showMessageDialog(null, "code do not match");
+    }//GEN-LAST:event_jButton1ActionPerformed
+}
     /**
      * @param args the command line arguments
      */
@@ -161,4 +187,4 @@ public class Sendcode extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     // End of variables declaration//GEN-END:variables
-}
+

@@ -1,27 +1,32 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package Database;
 
+/**
+ *
+ * @author Ekta Thapa
+ */
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.SQLException;
 
-/**
- *
- * @author Ekta Thapa
- */
 
 
-public class MySqlConnection implements Database {
-
+public class Mysql implements Database {
+  
     @Override
     public Connection openConnection() {
         try {
             String username = "root";
-            String password = "password";
-            String database = " demo";
+            String password = "Ektathapa9848";
+            String database = "databasejava"; // ✅ Fixed: removed extra space
+
             Connection connection = DriverManager.getConnection(
-                "jdbc:mysql://127.0.0.1:3306/" + database, username, password
+                "jdbc:mysql://localhost:3306/" + database, username, password
             );
 
             if (connection == null) {
@@ -31,7 +36,7 @@ public class MySqlConnection implements Database {
             }
             return connection;
         } catch (Exception e) {
-            System.out.println("Connection error: " + e.getMessage());
+            System.out.println("Connection error: " + e);
             return null;
         }
     }
@@ -60,7 +65,7 @@ public class MySqlConnection implements Database {
     }
 
     @Override
-    public int executeUpdate(Connection conn, String query) { // fixed typo
+    public int executeUpdate(Connection conn, String query) {
         try {
             Statement stmp = conn.createStatement();
             return stmp.executeUpdate(query);
