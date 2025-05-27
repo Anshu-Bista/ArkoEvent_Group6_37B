@@ -8,27 +8,25 @@ package Model;
  *
  * @author Aayusha
  */
-public class registrationpagedata {
+public class UserData {
     private String Username;
     private String email;
     private String contact;
     private String password;
-    private String confirmPassword;
  
-    // Constructor
-    public registrationpagedata(String email, String Username, String password, String confirmPassword, String contact) {
+    // yo parameters serially dinuparcha yo 
+    public UserData(String email, String Username, String password,String contact) {
         this.email = email;
         this.contact = contact;
         this.Username = Username;
         this.password = password;
-        this.confirmPassword = confirmPassword;
     }
  
 //Getters and setters
-    public String getemail() {
+    public String getEmail() {
         return email;
     }
-    public void setemail(String email) {
+    public void setEmail(String email) {
         this.email = email;
     }
  
@@ -39,24 +37,18 @@ public class registrationpagedata {
         this.Username = Username;
     }
  
-    public String getpassword() {
+    public String getPassword() {
         return password;
     }
-    public void setpassword(String password) {
+    public void setPassword(String password) {
         this.password = password;
     }
  
-    public String getconfirmPassword() {
-        return confirmPassword;
-    }
-    public void setconfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
-    }
-    public String getcontact()
+    public String getContact()
     {
         return contact;
     }
-    public void setcontact(String contact)
+    public void setContact(String contact)
     {
         this.contact = contact;
     }
