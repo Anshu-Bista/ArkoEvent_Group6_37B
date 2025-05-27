@@ -28,16 +28,10 @@ public class UserProfile extends javax.swing.JFrame {
 
         bg = new javax.swing.JPanel();
         sidebar = new javax.swing.JPanel();
-        home1 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        my_events = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        profile = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
@@ -67,104 +61,22 @@ public class UserProfile extends javax.swing.JFrame {
         sidebar.setBackground(new java.awt.Color(208, 202, 232));
         sidebar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        home1.setBackground(new java.awt.Color(208, 202, 232));
-
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/326656_home_icon.png"))); // NOI18N
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel3.setText("Home");
-
-        javax.swing.GroupLayout home1Layout = new javax.swing.GroupLayout(home1);
-        home1.setLayout(home1Layout);
-        home1Layout.setHorizontalGroup(
-            home1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(home1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(9, Short.MAX_VALUE))
-        );
-        home1Layout.setVerticalGroup(
-            home1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(home1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(home1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-
-        sidebar.add(home1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 220, 50));
-
-        my_events.setBackground(new java.awt.Color(208, 202, 232));
-
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/calendar-check.png"))); // NOI18N
-
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel7.setText("My Events");
-
-        javax.swing.GroupLayout my_eventsLayout = new javax.swing.GroupLayout(my_events);
-        my_events.setLayout(my_eventsLayout);
-        my_eventsLayout.setHorizontalGroup(
-            my_eventsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(my_eventsLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(9, Short.MAX_VALUE))
-        );
-        my_eventsLayout.setVerticalGroup(
-            my_eventsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(my_eventsLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(my_eventsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-
-        sidebar.add(my_events, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, -1, -1));
-
-        profile.setBackground(new java.awt.Color(180, 175, 204));
-
-        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/user.png"))); // NOI18N
-
-        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel11.setText("Profile");
-
-        javax.swing.GroupLayout profileLayout = new javax.swing.GroupLayout(profile);
-        profile.setLayout(profileLayout);
-        profileLayout.setHorizontalGroup(
-            profileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(profileLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(9, Short.MAX_VALUE))
-        );
-        profileLayout.setVerticalGroup(
-            profileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(profileLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(profileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-
-        sidebar.add(profile, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, -1, -1));
-
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel13.setText("Log Out");
         sidebar.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 570, 240, 38));
+
+        jButton2.setBackground(new java.awt.Color(208, 202, 232));
+        jButton2.setText("My Events");
+        sidebar.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 200, 40));
+
+        jButton3.setBackground(new java.awt.Color(208, 202, 232));
+        jButton3.setText("Home");
+        sidebar.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 200, 40));
+
+        jButton4.setBackground(new java.awt.Color(180, 175, 204));
+        jButton4.setText("Profile");
+        sidebar.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 200, 40));
 
         bg.add(sidebar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -2, 256, 630));
 
@@ -365,26 +277,20 @@ public class UserProfile extends javax.swing.JFrame {
     private javax.swing.JButton deactivate_btn;
     private javax.swing.JTextField email_fld;
     private javax.swing.JLabel email_lbl;
-    private javax.swing.JPanel home1;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel my_events;
     private javax.swing.JTextField name_fld;
     private javax.swing.JLabel name_lbl;
     private javax.swing.JTextField phone_fld;
     private javax.swing.JLabel phone_lbl;
     private javax.swing.JLabel pic_lbl;
-    private javax.swing.JPanel profile;
     private javax.swing.JTextField regdate_fld;
     private javax.swing.JLabel regdate_lbl;
     private javax.swing.JButton save_btn;

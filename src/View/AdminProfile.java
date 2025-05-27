@@ -28,26 +28,14 @@ public class AdminProfile extends javax.swing.JFrame {
 
         bg = new javax.swing.JPanel();
         sidebar = new javax.swing.JPanel();
-        discover = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        home1 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        my_events = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        bookings = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        profile = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        feedback = new javax.swing.JPanel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        feedback_btn = new javax.swing.JButton();
+        homebtn = new javax.swing.JButton();
+        bookingsbtn = new javax.swing.JButton();
+        myeventsbtn = new javax.swing.JButton();
+        discoverbtn = new javax.swing.JButton();
+        profilebtn = new javax.swing.JButton();
+        taskbar = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         pic_lbl = new javax.swing.JLabel();
@@ -76,201 +64,48 @@ public class AdminProfile extends javax.swing.JFrame {
         sidebar.setBackground(new java.awt.Color(208, 202, 232));
         sidebar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        discover.setBackground(new java.awt.Color(208, 202, 232));
-
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/search.png"))); // NOI18N
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel2.setText("Discover");
-
-        javax.swing.GroupLayout discoverLayout = new javax.swing.GroupLayout(discover);
-        discover.setLayout(discoverLayout);
-        discoverLayout.setHorizontalGroup(
-            discoverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(discoverLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(9, Short.MAX_VALUE))
-        );
-        discoverLayout.setVerticalGroup(
-            discoverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(discoverLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(discoverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-
-        sidebar.add(discover, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 220, 50));
-
-        home1.setBackground(new java.awt.Color(208, 202, 232));
-
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/326656_home_icon.png"))); // NOI18N
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel3.setText("Home");
-
-        javax.swing.GroupLayout home1Layout = new javax.swing.GroupLayout(home1);
-        home1.setLayout(home1Layout);
-        home1Layout.setHorizontalGroup(
-            home1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(home1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(9, Short.MAX_VALUE))
-        );
-        home1Layout.setVerticalGroup(
-            home1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(home1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(home1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-
-        sidebar.add(home1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 220, 50));
-
-        my_events.setBackground(new java.awt.Color(208, 202, 232));
-
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/calendar-check.png"))); // NOI18N
-
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel7.setText("My Events");
-
-        javax.swing.GroupLayout my_eventsLayout = new javax.swing.GroupLayout(my_events);
-        my_events.setLayout(my_eventsLayout);
-        my_eventsLayout.setHorizontalGroup(
-            my_eventsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(my_eventsLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(9, Short.MAX_VALUE))
-        );
-        my_eventsLayout.setVerticalGroup(
-            my_eventsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(my_eventsLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(my_eventsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-
-        sidebar.add(my_events, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, -1, -1));
-
-        bookings.setBackground(new java.awt.Color(208, 202, 232));
-
-        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/booking (1).png"))); // NOI18N
-
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel9.setText("Bookings");
-
-        javax.swing.GroupLayout bookingsLayout = new javax.swing.GroupLayout(bookings);
-        bookings.setLayout(bookingsLayout);
-        bookingsLayout.setHorizontalGroup(
-            bookingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(bookingsLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(9, Short.MAX_VALUE))
-        );
-        bookingsLayout.setVerticalGroup(
-            bookingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(bookingsLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(bookingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-
-        sidebar.add(bookings, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, -1, -1));
-
-        profile.setBackground(new java.awt.Color(180, 175, 204));
-
-        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/user.png"))); // NOI18N
-
-        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel11.setText("Profile");
-
-        javax.swing.GroupLayout profileLayout = new javax.swing.GroupLayout(profile);
-        profile.setLayout(profileLayout);
-        profileLayout.setHorizontalGroup(
-            profileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(profileLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(9, Short.MAX_VALUE))
-        );
-        profileLayout.setVerticalGroup(
-            profileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(profileLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(profileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-
-        sidebar.add(profile, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, -1, -1));
-
-        feedback.setBackground(new java.awt.Color(208, 202, 232));
-
-        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/ratings.png"))); // NOI18N
-
-        jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel16.setText("Feedback");
-
-        javax.swing.GroupLayout feedbackLayout = new javax.swing.GroupLayout(feedback);
-        feedback.setLayout(feedbackLayout);
-        feedbackLayout.setHorizontalGroup(
-            feedbackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(feedbackLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
-        );
-        feedbackLayout.setVerticalGroup(
-            feedbackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(feedbackLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(feedbackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-
-        sidebar.add(feedback, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, -1, -1));
-
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel13.setText("Log Out");
         sidebar.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 570, 240, 38));
 
+        feedback_btn.setBackground(new java.awt.Color(208, 202, 232));
+        feedback_btn.setText("Feedback");
+        feedback_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                feedback_btnActionPerformed(evt);
+            }
+        });
+        sidebar.add(feedback_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, 220, 50));
+
+        homebtn.setBackground(new java.awt.Color(208, 202, 232));
+        homebtn.setText("Home");
+        sidebar.add(homebtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 220, 50));
+
+        bookingsbtn.setBackground(new java.awt.Color(208, 202, 232));
+        bookingsbtn.setText("Bookings");
+        sidebar.add(bookingsbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 220, 50));
+
+        myeventsbtn.setBackground(new java.awt.Color(208, 202, 232));
+        myeventsbtn.setText("My Events");
+        sidebar.add(myeventsbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 220, 50));
+
+        discoverbtn.setBackground(new java.awt.Color(208, 202, 232));
+        discoverbtn.setText("Discover");
+        sidebar.add(discoverbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 220, 50));
+
+        profilebtn.setBackground(new java.awt.Color(180, 175, 204));
+        profilebtn.setText("Profile");
+        profilebtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                profilebtnActionPerformed(evt);
+            }
+        });
+        sidebar.add(profilebtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 220, 50));
+
         bg.add(sidebar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -2, 256, 630));
 
-        jPanel1.setBackground(new java.awt.Color(229, 179, 208));
+        taskbar.setBackground(new java.awt.Color(229, 179, 208));
 
         jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel15.setText("Profile");
@@ -278,26 +113,26 @@ public class AdminProfile extends javax.swing.JFrame {
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/user.png"))); // NOI18N
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout taskbarLayout = new javax.swing.GroupLayout(taskbar);
+        taskbar.setLayout(taskbarLayout);
+        taskbarLayout.setHorizontalGroup(
+            taskbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(taskbarLayout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(478, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        taskbarLayout.setVerticalGroup(
+            taskbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(taskbarLayout.createSequentialGroup()
                 .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 2, Short.MAX_VALUE))
             .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
 
-        bg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(248, 0, 700, 40));
+        bg.add(taskbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(248, 0, 700, 40));
 
         pic_lbl.setBackground(new java.awt.Color(102, 204, 255));
         pic_lbl.setForeground(new java.awt.Color(153, 255, 0));
@@ -383,16 +218,17 @@ public class AdminProfile extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(86, 86, 86))
         );
 
         pack();
@@ -421,6 +257,14 @@ public class AdminProfile extends javax.swing.JFrame {
     private void viewact_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewact_btnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_viewact_btnActionPerformed
+
+    private void feedback_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_feedback_btnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_feedback_btnActionPerformed
+
+    private void profilebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profilebtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_profilebtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -462,43 +306,31 @@ public class AdminProfile extends javax.swing.JFrame {
     private javax.swing.JTextField accstatus_fld;
     private javax.swing.JLabel accstatus_lbl;
     private javax.swing.JPanel bg;
-    private javax.swing.JPanel bookings;
+    private javax.swing.JButton bookingsbtn;
     private javax.swing.JLabel cam_lbl;
     private javax.swing.JButton deactivate_btn;
-    private javax.swing.JPanel discover;
+    private javax.swing.JButton discoverbtn;
     private javax.swing.JTextField email_fld;
     private javax.swing.JLabel email_lbl;
-    private javax.swing.JPanel feedback;
-    private javax.swing.JPanel home1;
+    private javax.swing.JButton feedback_btn;
+    private javax.swing.JButton homebtn;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel my_events;
+    private javax.swing.JButton myeventsbtn;
     private javax.swing.JTextField name_fld;
     private javax.swing.JLabel name_lbl;
     private javax.swing.JTextField phone_fld;
     private javax.swing.JLabel phone_lbl;
     private javax.swing.JLabel pic_lbl;
-    private javax.swing.JPanel profile;
+    private javax.swing.JButton profilebtn;
     private javax.swing.JTextField regdate_fld;
     private javax.swing.JLabel regdate_lbl;
     private javax.swing.JButton save_btn;
     private javax.swing.JPanel sidebar;
+    private javax.swing.JPanel taskbar;
     private javax.swing.JButton viewact_btn;
     // End of variables declaration//GEN-END:variables
 }
