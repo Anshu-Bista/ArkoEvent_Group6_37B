@@ -1,8 +1,10 @@
+package View;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package Forgotpass;
+
 
 /**
  *
@@ -10,9 +12,6 @@ package Forgotpass;
  */
 public class Sendcode extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Sendcode()
-     */
     public Sendcode() {
         initComponents();
     }
@@ -124,9 +123,11 @@ public class Sendcode extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-   
-}
 
+    // Assuming 'forgotPasswordScreen' is an instance of the Forgot Password UI
+    this.dispose();
+    Reset obj =new reset();
+   obj.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -137,6 +138,7 @@ public class Sendcode extends javax.swing.JFrame {
 
 } else{  
         JOptionpane.showMessageDialog(null, "code do not match");
+
     }//GEN-LAST:event_jButton1ActionPerformed
 }
     /**

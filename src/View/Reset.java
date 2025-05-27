@@ -14,13 +14,14 @@ public class Reset extends javax.swing.JFrame {
      * Creates new form Reset
      */
     public Reset() {
-        initComponents();
+    initComponents();
 }
-    public Reset(String username) {
-    this.user=username;
-    intComponents();
 
+public Reset(String username) {
+    this.user = username;
+    initComponents();
 }
+
     public static void main(String[] args) {
         System.out.println("Reset program started");
         // Add your logic here

@@ -656,6 +656,13 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
     }//GEN-LAST:event_EmailAddressFocusGained
 
     private void ResetPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResetPasswordActionPerformed
+            try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/your_database", "username", "password")) {
+            String query = "UPDATE users SET reset_token = ? WHERE email = ?";
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setString(1, resetToken);
+            stmt.setString(2, email);
+            stmt.executeUpdate();
+        } catch (Exception e) {
 
     }//GEN-LAST:event_ResetPasswordActionPerformed
 
