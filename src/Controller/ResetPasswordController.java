@@ -4,7 +4,7 @@
  */
 package Controller;
 
-import Dao.UserDao;
+import Dao.User.Dao;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;

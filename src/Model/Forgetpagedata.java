@@ -9,5 +9,9 @@ package Model;
  * @author Ekta Thapa
  */
 public class Forgetpagedata {
-    
-}
+     public class ArkoEvent_Group6_37B {
+    public static void main(String[] args) {
+        // your application logic
+    }
+    }
+    }

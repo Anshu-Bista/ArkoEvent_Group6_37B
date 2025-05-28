@@ -41,6 +41,7 @@ public Reset(String username) {
 
         jPanel1 = new javax.swing.JPanel();
         left = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
         right = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         Password = new javax.swing.JLabel();
@@ -61,15 +62,24 @@ public Reset(String username) {
         left.setForeground(new java.awt.Color(255, 255, 255));
         left.setPreferredSize(new java.awt.Dimension(400, 500));
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/rsz_aarkoeventlogo.jpg"))); // NOI18N
+        jLabel2.setText("jLabel2");
+
         javax.swing.GroupLayout leftLayout = new javax.swing.GroupLayout(left);
         left.setLayout(leftLayout);
         leftLayout.setHorizontalGroup(
             leftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, leftLayout.createSequentialGroup()
+                .addContainerGap(141, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(139, 139, 139))
         );
         leftLayout.setVerticalGroup(
             leftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 510, Short.MAX_VALUE)
+            .addGroup(leftLayout.createSequentialGroup()
+                .addGap(90, 90, 90)
+                .addComponent(jLabel2)
+                .addContainerGap(300, Short.MAX_VALUE))
         );
 
         jPanel1.add(left);
@@ -941,6 +951,7 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
     private javax.swing.JLabel Password;
     private javax.swing.JButton ResetPassword;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JPasswordField jPasswordField2;
