@@ -7,6 +7,8 @@ package View;
 
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 import javax.swing.JOptionPane;
 
 /**
@@ -353,10 +355,19 @@ public class Registration extends javax.swing.JFrame {
     }//GEN-LAST:event_contactFieldActionPerformed
 
     private void contactFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_contactFieldFocusGained
-        if (contactField.getText().equals("Contact")) {
-            contactField.setText("");
-            contactField.setForeground(Color.BLACK);
-        }  // TODO add your handling code here:
+         String raw;
+        if(contactField.getText().equals("Contact")){
+            raw = "";
+        }else{
+            raw = contactField.getText();
+        }
+        try {
+            contactField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##########")));
+        } catch (Exception ex) {
+            Logger.getLogger(Registration.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        contactField.setText(raw);
+        contactField.setForeground(Color.BLACK);
     }//GEN-LAST:event_contactFieldFocusGained
 
     private void formFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formFocusLost
@@ -364,10 +375,15 @@ public class Registration extends javax.swing.JFrame {
     }//GEN-LAST:event_formFocusLost
 
     private void contactFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_contactFieldFocusLost
-        if (contactField.getText().isEmpty()) {
+        String raw = contactField.getText().replaceAll("[^0-9]", "");
+        contactField.setFormatterFactory(null);
+        System.out.println(raw);
+        if(raw.isEmpty()){
             contactField.setText("Contact");
             contactField.setForeground(new Color(180, 180, 180));
-        } // TODO add your handling code here:
+        }else{
+            contactField.setText(raw);
+        }
     }//GEN-LAST:event_contactFieldFocusLost
 
     /**
@@ -443,5 +459,5 @@ public class Registration extends javax.swing.JFrame {
         }
     }
     
-  
+  // aayusha is i
 }
