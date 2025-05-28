@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
  import Database.MySqlConnection;
-import Model.UserData;
+import Model.RegData;
 import javax.swing.JOptionPane;
 
  
@@ -22,7 +22,7 @@ public class UserDao {
     MySqlConnection mysql = new MySqlConnection();
     
  
-    public void signUp(UserData user){
+    public void signUp(RegData user){
         Connection conn = mysql.openConnection();
         String sql = "INSERT into users(username, email, contact, pass) values(?, ?, ?, ?)";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)){
@@ -44,7 +44,7 @@ public class UserDao {
             mysql.closeConnection(conn);          
         }
     }
-    public boolean checkUser(UserData user){
+    public boolean checkUser(RegData user){
         Connection connn = mysql.openConnection();
         String sql ="SELECT* FROM users where email = ? or username = ?"; 
         try (PreparedStatement pstmt = connn.prepareStatement(sql)){

@@ -8,14 +8,14 @@ package Model;
  *
  * @author Aayusha
  */
-public class UserData {
+public class RegData {
     private String Username;
     private String email;
     private String contact;
     private String password;
  
     // yo parameters serially dinuparcha yo 
-    public UserData(String email, String Username, String password,String contact) {
+    public RegData(String email, String Username, String password,String contact) {
         this.email = email;
         this.contact = contact;
         this.Username = Username;

@@ -5,7 +5,7 @@
 package Controller;
 
 import Dao.UserDao;
-import Model.UserData;
+import Model.RegData;
 import View.Registration;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
@@ -69,7 +69,7 @@ public class signUpController {
                 }
                 
               //aaba try reegeestering ani check if data go
-                UserData user = new UserData(email,userName,password,contact);
+                RegData user = new RegData(email,userName,password,contact);
                 if(userDao.checkUser(user)){
                     JOptionPane.showMessageDialog(null, "Duplicate User");
                     return;
