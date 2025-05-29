@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 import java.time.ZoneId;
 
 import database.MySqlConnection;
+import java.sql.Timestamp;
 import model.UserData;
 
 /**
@@ -50,7 +51,7 @@ public class UserDao {
 
     //Checks if the user is present
     public boolean checkUser(UserData user){
-        Connection conn = mysql.openConnection();
+        Connection conn1 = mysql.openConnection();
         String sql ="SELECT* FROM users where email = ? or username = ?";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)){
             pstmt.setString(1, user.getEmail());
@@ -62,14 +63,14 @@ public class UserDao {
             Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         finally{
-            mysql.closeConnection(conn);
+            mysql.closeConnection(conn1);
         }
         return false;
     }
 
     //Log In
     public boolean login(String email, String password){
-        Connection conn = mysql.openConnection();
+        Connection conn2 = mysql.openConnection();
         String sql ="SELECT* FROM users where email = ? AND password = ?";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)){
             pstmt.setString(1, email);
@@ -81,7 +82,7 @@ public class UserDao {
             Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         finally{
-            mysql.closeConnection(conn);
+            mysql.closeConnection(conn2);
         }
         return false;
     }
@@ -89,7 +90,7 @@ public class UserDao {
     //Forgot Password
     //check if email is in the table
     public boolean checkEmail(UserData user){
-        Connection conn = mysql.openConnection();
+        Connection conn3 = mysql.openConnection();
         String sql ="SELECT id FROM users where email = ?";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)){
             pstmt.setString(1, user.getEmail());
@@ -100,14 +101,14 @@ public class UserDao {
             Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         finally{
-            mysql.closeConnection(conn);
+            mysql.closeConnection(conn3);
         }
         return false;
     }
 
     //save reset code and current timestamp 
     public void saveResetCode(String email, String resetCode){
-        Connection conn = mysql.openConnection();
+        Connection conn4 = mysql.openConnection();
         String sql ="UPDATE users SET reset_code = ?, reset_code_timestamp = NOW() WHERE email = ?";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)){
             pstmt.setString(1, resetCode);
@@ -118,13 +119,13 @@ public class UserDao {
             Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         finally{
-            mysql.closeConnection(conn);
+            mysql.closeConnection(conn4);
         }
     }
 
     //verify the code and time 
     public boolean verifyResetCode(String email, String resetCode){
-        Connection conn = mysql.openConnection();
+        Connection conn5 = mysql.openConnection();
         String sql ="SELECT reset_code_timestamp FROM users WHERE email= ? AND reset_code = ? ";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)){
             pstmt.setString(1, email);
@@ -144,7 +145,7 @@ public class UserDao {
             Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         finally{
-            mysql.closeConnection(conn);
+            mysql.closeConnection(conn5);
         }
         return false;
     }
@@ -154,7 +155,7 @@ public class UserDao {
         if (!newPassword.equals(confirmPassword)){
             return false;
         }
-        Connection conn = mysql.openConnection();
+        Connection conn6 = mysql.openConnection();
         String sql ="UPDATE users SET password = ?, reset_code = null, reset_code_timestamp = null WHERE email = ?";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)){
             pstmt.setString(1, newPassword);
@@ -167,20 +168,21 @@ public class UserDao {
             Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         finally{
-            mysql.closeConnection(conn);
+            mysql.closeConnection(conn6);
         }
         return false;
     }
 
     //Profile
     public UserData getProfile(String email){
-        Connection conn = mysql.openConnection();
+        Connection conn7 = mysql.openConnection();
         String sql ="SELECT username, email, phone, account_status, profile_image, registration_date FROM users where email = ?";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)){
             pstmt.setString(1, email);
             ResultSet result = pstmt.executeQuery();
             if (result.next()){
-                UserData user = new UserData( );
+                UserData user = new UserData(String username, String email, String password, String confirmPassword, String phone,
+                 byte[] profileImage, String status, Timestamp registrationDate);
                 user.setUsername(result.getString("username"));               
                 user.setEmail(result.getString("email"));
                 user.setPhone(result.getString("phone"));
@@ -194,13 +196,13 @@ public class UserDao {
             Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         finally{
-            mysql.closeConnection(conn);
+            mysql.closeConnection(conn7);
         }
         return null;
     }
 
     public void updateProfile(UserData user){
-        Connection conn = mysql.openConnection();
+        Connection conn8 = mysql.openConnection();
         String sql ="UPDATE users SET username = ?, phone = ?, account_status = ?, profile_image = ? WHERE email = ?";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)){
             pstmt.setString(1, user.getUsername());
@@ -214,7 +216,7 @@ public class UserDao {
             Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         finally{
-            mysql.closeConnection(conn);
+            mysql.closeConnection(conn8);
         }
     }
 
