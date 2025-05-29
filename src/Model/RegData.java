@@ -14,7 +14,7 @@ public class RegData {
     private String contact;
     private String password;
  
-    // yo parameters serially dinuparcha yo 
+    
     public RegData(String email, String Username, String password,String contact) {
         this.email = email;
         this.contact = contact;
