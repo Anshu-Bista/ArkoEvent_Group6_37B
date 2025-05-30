@@ -2,7 +2,7 @@ package controller;
 
 import model.EventDao;
 import model.EventData;
-import view.SearchCategoryView;
+import view.EventList;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -10,44 +10,44 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 public class SearchByCategoryController {
-    private final SearchCategoryView view;
+    private final EventList eventListView; // Renamed from 'view' to 'eventListView'
     private final EventDao eventDao;
 
-    public SearchByCategoryController(SearchCategoryView view, EventDao eventDao) {
-        this.view = view;
+    public SearchByCategoryController(EventList eventListView, EventDao eventDao) {
+        this.eventListView = eventListView;
         this.eventDao = eventDao;
 
-        // Attach action listener to search button
-        this.view.addSearchButtonListener(new SearchListener());
+        // Attach action listener to the search button in EventList
+        this.eventListView.addSearchButtonListener(new SearchListener());
     }
 
     public void open() {
-        this.view.setVisible(true);
+        this.eventListView.setVisible(true);
     }
 
     public void close() {
-        this.view.dispose();
+        this.eventListView.dispose();
     }
 
     class SearchListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             try {
-                String category = view.getSelectedCategory();
+                String category = eventListView.getSelectedCategory();
 
                 if (category == null || category.trim().isEmpty()) {
-                    JOptionPane.showMessageDialog(view, "Please select or enter a category.");
+                    JOptionPane.showMessageDialog(eventListView, "Please select or enter a category.");
                     return;
                 }
 
-                List<EventData> events = eventDao.getEventsByCategory(category);    //db
+                List<EventData> events = eventDao.getEventsByCategory(category); // DB layer
 
                 if (events.isEmpty()) {
-                    JOptionPane.showMessageDialog(view, "No events found for category: " + category);
+                    JOptionPane.showMessageDialog(eventListView, "No events found for category: " + category);
                 }
 
-                view.displayEvents(events);  //view 
+                eventListView.displayEvents(events); // Show results in EventList page
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(view, "Error searching events: " + ex.getMessage());
+                JOptionPane.showMessageDialog(eventListView, "Error searching events: " + ex.getMessage());
             }
         }
     }
