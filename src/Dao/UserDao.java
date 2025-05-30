@@ -175,6 +175,7 @@ public class UserDao {
 
     //Profile
     public UserData getProfile(String email){
+
         Connection conn7 = mysql.openConnection();
         String sql ="SELECT username, email, phone, account_status, profile_image, registration_date FROM users where email = ?";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)){
@@ -197,12 +198,13 @@ public class UserDao {
         }
         finally{
             mysql.closeConnection(conn7);
-        }
         return null;
     }
 
     public void updateProfile(UserData user){
+
         Connection conn8 = mysql.openConnection();
+
         String sql ="UPDATE users SET username = ?, phone = ?, account_status = ?, profile_image = ? WHERE email = ?";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)){
             pstmt.setString(1, user.getUsername());
@@ -217,6 +219,7 @@ public class UserDao {
         }
         finally{
             mysql.closeConnection(conn8);
+
         }
     }
 
