@@ -15,6 +15,7 @@ public class AdminProfile extends javax.swing.JFrame {
      */
     public AdminProfile() {
         initComponents();
+       
     }
 
     /**
@@ -28,19 +29,19 @@ public class AdminProfile extends javax.swing.JFrame {
 
         bg = new javax.swing.JPanel();
         sidebar = new javax.swing.JPanel();
-        jLabel13 = new javax.swing.JLabel();
         feedback_btn = new javax.swing.JButton();
         homebtn = new javax.swing.JButton();
         bookingsbtn = new javax.swing.JButton();
         myeventsbtn = new javax.swing.JButton();
         discoverbtn = new javax.swing.JButton();
         profilebtn = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         taskbar = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         pic_lbl = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        upload_btn = new javax.swing.JButton();
         email_lbl = new javax.swing.JLabel();
         name_lbl = new javax.swing.JLabel();
         phone_lbl = new javax.swing.JLabel();
@@ -64,11 +65,6 @@ public class AdminProfile extends javax.swing.JFrame {
         sidebar.setBackground(new java.awt.Color(208, 202, 232));
         sidebar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel13.setText("Log Out");
-        sidebar.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 570, 240, 38));
-
         feedback_btn.setBackground(new java.awt.Color(208, 202, 232));
         feedback_btn.setText("Feedback");
         feedback_btn.addActionListener(new java.awt.event.ActionListener() {
@@ -80,6 +76,11 @@ public class AdminProfile extends javax.swing.JFrame {
 
         homebtn.setBackground(new java.awt.Color(208, 202, 232));
         homebtn.setText("Home");
+        homebtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                homebtnActionPerformed(evt);
+            }
+        });
         sidebar.add(homebtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 220, 50));
 
         bookingsbtn.setBackground(new java.awt.Color(208, 202, 232));
@@ -92,6 +93,11 @@ public class AdminProfile extends javax.swing.JFrame {
 
         discoverbtn.setBackground(new java.awt.Color(208, 202, 232));
         discoverbtn.setText("Discover");
+        discoverbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                discoverbtnActionPerformed(evt);
+            }
+        });
         sidebar.add(discoverbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 220, 50));
 
         profilebtn.setBackground(new java.awt.Color(180, 175, 204));
@@ -102,6 +108,10 @@ public class AdminProfile extends javax.swing.JFrame {
             }
         });
         sidebar.add(profilebtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 220, 50));
+
+        jButton1.setBackground(new java.awt.Color(208, 202, 232));
+        jButton1.setText("Log Out");
+        sidebar.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 550, 220, 40));
 
         bg.add(sidebar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -2, 256, 630));
 
@@ -141,13 +151,13 @@ public class AdminProfile extends javax.swing.JFrame {
         bg.add(pic_lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 80, 130, 140));
         bg.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 290, -1, -1));
 
-        jButton1.setText("Upload your Profile Picture");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        upload_btn.setText("Upload your Profile Picture");
+        upload_btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                upload_btnActionPerformed(evt);
             }
         });
-        bg.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 230, -1, -1));
+        bg.add(upload_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 230, -1, -1));
 
         email_lbl.setText("Email");
         bg.add(email_lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 310, -1, -1));
@@ -191,6 +201,11 @@ public class AdminProfile extends javax.swing.JFrame {
         bg.add(cam_lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 130, 110, 50));
 
         save_btn.setText("Save Changes");
+        save_btn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                save_btnMouseClicked(evt);
+            }
+        });
         save_btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 save_btnActionPerformed(evt);
@@ -218,25 +233,23 @@ public class AdminProfile extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
                 .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(0, 12, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(86, 86, 86))
+                .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 92, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void upload_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_upload_btnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_upload_btnActionPerformed
 
     private void name_fldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_name_fldActionPerformed
         // TODO add your handling code here:
@@ -247,7 +260,7 @@ public class AdminProfile extends javax.swing.JFrame {
     }//GEN-LAST:event_accstatus_fldActionPerformed
 
     private void save_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_btnActionPerformed
-        // TODO add your handling code here:
+    
     }//GEN-LAST:event_save_btnActionPerformed
 
     private void deactivate_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deactivate_btnActionPerformed
@@ -265,6 +278,18 @@ public class AdminProfile extends javax.swing.JFrame {
     private void profilebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profilebtnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_profilebtnActionPerformed
+
+    private void homebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homebtnActionPerformed
+        
+    }//GEN-LAST:event_homebtnActionPerformed
+
+    private void save_btnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_save_btnMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_save_btnMouseClicked
+
+    private void discoverbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_discoverbtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_discoverbtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -315,7 +340,6 @@ public class AdminProfile extends javax.swing.JFrame {
     private javax.swing.JButton feedback_btn;
     private javax.swing.JButton homebtn;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel18;
@@ -331,6 +355,7 @@ public class AdminProfile extends javax.swing.JFrame {
     private javax.swing.JButton save_btn;
     private javax.swing.JPanel sidebar;
     private javax.swing.JPanel taskbar;
+    private javax.swing.JButton upload_btn;
     private javax.swing.JButton viewact_btn;
     // End of variables declaration//GEN-END:variables
 }
