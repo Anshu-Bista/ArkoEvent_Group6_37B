@@ -28,10 +28,10 @@ public class UserProfile extends javax.swing.JFrame {
 
         bg = new javax.swing.JPanel();
         sidebar = new javax.swing.JPanel();
-        jLabel13 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
@@ -61,11 +61,6 @@ public class UserProfile extends javax.swing.JFrame {
         sidebar.setBackground(new java.awt.Color(208, 202, 232));
         sidebar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel13.setText("Log Out");
-        sidebar.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 570, 240, 38));
-
         jButton2.setBackground(new java.awt.Color(208, 202, 232));
         jButton2.setText("My Events");
         sidebar.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 200, 40));
@@ -77,6 +72,10 @@ public class UserProfile extends javax.swing.JFrame {
         jButton4.setBackground(new java.awt.Color(180, 175, 204));
         jButton4.setText("Profile");
         sidebar.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 200, 40));
+
+        jButton5.setBackground(new java.awt.Color(208, 202, 232));
+        jButton5.setText("Log Out");
+        sidebar.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 570, 220, 40));
 
         bg.add(sidebar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -2, 256, 630));
 
@@ -281,7 +280,7 @@ public class UserProfile extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JLabel jLabel13;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel18;

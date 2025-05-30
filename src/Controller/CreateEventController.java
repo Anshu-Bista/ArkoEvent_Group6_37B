@@ -12,10 +12,10 @@ import model.EventData;
 import model.EventDao;
 
 public class CreateEventController {
-    private final CreateEventView createEventView;
+    private final CreateEven createEventView;
     private final EventDao eventDao;
 
-    public CreateEventController(CreateEventView createEventView, EventDao eventDao) {
+    public CreateEventController(CreateEvent createEventView, EventDao eventDao) {
         this.createEventView = createEventView;
         this.eventDao = eventDao;
 
