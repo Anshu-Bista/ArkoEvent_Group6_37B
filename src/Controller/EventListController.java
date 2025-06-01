@@ -23,21 +23,30 @@ public class EventListController {
         this.eventListView.setVisible(true);
     }
 
-    public void close(){
+    public void close() {
         this.eventListView.dispose();
     }
 
-    private void loadEvents(){
-        try{
-            List<EventData> events = eventDao.getAllEvents();
-            if (events.isEmpty()){
+    private void loadEvents() {
+        try {
+            List<Event> events = eventDao.getAllEvents();
+            JPanel panel = eventListView.getEventPanel();
+            panel.removeAll();
+
+            for (Event event : events) {
+                EventCard card = new EventCard();
+                card.setEvent(event);
+                panel.add(card);
+            }
+            panel.revalidate(); // refresh panel layout
+            panel.repaint(); // repaint to visualize changes
+
+            if (events.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "No events available");
+            } else {
+                eventListView.displayEvents(events); // view
             }
-            else{
-                eventListView.displayEvents(events);    //view
-            }
-        }
-        catch(Exception ex){
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Error loading events" + ex.getMessage());
         }
     }
@@ -48,6 +57,3 @@ public class EventListController {
         }
     }
 }
-
-
-
