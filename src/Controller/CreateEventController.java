@@ -12,7 +12,7 @@ import model.EventData;
 import model.EventDao;
 
 public class CreateEventController {
-    private final CreateEven createEventView;
+    private final CreateEvent createEventView;
     private final EventDao eventDao;
 
     public CreateEventController(CreateEvent createEventView, EventDao eventDao) {

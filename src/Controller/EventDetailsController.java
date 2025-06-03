@@ -1,5 +1,6 @@
 package controller;
 
+import dao.BookingDao;
 //import dao.BookingDao;
 import dao.EventDao;
 import model.EventData;
@@ -11,7 +12,7 @@ import java.awt.event.ActionListener;
 
 public class EventDetailsController {
     private final EventDao eventDao = new EventDao();
-    //private final BookingDao bookingDao = new BookingDao();
+    // private final BookingDao bookingDao = new BookingDao();
     private final EventDetail eventDetailView;
     private final int userId;
     private final int eventId;
@@ -25,7 +26,7 @@ public class EventDetailsController {
         loadEventDetails();
 
         // Add listener for booking
-        //eventDetailView.addBookEventListener(new BookEventListener());
+        // eventDetailView.addBookEventListener(new BookEventListener());
     }
 
     public void open() {
@@ -49,21 +50,40 @@ public class EventDetailsController {
         }
     }
 
-    class LoadEventDetailsListener implements ActionListener{
-        public void actionPerformed(ActionEvent e){
+    class LoadEventDetailsListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
             loadEventDetails();
         }
     }
-    /*
-    class BookEventListener implements ActionListener {
+
+    public class BookEventListener implements ActionListener {
+        private int eventId;
+        private int userId;
+        private double ticketPrice;
+        private JSpinner ticketSpinner;
+
+        public BookEventListener(int eventId, int userId, double ticketPrice, JSpinner ticketSpinner) {
+            this.eventId = eventId;
+            this.userId = userId;
+            this.ticketPrice = ticketPrice;
+            this.ticketSpinner = ticketSpinner;
+        }
+
         public void actionPerformed(ActionEvent e) {
             try {
-                if (bookingDao.userBooked(eventId, userId)) {
-                    JOptionPane.showMessageDialog(null, "You have already booked this event.");
-                    return;
+                int ticketCount = (Integer) ticketSpinner.getValue();
+
+                if (BookingDao.userBooked(eventId, userId)) {
+                    int choice = JOptionPane.showConfirmDialog(null,
+                            "You have already booked this event. Do you want to add more tickets?",
+                            "Already Booked", JOptionPane.YES_NO_OPTION);
+
+                    if (choice != JOptionPane.YES_OPTION) {
+                        return;
+                    }
                 }
 
-                boolean booked = bookingDao.bookEvent(eventId, userId);// db
+                boolean booked = BookingDao.bookEvent(eventId, userId, ticketCount, ticketPrice);
                 if (booked) {
                     JOptionPane.showMessageDialog(null, "Event booked successfully!");
                 } else {
@@ -74,5 +94,4 @@ public class EventDetailsController {
             }
         }
     }
-         */
 }
