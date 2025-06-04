@@ -1,13 +1,120 @@
-
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 
 /*
 * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
+public class Reset extends JFrame {
+   private JPanel jPanel1;
+    private JPanel left;
+    private JPanel right;
+    private JLabel jLabel1;
+    private JLabel jLabel2;
+    private JLabel jLabel3;
+    private JLabel Password;
+    private JLabel Confirmpassword;
+    private JButton ResetPassword;
+    private JPasswordField jPasswordField1;
+    private JPasswordField jPasswordField2;
 
-   
-    
-     
+    public Reset() {
+    initComponents();
+    }
+
+    private void initComponents() {
+        jPanel1 = new JPanel();
+        left = new JPanel();
+        right = new JPanel();
+        jLabel1 = new JLabel();
+        jLabel2 = new JLabel();
+        jLabel3 = new JLabel();
+        Password = new JLabel();
+        Confirmpassword = new JLabel();
+        ResetPassword = new JButton();
+        jPasswordField1 = new JPasswordField();
+        jPasswordField2 = new JPasswordField();
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Reset");
+        setBackground(new Color(0, 102, 204));
+
+        jPanel1.setBackground(Color.WHITE);
+        jPanel1.setPreferredSize(new Dimension(800, 500));
+        jPanel1.setLayout(null);
+
+        left.setBackground(new Color(0, 102, 102));
+        left.setPreferredSize(new Dimension(400, 500));
+        jLabel2.setIcon(new ImageIcon(getClass().getResource("/Image/rsz_aarkoeventlogo.jpg"))); // Ensure the image path exists
+        left.add(jLabel2);
+        jPanel1.add(left);
+        left.setBounds(0, -50, 400, 560);
+
+        right.setBackground(Color.WHITE);
+        right.setLayout(null);
+
+        jLabel1.setFont(new Font("Segoe UI", Font.BOLD, 18));
+        jLabel1.setForeground(new Color(0, 102, 102));
+        jLabel1.setText("RESET PASSWORD");
+        jLabel1.setBounds(100, 30, 200, 30);
+        right.add(jLabel1);
+
+        Password.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        Password.setText("Password");
+        Password.setBounds(40, 80, 100, 25);
+        right.add(Password);
+        jPasswordField1.setBounds(160, 80, 142, 25);
+        right.add(jPasswordField1);
+
+        Confirmpassword.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        Confirmpassword.setText("Confirm Password");
+        Confirmpassword.setBounds(40, 130, 120, 25);
+        right.add(Confirmpassword);
+
+        jPasswordField2.setBounds(160, 130, 142, 25);
+        right.add(jPasswordField2);
+
+        ResetPassword.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        ResetPassword.setText("Reset password");
+        ResetPassword.setBounds(100, 180, 197, 30);
+        right.add(ResetPassword);
+        jLabel3.setText("Your password will be changed. Proceed?");
+        jLabel3.setBounds(70, 230, 250, 25);
+        right.add(jLabel3);
+
+        jPanel1.add(right);
+        right.setBounds(400, 0, 400, 510);
+
+        add(jPanel1);
+        pack();
+        setLocationRelativeTo(null);
+        // Event Listeners
+
+        Password.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent evt) {
+                System.out.println("Password field gained focus.");
+            }
+            @Override
+            public void focusLost(FocusEvent evt) {
+                System.out.println("Password field lost focus.");
+            }
+        });
+
+        Confirmpassword.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent evt) {
+                System.out.println("Confirm Password field gained focus.");
+            }
+            });
+
+        ResetPassword.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                ResetPasswordActionPerformed(evt);
+            }
+        });
+    }
        
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -186,7 +293,7 @@
     }//GEN-LAST:event_ConfirmpasswordFocusGained
 
     private void ResetPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResetPasswordActionPerformed
-    String newPassword = new String(jPasswordField1.getPassword());
+   String newPassword = new String(jPasswordField1.getPassword());
         String confirmPassword = new String(jPasswordField2.getPassword());
 
         if (newPassword.isEmpty() || confirmPassword.isEmpty()) {
@@ -195,14 +302,13 @@
             JOptionPane.showMessageDialog(this, "Password reset successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
             // Here you would add logic to update the password in your backend/database
             System.out.println("New Password: " + newPassword);
-            // Clear fields after successful reset
-            jPasswordField1.setText("");
+             jPasswordField1.setText("");
             jPasswordField2.setText("");
         } else {
             JOptionPane.showMessageDialog(this, "Passwords do not match. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
-            jPasswordField2.setText(""); // Clear confirm password field
+            jPasswordField2.setText("");
         }
-    
+    }
 
     }//GEN-LAST:event_ResetPasswordActionPerformed
 
@@ -214,14 +320,11 @@
 
     }//GEN-LAST:event_jPasswordField1ActionPerformed
     
-    public static void(String[]args)
+    public static void main (String[]args) {
     /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new reset().setVisible(true);
-            }
-        });
-    }
+            
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Confirmpassword;
@@ -236,5 +339,6 @@
     private javax.swing.JPanel left;
     private javax.swing.JPanel right;
     // End of variables declaration//GEN-END:variables
+}
 }
 
