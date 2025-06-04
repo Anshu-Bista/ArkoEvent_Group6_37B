@@ -1,41 +1,21 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package arkoevent_group6_37b;
-import Database.*;
-import Database.Mysql;
 
-/**
- *
- * @author hp
- */
+import View.Reset;
+import controller.PasswordUpdateController;
+
 public class ArkoEvent_Group6_37B {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        Database db = new Mysql();
-        System.out.println(db);
-        try {
-            db.openConnection();
-            System.out.println(db.openConnection());
-//            if (db.openConnection() != null){
-//                System.out.println("Database  connected successfully!");
-//               }else{
-//                System.out.println("Failed to connect to database.");
-//            }
-        } catch(Exception e){
-           System.out.println("Failed to connect to database.");
-           System.out.println(e);
-       }
+        // Example username - this would typically come from a login screen
+        String username = "testUser";
+
+        // Create the Reset view (UI)
+        Reset resetView = new Reset(username);
+
+        // Connect the controller (optional - depends on your structure)
+        PasswordUpdateController controller = new PasswordUpdateController(resetView);
+
+        // Open the UI window
+        controller.open();
     }
-    
-    /**
-     * @param args the command line arguments
-     */
-  
-        // TODO code application logic here
-    }
-    
+}
