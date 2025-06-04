@@ -4,6 +4,8 @@
  */
 package arkoevent_group6_37b;
 
+import controller.CreateEventController;
+import view.CreateEvent;
 
 /**
  *
@@ -15,7 +17,10 @@ public class ArkoEvent_Group6_37B {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-       
+       CreateEvent createView =  new CreateEvent();
+       CreateEventController controller = new CreateEventController(createView);
+       controller.open();
+
     }
     
 }

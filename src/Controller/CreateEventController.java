@@ -9,7 +9,8 @@ import java.time.format.DateTimeParseException;
 import javax.swing.JOptionPane;
 
 import model.EventData;
-import model.EventDao;
+import view.CreateEvent;
+import dao.EventDao;
 
 public class CreateEventController {
     private final CreateEvent createEventView;
@@ -30,40 +31,57 @@ public class CreateEventController {
         this.createEventView.dispose();
     }
 
-    // Create Event method handling all fields and validations
-    private void createEvent() {
+    // Handles creation of the event with form validations
+    private void handleCreateEvent() {
         try {
-            String title = createEventView.getEventTitle().trim();
-            String location = createEventView.getEventLocation().trim();
-            String description = createEventView.getEventDescription().trim();
-            String category = createEventView.getEventCategory().trim();
-            String type = createEventView.getEventType(); // "Private" or "Public"
+            String eventTitle = createEventView.getEventTitle().trim();
+            String eventLocation = createEventView.getEventLocation().trim();
+            String eventDescription = createEventView.getEventDescription().trim();
+            String eventCategory = createEventView.getEventCategory().trim();
+            String eventType = createEventView.getEventType(); // "Private" or "Public"
             String ticketType = createEventView.getTicketType(); // "Paid" or "Free"
-            String eventStatus = createEventView.getEventStatus(); // "Draft" or "Published"
+            String eventStatus;
 
+            // Confirm event publishing
+            int confirm = JOptionPane.showConfirmDialog(
+                    createEventView,
+                    "Are you sure you want to publish this event?",
+                    "Confirm Publish",
+                    JOptionPane.YES_NO_OPTION
+            );
+
+            if (confirm == JOptionPane.YES_OPTION) {
+                eventStatus = "Published";
+            } else {
+                eventStatus = "Draft";
+                JOptionPane.showMessageDialog(createEventView, "Event saved as draft.");
+                createEventView.clearFields();
+                return;
+            }
+
+            // Parse dates/times with error handling
             LocalDate eventDate;
             LocalTime startTime;
             LocalTime endTime;
             LocalDate rsvpDeadline;
 
-            // Parse dates/times with error handling
             try {
                 eventDate = createEventView.getEventDate();
                 startTime = createEventView.getStartTime();
                 endTime = createEventView.getEndTime();
                 rsvpDeadline = createEventView.getRsvpDeadline();
             } catch (DateTimeParseException dtpe) {
-                JOptionPane.showMessageDialog(createEventView, "Invalid date or time format: " + dtpe.getMessage());
+                JOptionPane.showMessageDialog(createEventView, "Invalid date or time: " + dtpe.getMessage());
                 return;
             }
 
-            double price = createEventView.getEventPrice();
-            int ticketsAvailable = createEventView.getTicketsAvailable();
+            double ticketPrice = createEventView.getEventPrice();
+            int totalTickets = createEventView.getTicketsAvailable();
 
-            // Basic validations
-            if (title.isEmpty() || location.isEmpty() || category.isEmpty() ||
-                    eventDate == null || startTime == null || endTime == null ||
-                    rsvpDeadline == null || type == null || ticketType == null || eventStatus == null) {
+            // Validations
+            if (eventTitle.isEmpty() || eventLocation.isEmpty() || eventCategory.isEmpty()
+                    || eventDate == null || startTime == null || endTime == null
+                    || rsvpDeadline == null || eventType == null || ticketType == null) {
                 JOptionPane.showMessageDialog(createEventView, "Please fill in all required fields.");
                 return;
             }
@@ -79,28 +97,28 @@ public class CreateEventController {
             }
 
             if (ticketType.equalsIgnoreCase("Free")) {
-                price = 0; // Enforce price zero if free ticket
-            } else if (price < 0) {
-                JOptionPane.showMessageDialog(createEventView, "Price cannot be negative.");
+                ticketPrice = 0;
+            } else if (ticketPrice < 0) {
+                JOptionPane.showMessageDialog(createEventView, "Ticket price cannot be negative.");
                 return;
             }
 
             EventData event = new EventData(
-                    0, // ID auto-generated
-                    title,
-                    location,
-                    description,
-                    category,
-                    type,
+                    0, // Auto-generated ID
+                    eventTitle,
+                    eventLocation,
+                    eventDescription,
+                    eventCategory,
+                    eventType,
                     ticketType,
                     eventStatus,
                     eventDate,
                     startTime,
                     endTime,
                     rsvpDeadline,
-                    price,
-                    ticketsAvailable,
-                    0 // ticketsSold start at 0
+                    ticketPrice,
+                    totalTickets,
+                    0 // Tickets sold initially 0
             );
 
             boolean success = eventDao.createEvent(event);
@@ -119,7 +137,7 @@ public class CreateEventController {
 
     class AddEventListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            createEvent();
+            handleCreateEvent();
         }
     }
 }

@@ -8,7 +8,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import database.MySqlConnection;
-import model.BookingData;
 
 public class BookingDao {
     MySqlConnection mysql = new MySqlConnection();

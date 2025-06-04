@@ -6,6 +6,11 @@
             <file>file:/C:/Users/hp/Documents/NetBeansProjects/ArkoEvent_Group6_37B/src/controller/EventListController.java</file>
             <file>file:/C:/Users/hp/Documents/NetBeansProjects/ArkoEvent_Group6_37B/src/view/AdminProfile.java</file>
             <file>file:/C:/Users/hp/Documents/NetBeansProjects/ArkoEvent_Group6_37B/src/view/UserProfile.java</file>
+            <file>file:/C:/Users/hp/Documents/NetBeansProjects/ArkoEvent_Group6_37B/src/dao/UserDao.java</file>
+            <file>file:/C:/Users/hp/Documents/NetBeansProjects/ArkoEvent_Group6_37B/src/dao/BookingDao.java</file>
+            <file>file:/C:/Users/hp/Documents/NetBeansProjects/ArkoEvent_Group6_37B/src/view/Login.java</file>
+            <file>file:/C:/Users/hp/Documents/NetBeansProjects/ArkoEvent_Group6_37B/src/view/ViewEventDetails.java</file>
+            <file>file:/C:/Users/hp/Documents/NetBeansProjects/ArkoEvent_Group6_37B/src/view/Registration.java</file>
         </group>
     </open-files>
 </project-private>

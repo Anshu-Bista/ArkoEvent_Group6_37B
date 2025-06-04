@@ -187,7 +187,6 @@ public class UserDao {
     }
 
     public void updateProfile(UserData user) {
-
         Connection conn8 = mysql.openConnection();
 
         String sql = "UPDATE users SET username = ?, phone = ?, account_status = ?, profile_image = ? WHERE email = ?";
