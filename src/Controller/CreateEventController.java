@@ -47,8 +47,7 @@ public class CreateEventController {
                     createEventView,
                     "Are you sure you want to publish this event?",
                     "Confirm Publish",
-                    JOptionPane.YES_NO_OPTION
-            );
+                    JOptionPane.YES_NO_OPTION);
 
             if (confirm == JOptionPane.YES_OPTION) {
                 eventStatus = "Published";
@@ -137,6 +136,7 @@ public class CreateEventController {
 
     class AddEventListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
+            System.out.println("clicked");
             handleCreateEvent();
         }
     }

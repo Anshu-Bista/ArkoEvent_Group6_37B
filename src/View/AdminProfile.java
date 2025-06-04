@@ -32,10 +32,11 @@ public class AdminProfile extends javax.swing.JFrame {
         feedback_btn = new javax.swing.JButton();
         homebtn = new javax.swing.JButton();
         bookingsbtn = new javax.swing.JButton();
-        myeventsbtn = new javax.swing.JButton();
         discoverbtn = new javax.swing.JButton();
         profilebtn = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        myeventsbtn = new javax.swing.JButton();
+        plus_btn = new javax.swing.JButton();
         taskbar = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
@@ -87,10 +88,6 @@ public class AdminProfile extends javax.swing.JFrame {
         bookingsbtn.setText("Bookings");
         sidebar.add(bookingsbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 220, 50));
 
-        myeventsbtn.setBackground(new java.awt.Color(208, 202, 232));
-        myeventsbtn.setText("My Events");
-        sidebar.add(myeventsbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 220, 50));
-
         discoverbtn.setBackground(new java.awt.Color(208, 202, 232));
         discoverbtn.setText("Discover");
         discoverbtn.addActionListener(new java.awt.event.ActionListener() {
@@ -112,6 +109,25 @@ public class AdminProfile extends javax.swing.JFrame {
         jButton1.setBackground(new java.awt.Color(208, 202, 232));
         jButton1.setText("Log Out");
         sidebar.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 550, 220, 40));
+
+        myeventsbtn.setBackground(new java.awt.Color(208, 202, 232));
+        myeventsbtn.setText("My Events");
+        myeventsbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                myeventsbtnActionPerformed(evt);
+            }
+        });
+        sidebar.add(myeventsbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 160, 50));
+
+        plus_btn.setBackground(new java.awt.Color(208, 202, 232));
+        plus_btn.setFont(new java.awt.Font("Segoe UI Historic", 0, 48)); // NOI18N
+        plus_btn.setText("+");
+        plus_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                plus_btnActionPerformed(evt);
+            }
+        });
+        sidebar.add(plus_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 233, 60, 50));
 
         bg.add(sidebar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -2, 256, 630));
 
@@ -194,7 +210,7 @@ public class AdminProfile extends javax.swing.JFrame {
                 accstatus_fldActionPerformed(evt);
             }
         });
-        bg.add(accstatus_fld, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 400, 220, -1));
+        bg.add(accstatus_fld, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 390, 220, -1));
 
         cam_lbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         cam_lbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/211634_camera_icon.png"))); // NOI18N
@@ -289,6 +305,14 @@ public class AdminProfile extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_discoverbtnActionPerformed
 
+    private void myeventsbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myeventsbtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_myeventsbtnActionPerformed
+
+    private void plus_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_plus_btnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_plus_btnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -347,6 +371,7 @@ public class AdminProfile extends javax.swing.JFrame {
     private javax.swing.JTextField phone_fld;
     private javax.swing.JLabel phone_lbl;
     private javax.swing.JLabel pic_lbl;
+    private javax.swing.JButton plus_btn;
     private javax.swing.JButton profilebtn;
     private javax.swing.JTextField regdate_fld;
     private javax.swing.JLabel regdate_lbl;

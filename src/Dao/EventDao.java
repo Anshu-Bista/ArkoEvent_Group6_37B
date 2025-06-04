@@ -21,9 +21,9 @@ public class EventDao {
      */
     public boolean createEvent(EventData event) {
         String sql = "INSERT INTO events (title, location, description, category, event_type, ticket_type, "
-                + "status, event_date, start_time, end_time, rsvp_deadline, price, total_tickets, tickets_sold) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
+                   + "status, event_date, start_time, end_time, rsvp_deadline, price, total_tickets, tickets_sold) "
+                   + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, event.getTitle());
             stmt.setString(2, event.getLocation());
@@ -39,7 +39,7 @@ public class EventDao {
             stmt.setDouble(12, event.getPrice());
             stmt.setInt(13, event.getTicketsAvailable());
             stmt.setInt(14, event.getTicketsSold()); // Add this line
-
+    
             int affectedRows = stmt.executeUpdate();
             return affectedRows > 0;
         } catch (SQLException ex) {
@@ -47,5 +47,6 @@ public class EventDao {
             return false;
         }
     }
+    
 
 }
