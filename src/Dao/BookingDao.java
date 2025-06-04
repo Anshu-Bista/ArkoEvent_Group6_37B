@@ -16,7 +16,7 @@ public class BookingDao {
 
     public static boolean bookEvent(int eventId, int userId, int ticketCount, double ticketPrice) {
         Connection conn = mysql.openConnection();
-    
+
         try {
             // First check if booking exists
             String checkSql = "SELECT ticket_count, total_amount FROM bookings WHERE event_id = ? AND user_id = ?";
@@ -24,12 +24,12 @@ public class BookingDao {
                 checkStmt.setInt(1, eventId);
                 checkStmt.setInt(2, userId);
                 ResultSet rs = checkStmt.executeQuery();
-    
+
                 if (rs.next()) {
                     // Booking exists: update ticket count and total amount
                     int currentCount = rs.getInt("ticket_count");
                     double currentAmount = rs.getDouble("total_amount");
-    
+
                     String updateSql = "UPDATE bookings SET ticket_count = ?, total_amount = ? WHERE event_id = ? AND user_id = ?";
                     try (PreparedStatement updateStmt = conn.prepareStatement(updateSql)) {
                         updateStmt.setInt(1, currentCount + ticketCount);
@@ -57,12 +57,8 @@ public class BookingDao {
         } finally {
             mysql.closeConnection(conn);
         }
-    
+
         return false;
     }
-    
-    }
-
-
 
 }
