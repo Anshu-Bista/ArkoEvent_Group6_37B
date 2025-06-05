@@ -1,4 +1,5 @@
 package controller();
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -7,7 +8,6 @@ import javax.swing.JOptionPane;
 import dao.UserDao;
 import model.UserData;
 import view.AdminProfile;
-
 
 public class ProfilePageController {
     private final AdminProfile profileView;
@@ -20,7 +20,7 @@ public class ProfilePageController {
         this.userEmail = userEmail;
 
         loadProfile();
-        this.profileView.addUpdateButtonListener(new UpdateProfileListener());
+        this.profileView.addUpdateProfileListener(new UpdateProfileListener());
     }
 
     private void loadProfile() {
@@ -33,7 +33,8 @@ public class ProfilePageController {
                 JOptionPane.showMessageDialog(profileView, "User not found.");
             }
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(profileView, "Error loading profile: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(profileView, "Error loading profile: " + ex.getMessage(), "Error",
+                    JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -56,7 +57,8 @@ public class ProfilePageController {
                 JOptionPane.showMessageDialog(profileView, "Failed to update profile.");
             }
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(profileView, "Error updating profile: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(profileView, "Error updating profile: " + ex.getMessage(), "Error",
+                    JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -64,14 +66,16 @@ public class ProfilePageController {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (!profileView.isEditable()) {
-                profileView.setFieldsEditable(true); // Let user edit
+                profileView.setFieldsEditable(true);
             } else {
-                int option = JOptionPane.showConfirmDialog(profileView, "Do you want to save changes?", "Confirm", JOptionPane.YES_NO_OPTION);
+                int option = JOptionPane.showConfirmDialog(profileView, "Do you want to save changes?", "Confirm",
+                        JOptionPane.YES_NO_OPTION);
                 if (option == JOptionPane.YES_OPTION) {
-                    updateProfile(); // Save
-                    profileView.setFieldsEditable(false); // Lock again
+                    updateProfile();
+                    profileView.setFieldsEditable(false);
                 }
             }
+
         }
     }
 

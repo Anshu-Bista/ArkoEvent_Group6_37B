@@ -47,11 +47,12 @@ public class UserProfile extends javax.swing.JFrame {
         email_fld = new javax.swing.JTextField();
         phone_fld = new javax.swing.JTextField();
         regdate_fld = new javax.swing.JTextField();
-        accstatus_fld = new javax.swing.JTextField();
         cam_lbl = new javax.swing.JLabel();
         save_btn = new javax.swing.JButton();
         deactivate_btn = new javax.swing.JButton();
         viewact_btn = new javax.swing.JButton();
+        accstatus_box = new javax.swing.JComboBox<>();
+        update_btn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -147,18 +148,14 @@ public class UserProfile extends javax.swing.JFrame {
         bg.add(name_fld, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 270, 220, -1));
 
         email_fld.setText("Enter your email");
-        bg.add(email_fld, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 300, 220, -1));
-
-        phone_fld.setText("Enter your contact number");
-        bg.add(phone_fld, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 330, 220, -1));
-        bg.add(regdate_fld, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 360, 220, -1));
-
-        accstatus_fld.addActionListener(new java.awt.event.ActionListener() {
+        email_fld.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                accstatus_fldActionPerformed(evt);
+                email_fldActionPerformed(evt);
             }
         });
-        bg.add(accstatus_fld, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 400, 220, -1));
+        bg.add(email_fld, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 300, 220, -1));
+        bg.add(phone_fld, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 330, 220, -1));
+        bg.add(regdate_fld, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 360, 220, -1));
 
         cam_lbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         cam_lbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/211634_camera_icon.png"))); // NOI18N
@@ -188,6 +185,12 @@ public class UserProfile extends javax.swing.JFrame {
         });
         bg.add(viewact_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 490, -1, -1));
 
+        accstatus_box.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Active", "Deactivated", "Banned" }));
+        bg.add(accstatus_box, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 400, -1, -1));
+
+        update_btn.setText("Update");
+        bg.add(update_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 50, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -214,10 +217,6 @@ public class UserProfile extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_name_fldActionPerformed
 
-    private void accstatus_fldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accstatus_fldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_accstatus_fldActionPerformed
-
     private void save_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_btnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_save_btnActionPerformed
@@ -229,6 +228,10 @@ public class UserProfile extends javax.swing.JFrame {
     private void viewact_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewact_btnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_viewact_btnActionPerformed
+
+    private void email_fldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_email_fldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_email_fldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -267,7 +270,7 @@ public class UserProfile extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField accstatus_fld;
+    private javax.swing.JComboBox<String> accstatus_box;
     private javax.swing.JLabel accstatus_lbl;
     private javax.swing.JPanel bg;
     private javax.swing.JLabel cam_lbl;
@@ -292,6 +295,7 @@ public class UserProfile extends javax.swing.JFrame {
     private javax.swing.JLabel regdate_lbl;
     private javax.swing.JButton save_btn;
     private javax.swing.JPanel sidebar;
+    private javax.swing.JButton update_btn;
     private javax.swing.JButton viewact_btn;
     // End of variables declaration//GEN-END:variables
 }
