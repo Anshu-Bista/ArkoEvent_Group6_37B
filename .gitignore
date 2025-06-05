@@ -1,2 +1,24 @@
+# NetBeans private settings (user-specific config like JAR paths)
+nbproject/private/
+
+# Ignore user-specific project configurations (optional)
+nbproject/project.properties
+nbproject/project.xml
+
+# Build output
 /build/
-/nbproject/private/
+/dist/
+
+# Generated files
+*.class
+*.jar
+
+# IDE specific
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# OS generated files
+.DS_Store
+Thumbs.db

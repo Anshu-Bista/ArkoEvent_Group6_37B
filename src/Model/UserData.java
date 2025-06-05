@@ -100,4 +100,9 @@ public class UserData {
     public void setProfileImage(byte[] profileImage){
         this.profileImage = profileImage;
     }
+
+    public UserData() {
+        // empty constructor required for use in userdao
+    }
+    
 }

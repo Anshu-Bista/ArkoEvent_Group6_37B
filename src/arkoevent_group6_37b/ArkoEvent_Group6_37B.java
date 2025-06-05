@@ -4,8 +4,13 @@
  */
 package arkoevent_group6_37b;
 
-import Controller.signUpController;
-import View.Registration;
+import java.sql.Connection;
+import java.sql.SQLException;
+
+import controller.CreateEventController;
+import dao.EventDao;
+import database.MySqlConnection;
+import view.CreateEvent;
 
 /**
  *
@@ -17,9 +22,14 @@ public class ArkoEvent_Group6_37B {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-       Registration registerView = new Registration();
-       signUpController c = new signUpController(registerView);
-       c.open();
+        MySqlConnection mySqlConn = new MySqlConnection();
+        try (Connection conn = mySqlConn.openConnection()) {
+            EventDao eventDao = new EventDao(conn);
+            CreateEvent createEventView = new CreateEvent();
+            CreateEventController controller = new CreateEventController(createEventView, eventDao);
+            controller.open();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
-    
 }

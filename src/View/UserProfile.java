@@ -28,10 +28,10 @@ public class UserProfile extends javax.swing.JFrame {
 
         bg = new javax.swing.JPanel();
         sidebar = new javax.swing.JPanel();
-        jLabel13 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
@@ -47,11 +47,12 @@ public class UserProfile extends javax.swing.JFrame {
         email_fld = new javax.swing.JTextField();
         phone_fld = new javax.swing.JTextField();
         regdate_fld = new javax.swing.JTextField();
-        accstatus_fld = new javax.swing.JTextField();
         cam_lbl = new javax.swing.JLabel();
         save_btn = new javax.swing.JButton();
         deactivate_btn = new javax.swing.JButton();
         viewact_btn = new javax.swing.JButton();
+        accstatus_box = new javax.swing.JComboBox<>();
+        update_btn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -60,11 +61,6 @@ public class UserProfile extends javax.swing.JFrame {
 
         sidebar.setBackground(new java.awt.Color(208, 202, 232));
         sidebar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel13.setText("Log Out");
-        sidebar.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 570, 240, 38));
 
         jButton2.setBackground(new java.awt.Color(208, 202, 232));
         jButton2.setText("My Events");
@@ -77,6 +73,10 @@ public class UserProfile extends javax.swing.JFrame {
         jButton4.setBackground(new java.awt.Color(180, 175, 204));
         jButton4.setText("Profile");
         sidebar.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 200, 40));
+
+        jButton5.setBackground(new java.awt.Color(208, 202, 232));
+        jButton5.setText("Log Out");
+        sidebar.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 570, 220, 40));
 
         bg.add(sidebar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -2, 256, 630));
 
@@ -148,18 +148,14 @@ public class UserProfile extends javax.swing.JFrame {
         bg.add(name_fld, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 270, 220, -1));
 
         email_fld.setText("Enter your email");
-        bg.add(email_fld, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 300, 220, -1));
-
-        phone_fld.setText("Enter your contact number");
-        bg.add(phone_fld, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 330, 220, -1));
-        bg.add(regdate_fld, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 360, 220, -1));
-
-        accstatus_fld.addActionListener(new java.awt.event.ActionListener() {
+        email_fld.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                accstatus_fldActionPerformed(evt);
+                email_fldActionPerformed(evt);
             }
         });
-        bg.add(accstatus_fld, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 400, 220, -1));
+        bg.add(email_fld, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 300, 220, -1));
+        bg.add(phone_fld, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 330, 220, -1));
+        bg.add(regdate_fld, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 360, 220, -1));
 
         cam_lbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         cam_lbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/211634_camera_icon.png"))); // NOI18N
@@ -189,21 +185,25 @@ public class UserProfile extends javax.swing.JFrame {
         });
         bg.add(viewact_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 490, -1, -1));
 
+        accstatus_box.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Active", "Deactivated", "Banned" }));
+        bg.add(accstatus_box, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 400, -1, -1));
+
+        update_btn.setText("Update");
+        bg.add(update_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 50, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(379, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(163, 163, 163))
+                .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -217,10 +217,6 @@ public class UserProfile extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_name_fldActionPerformed
 
-    private void accstatus_fldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accstatus_fldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_accstatus_fldActionPerformed
-
     private void save_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_btnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_save_btnActionPerformed
@@ -232,6 +228,10 @@ public class UserProfile extends javax.swing.JFrame {
     private void viewact_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewact_btnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_viewact_btnActionPerformed
+
+    private void email_fldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_email_fldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_email_fldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -270,7 +270,7 @@ public class UserProfile extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField accstatus_fld;
+    private javax.swing.JComboBox<String> accstatus_box;
     private javax.swing.JLabel accstatus_lbl;
     private javax.swing.JPanel bg;
     private javax.swing.JLabel cam_lbl;
@@ -281,7 +281,7 @@ public class UserProfile extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JLabel jLabel13;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel18;
@@ -295,6 +295,7 @@ public class UserProfile extends javax.swing.JFrame {
     private javax.swing.JLabel regdate_lbl;
     private javax.swing.JButton save_btn;
     private javax.swing.JPanel sidebar;
+    private javax.swing.JButton update_btn;
     private javax.swing.JButton viewact_btn;
     // End of variables declaration//GEN-END:variables
 }
