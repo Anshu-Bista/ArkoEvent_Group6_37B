@@ -6,6 +6,9 @@ package view;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+
+import javax.swing.JOptionPane;
+
 import java.awt.event.ActionListener;
 
 /**
@@ -479,7 +482,7 @@ public class CreateEvent extends javax.swing.JFrame {
     }
 
     public LocalTime getStartTime() {
-        return LocalTime.parse(date_fld.getText());
+        return LocalTime.parse(start_fld.getText());
     }
 
     public LocalTime getEndTime() {
@@ -505,9 +508,12 @@ public class CreateEvent extends javax.swing.JFrame {
         eventcategory_box.setSelectedIndex(0);
         eventtype_box.setSelectedIndex(0);
         ticketype_box.setSelectedIndex(0);
-        date_fld.setText("yyyy-mm-dd");
-        end_fld.setText("HH:mm");
-        deadline_fld.setText("yyyy-mm-dd");
+
+        if (date_fld.getText().equals("yyyy-mm-dd") || date_fld.getText().isBlank()) {
+            JOptionPane.showMessageDialog(this, "Please enter a valid event date in yyyy-mm-dd format.");
+            return;
+        }
+
         price_fld.setText("");
         limit_fld.setText("");
     }

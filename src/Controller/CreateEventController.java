@@ -136,7 +136,7 @@ public class CreateEventController {
 
     class AddEventListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            System.out.println("clicked");
+            
             handleCreateEvent();
         }
     }

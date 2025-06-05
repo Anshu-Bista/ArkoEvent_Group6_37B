@@ -21,9 +21,9 @@ public class EventDao {
      * @return true if insert was successful, false otherwise.
      */
     public boolean createEvent(EventData event) {
-        String sql = "INSERT INTO events (title, location, description, category, event_type, ticket_type, "
-                + "status, event_date, start_time, end_time, rsvp_deadline, price, total_tickets, tickets_sold) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO events (title, location, description, category, type, ticket_type, "
+                   + "event_status, date, start_time, end_time, rsvp_deadline, price, tickets_available, tickets_sold) "
+                   + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, event.getTitle());
@@ -39,14 +39,15 @@ public class EventDao {
             stmt.setDate(11, java.sql.Date.valueOf(event.getRsvpDeadline()));
             stmt.setDouble(12, event.getPrice());
             stmt.setInt(13, event.getTicketsAvailable());
-            stmt.setInt(14, event.getTicketsSold()); // Add this line
+            stmt.setInt(14, event.getTicketsSold());
 
             int affectedRows = stmt.executeUpdate();
             return affectedRows > 0;
         } catch (SQLException ex) {
             Logger.getLogger(EventDao.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("SQL Error: " + ex.getMessage());
+            ex.printStackTrace();
             return false;
         }
     }
-
 }
