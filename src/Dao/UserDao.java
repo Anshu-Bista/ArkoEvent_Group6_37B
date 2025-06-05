@@ -14,7 +14,6 @@ import java.util.logging.Logger;
 import java.time.ZoneId;
 
 import database.MySqlConnection;
-import java.sql.Timestamp;
 import model.UserData;
 
 /**
@@ -159,50 +158,51 @@ public class UserDao {
     }
 
     // Profile
-    public UserData getProfile(String email){
-
-        Connection conn7 = mysql.openConnection();
-        String sql ="SELECT username, email, phone, account_status, profile_image, registration_date FROM users where email = ?";
-        try (PreparedStatement pstmt = conn.prepareStatement(sql)){
+    public UserData getProfile(String email) {
+        Connection conn = mysql.openConnection();
+        String sql = "SELECT username, email, phone, account_status, profile_image, registration_date FROM users WHERE email = ?";
+        
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, email);
             ResultSet result = pstmt.executeQuery();
-            if (result.next()){
-                UserData user = new UserData(String username, String email, String password, String confirmPassword, String phone,
-                 byte[] profileImage, String status, Timestamp registrationDate);
-                user.setUsername(result.getString("username"));               
+            
+            if (result.next()) {
+                UserData user = new UserData();
+                user.setUsername(result.getString("username"));
                 user.setEmail(result.getString("email"));
                 user.setPhone(result.getString("phone"));
-                user.setStatus(result.getString("account_status"));        
+                user.setStatus(result.getString("account_status"));
                 user.setProfileImage(result.getBytes("profile_image"));
                 user.setRegistrationDate(result.getTimestamp("registration_date"));
                 return user;
-            } 
-        }
-        catch(SQLException ex){
+            }
+        } catch (SQLException ex) {
             Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            mysql.closeConnection(conn);
         }
-        finally{
-            mysql.closeConnection(conn7);
         return null;
     }
 
-    public void updateProfile(UserData user) {
-        Connection conn8 = mysql.openConnection();
-
+    // Update user profile
+    public boolean updateProfile(UserData user) {
+        Connection conn = mysql.openConnection();
         String sql = "UPDATE users SET username = ?, phone = ?, account_status = ?, profile_image = ? WHERE email = ?";
+        
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, user.getUsername());
             pstmt.setString(2, user.getPhone());
             pstmt.setString(3, user.getStatus());
             pstmt.setBytes(4, user.getProfileImage());
             pstmt.setString(5, user.getEmail());
-            pstmt.executeUpdate();
+
+            int rowsUpdated = pstmt.executeUpdate();
+            return rowsUpdated > 0;
         } catch (SQLException ex) {
             Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         } finally {
-            mysql.closeConnection(conn8);
-
+            mysql.closeConnection(conn);
         }
     }
-
 }
