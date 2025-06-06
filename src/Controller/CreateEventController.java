@@ -2,52 +2,62 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 
 import javax.swing.JOptionPane;
 
+import dao.EventDao;
+import database.MySqlConnection;
 import model.EventData;
 import view.CreateEvent;
-import dao.EventDao;
 
 public class CreateEventController {
     private final CreateEvent createEventView;
-    private final EventDao eventDao;
+    private EventDao eventDao; 
 
-    public CreateEventController(CreateEvent createEventView, EventDao eventDao) {
-        this.createEventView = createEventView;
-        this.eventDao = eventDao;
+    public CreateEventController(CreateEvent view) {
+        this.createEventView = view;
+
+        try {
+            Connection conn = new MySqlConnection().openConnection();
+            this.eventDao = new EventDao(conn);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Database connection failed: " + e.getMessage());
+        }
 
         this.createEventView.addAddEventListener(new AddEventListener());
     }
 
     public void open() {
-        this.createEventView.setVisible(true);
+        createEventView.setVisible(true);
     }
 
     public void close() {
-        this.createEventView.dispose();
+        createEventView.dispose();
     }
 
-    // Handles creation of the event with form validations
     private void handleCreateEvent() {
+        if (eventDao == null) {
+            JOptionPane.showMessageDialog(createEventView, "Error: Event DAO not available.");
+            return;
+        }
+
         try {
             String eventTitle = createEventView.getEventTitle().trim();
             String eventLocation = createEventView.getEventLocation().trim();
             String eventDescription = createEventView.getEventDescription().trim();
             String eventCategory = createEventView.getEventCategory().trim();
-            String eventType = createEventView.getEventType(); // "Private" or "Public"
-            String ticketType = createEventView.getTicketType(); // "Paid" or "Free"
+            String eventType = createEventView.getEventType();
+            String ticketType = createEventView.getTicketType();
             String eventStatus;
 
-            // Confirm event publishing
             int confirm = JOptionPane.showConfirmDialog(
-                    createEventView,
-                    "Are you sure you want to publish this event?",
-                    "Confirm Publish",
-                    JOptionPane.YES_NO_OPTION);
+                createEventView, "Are you sure you want to publish this event?",
+                "Confirm Publish", JOptionPane.YES_NO_OPTION
+            );
 
             if (confirm == JOptionPane.YES_OPTION) {
                 eventStatus = "Published";
@@ -58,26 +68,14 @@ public class CreateEventController {
                 return;
             }
 
-            // Parse dates/times with error handling
-            LocalDate eventDate;
-            LocalTime startTime;
-            LocalTime endTime;
-            LocalDate rsvpDeadline;
-
-            try {
-                eventDate = createEventView.getEventDate();
-                startTime = createEventView.getStartTime();
-                endTime = createEventView.getEndTime();
-                rsvpDeadline = createEventView.getRsvpDeadline();
-            } catch (DateTimeParseException dtpe) {
-                JOptionPane.showMessageDialog(createEventView, "Invalid date or time: " + dtpe.getMessage());
-                return;
-            }
+            LocalDate eventDate = createEventView.getEventDate();
+            LocalTime startTime = createEventView.getStartTime();
+            LocalTime endTime = createEventView.getEndTime();
+            LocalDate rsvpDeadline = createEventView.getRsvpDeadline();
 
             double ticketPrice = createEventView.getEventPrice();
             int totalTickets = createEventView.getTicketsAvailable();
 
-            // Validations
             if (eventTitle.isEmpty() || eventLocation.isEmpty() || eventCategory.isEmpty()
                     || eventDate == null || startTime == null || endTime == null
                     || rsvpDeadline == null || eventType == null || ticketType == null) {
@@ -103,21 +101,10 @@ public class CreateEventController {
             }
 
             EventData event = new EventData(
-                    0, // Auto-generated ID
-                    eventTitle,
-                    eventLocation,
-                    eventDescription,
-                    eventCategory,
-                    eventType,
-                    ticketType,
-                    eventStatus,
-                    eventDate,
-                    startTime,
-                    endTime,
-                    rsvpDeadline,
-                    ticketPrice,
-                    totalTickets,
-                    0 // Tickets sold initially 0
+                0, eventTitle, eventLocation, eventDescription,
+                eventCategory, eventType, ticketType, eventStatus,
+                eventDate, startTime, endTime, rsvpDeadline,
+                ticketPrice, totalTickets, 0
             );
 
             boolean success = eventDao.createEvent(event);
@@ -129,6 +116,8 @@ public class CreateEventController {
                 JOptionPane.showMessageDialog(createEventView, "Failed to create the event.");
             }
 
+        } catch (DateTimeParseException dtpe) {
+            JOptionPane.showMessageDialog(createEventView, "Invalid date/time: " + dtpe.getMessage());
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(createEventView, "Error creating event: " + ex.getMessage());
         }
@@ -136,7 +125,6 @@ public class CreateEventController {
 
     class AddEventListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            
             handleCreateEvent();
         }
     }
