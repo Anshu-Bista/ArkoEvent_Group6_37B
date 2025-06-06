@@ -22,8 +22,8 @@ public class EventDao {
      */
     public boolean createEvent(EventData event) {
         String sql = "INSERT INTO events (title, location, description, category, type, ticket_type, "
-                   + "event_status, date, start_time, end_time, rsvp_deadline, price, tickets_available, tickets_sold) "
-                   + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                + "event_status, event_date, start_time, end_time, rsvp_deadline, price, tickets_available, tickets_sold) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, event.getTitle());
