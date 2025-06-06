@@ -1,4 +1,4 @@
-package controller();
+package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,6 +21,13 @@ public class ProfilePageController {
 
         loadProfile();
         this.profileView.addUpdateProfileListener(new UpdateProfileListener());
+    }
+    public void open() {
+        profileView.setVisible(true);
+    }
+
+    public void close() {
+        profileView.dispose();
     }
 
     private void loadProfile() {
@@ -79,11 +86,5 @@ public class ProfilePageController {
         }
     }
 
-    public void open() {
-        profileView.setVisible(true);
-    }
-
-    public void close() {
-        profileView.dispose();
-    }
+    
 }
