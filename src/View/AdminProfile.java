@@ -4,6 +4,8 @@
  */
 package view;
 
+import controller.ProfilePageController;
+import java.awt.event.ActionListener;
 import model.UserData;
 
 /**
@@ -420,5 +422,9 @@ public class AdminProfile extends javax.swing.JFrame {
 
     public void addUpdateButtonListener(ActionListener listener) {
         update_btn.addActionListener(listener);
+    }
+
+    public void addUpdateProfileListener(ProfilePageController.UpdateProfileListener updateProfileListener) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

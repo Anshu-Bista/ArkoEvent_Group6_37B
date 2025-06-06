@@ -521,4 +521,5 @@ public class CreateEvent extends javax.swing.JFrame {
     public void addAddEventListener(ActionListener listener) {
         create_btn.addActionListener(listener);
     }
+   
 }
