@@ -18,6 +18,9 @@ public class CreateEventController {
     private final CreateEvent createEventView;
     private EventDao eventDao; 
 
+    private boolean isEditMode = false;
+    private EventData editingEvent = null;
+
     public CreateEventController(CreateEvent view) {
         this.createEventView = view;
 
@@ -39,6 +42,13 @@ public class CreateEventController {
         createEventView.dispose();
     }
 
+    // Call this when editing an existing event
+    public void setEditEvent(EventData event) {
+        this.isEditMode = true;
+        this.editingEvent = event;
+        createEventView.setFormData(event); // assumes your CreateEvent view has this method
+    }
+
     private void handleCreateEvent() {
         if (eventDao == null) {
             JOptionPane.showMessageDialog(createEventView, "Error: Event DAO not available.");
@@ -55,8 +65,8 @@ public class CreateEventController {
             String eventStatus;
 
             int confirm = JOptionPane.showConfirmDialog(
-                createEventView, "Are you sure you want to publish this event?",
-                "Confirm Publish", JOptionPane.YES_NO_OPTION
+                createEventView, isEditMode ? "Update this event?" : "Publish this event?",
+                isEditMode ? "Confirm Update" : "Confirm Publish", JOptionPane.YES_NO_OPTION
             );
 
             if (confirm == JOptionPane.YES_OPTION) {
@@ -64,7 +74,8 @@ public class CreateEventController {
             } else {
                 eventStatus = "Draft";
                 JOptionPane.showMessageDialog(createEventView, "Event saved as draft.");
-                createEventView.clearFields();
+                createEventView.resetForm();
+                resetFormState();
                 return;
             }
 
@@ -100,30 +111,47 @@ public class CreateEventController {
                 return;
             }
 
+            // Set ID = existing ID if editing, otherwise 0
+            int eventId = isEditMode && editingEvent != null ? editingEvent.getId() : 0;
+
             EventData event = new EventData(
-                0, eventTitle, eventLocation, eventDescription,
+                eventId, eventTitle, eventLocation, eventDescription,
                 eventCategory, eventType, ticketType, eventStatus,
                 eventDate, startTime, endTime, rsvpDeadline,
                 ticketPrice, totalTickets, 0
             );
 
-            boolean success = eventDao.createEvent(event);
+            boolean success;
+            if (isEditMode && editingEvent != null) {
+                success = eventDao.updateEvent(event); // You need to define this in EventDao
+            } else {
+                success = eventDao.createEvent(event);
+            }
 
             if (success) {
-                JOptionPane.showMessageDialog(createEventView, "Event created successfully!");
-                createEventView.clearFields();
+                JOptionPane.showMessageDialog(createEventView,
+                    isEditMode ? "Event updated successfully!" : "Event created successfully!");
+                createEventView.resetForm();;
+                resetFormState();
             } else {
-                JOptionPane.showMessageDialog(createEventView, "Failed to create the event.");
+                JOptionPane.showMessageDialog(createEventView,
+                    isEditMode ? "Failed to update event." : "Failed to create the event.");
             }
 
         } catch (DateTimeParseException dtpe) {
             JOptionPane.showMessageDialog(createEventView, "Invalid date/time: " + dtpe.getMessage());
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(createEventView, "Error creating event: " + ex.getMessage());
+            JOptionPane.showMessageDialog(createEventView, "Error creating/updating event: " + ex.getMessage());
         }
     }
 
+    private void resetFormState() {
+        isEditMode = false;
+        editingEvent = null;
+    }
+
     class AddEventListener implements ActionListener {
+        @Override
         public void actionPerformed(ActionEvent e) {
             handleCreateEvent();
         }

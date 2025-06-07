@@ -2,6 +2,7 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -50,4 +51,72 @@ public class EventDao {
             return false;
         }
     }
+    public boolean deleteEventById(int eventId) {
+        String sql = "DELETE FROM events WHERE id = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, eventId);
+            return stmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            Logger.getLogger(EventDao.class.getName()).log(Level.SEVERE, null, e);
+            return false;
+        }
+    }
+
+    public EventData getEventById(int eventId) {
+        String sql = "SELECT * FROM events WHERE id = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, eventId);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return new EventData(
+                    rs.getInt("id"),
+                    rs.getString("title"),
+                    rs.getString("location"),
+                    rs.getString("description"),
+                    rs.getString("category"),
+                    rs.getString("type"), // fixed column name
+                    rs.getString("ticket_type"),
+                    rs.getString("event_status"),
+                    rs.getDate("event_date").toLocalDate(),
+                    rs.getTime("start_time").toLocalTime(),
+                    rs.getTime("end_time").toLocalTime(),
+                    rs.getDate("rsvp_deadline").toLocalDate(),
+                    rs.getDouble("price"),
+                    rs.getInt("tickets_available"),
+                    rs.getInt("tickets_sold")
+                );
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(EventDao.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return null;
+    }
+
+    public boolean updateEvent(EventData event) {
+        String sql = "UPDATE events SET title=?, location=?, description=?, category=?, type=?, ticket_type=?, "
+                + "event_status=?, event_date=?, start_time=?, end_time=?, rsvp_deadline=?, price=?, tickets_available=? "
+                + "WHERE id=?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, event.getTitle());
+            stmt.setString(2, event.getLocation());
+            stmt.setString(3, event.getDescription());
+            stmt.setString(4, event.getCategory());
+            stmt.setString(5, event.getType());
+            stmt.setString(6, event.getTicketType());
+            stmt.setString(7, event.getEventStatus());
+            stmt.setDate(8, java.sql.Date.valueOf(event.getEventDate()));
+            stmt.setTime(9, java.sql.Time.valueOf(event.getStartTime()));
+            stmt.setTime(10, java.sql.Time.valueOf(event.getEndTime()));
+            stmt.setDate(11, java.sql.Date.valueOf(event.getRsvpDeadline()));
+            stmt.setDouble(12, event.getPrice());
+            stmt.setInt(13, event.getTicketsAvailable());
+            stmt.setInt(14, event.getId());
+    
+            return stmt.executeUpdate() > 0;
+        } catch (SQLException ex) {
+            Logger.getLogger(EventDao.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }    
+
 }
