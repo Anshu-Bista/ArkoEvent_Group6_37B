@@ -48,7 +48,6 @@ public class UserProfile extends javax.swing.JFrame {
         phone_fld = new javax.swing.JTextField();
         regdate_fld = new javax.swing.JTextField();
         cam_lbl = new javax.swing.JLabel();
-        save_btn = new javax.swing.JButton();
         deactivate_btn = new javax.swing.JButton();
         viewact_btn = new javax.swing.JButton();
         accstatus_box = new javax.swing.JComboBox<>();
@@ -139,7 +138,6 @@ public class UserProfile extends javax.swing.JFrame {
         accstatus_lbl.setText("Account Status");
         bg.add(accstatus_lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 400, -1, -1));
 
-        name_fld.setText("Enter your full name");
         name_fld.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 name_fldActionPerformed(evt);
@@ -147,7 +145,6 @@ public class UserProfile extends javax.swing.JFrame {
         });
         bg.add(name_fld, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 270, 220, -1));
 
-        email_fld.setText("Enter your email");
         email_fld.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 email_fldActionPerformed(evt);
@@ -160,14 +157,6 @@ public class UserProfile extends javax.swing.JFrame {
         cam_lbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         cam_lbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/211634_camera_icon.png"))); // NOI18N
         bg.add(cam_lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 130, 110, 50));
-
-        save_btn.setText("Save Changes");
-        save_btn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                save_btnActionPerformed(evt);
-            }
-        });
-        bg.add(save_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 490, 110, -1));
 
         deactivate_btn.setText("Deactivate Account");
         deactivate_btn.addActionListener(new java.awt.event.ActionListener() {
@@ -189,7 +178,7 @@ public class UserProfile extends javax.swing.JFrame {
         bg.add(accstatus_box, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 400, -1, -1));
 
         update_btn.setText("Update");
-        bg.add(update_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 50, -1, -1));
+        bg.add(update_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 490, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -216,10 +205,6 @@ public class UserProfile extends javax.swing.JFrame {
     private void name_fldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_name_fldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_name_fldActionPerformed
-
-    private void save_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_btnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_save_btnActionPerformed
 
     private void deactivate_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deactivate_btnActionPerformed
         // TODO add your handling code here:
@@ -293,7 +278,6 @@ public class UserProfile extends javax.swing.JFrame {
     private javax.swing.JLabel pic_lbl;
     private javax.swing.JTextField regdate_fld;
     private javax.swing.JLabel regdate_lbl;
-    private javax.swing.JButton save_btn;
     private javax.swing.JPanel sidebar;
     private javax.swing.JButton update_btn;
     private javax.swing.JButton viewact_btn;

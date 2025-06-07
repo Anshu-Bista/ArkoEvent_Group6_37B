@@ -4,7 +4,7 @@
  */
 package view;
 
-import controller.ProfilePageController;
+import controller.ProfileController;
 import java.awt.event.ActionListener;
 import model.UserData;
 
@@ -30,7 +30,7 @@ public class AdminProfile extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         bg = new javax.swing.JPanel();
@@ -59,7 +59,6 @@ public class AdminProfile extends javax.swing.JFrame {
         phone_fld = new javax.swing.JTextField();
         regdate_fld = new javax.swing.JTextField();
         cam_lbl = new javax.swing.JLabel();
-        save_btn = new javax.swing.JButton();
         deactivate_btn = new javax.swing.JButton();
         viewact_btn = new javax.swing.JButton();
         accstatus_box = new javax.swing.JComboBox<>();
@@ -134,7 +133,7 @@ public class AdminProfile extends javax.swing.JFrame {
                 plus_btnActionPerformed(evt);
             }
         });
-        sidebar.add(plus_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 233, 60, 50));
+        sidebar.add(plus_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 230, 60, 50));
 
         bg.add(sidebar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -2, 256, 630));
 
@@ -149,23 +148,21 @@ public class AdminProfile extends javax.swing.JFrame {
         javax.swing.GroupLayout taskbarLayout = new javax.swing.GroupLayout(taskbar);
         taskbar.setLayout(taskbarLayout);
         taskbarLayout.setHorizontalGroup(
-                taskbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(taskbarLayout.createSequentialGroup()
-                                .addGap(17, 17, 17)
-                                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 50,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 149,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(488, Short.MAX_VALUE)));
+            taskbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(taskbarLayout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(488, Short.MAX_VALUE))
+        );
         taskbarLayout.setVerticalGroup(
-                taskbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(taskbarLayout.createSequentialGroup()
-                                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 38,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 2, Short.MAX_VALUE))
-                        .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE));
+            taskbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(taskbarLayout.createSequentialGroup()
+                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 2, Short.MAX_VALUE))
+            .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+        );
 
         bg.add(taskbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(248, 0, 710, 40));
 
@@ -199,37 +196,19 @@ public class AdminProfile extends javax.swing.JFrame {
         accstatus_lbl.setText("Account Status");
         bg.add(accstatus_lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 400, -1, -1));
 
-        name_fld.setText("Enter your name");
         name_fld.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 name_fldActionPerformed(evt);
             }
         });
         bg.add(name_fld, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 270, 220, -1));
-
-        email_fld.setText("Enter your email");
         bg.add(email_fld, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 300, 220, -1));
-
-        phone_fld.setText("Enter your phone number");
         bg.add(phone_fld, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 330, 220, -1));
         bg.add(regdate_fld, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 360, 220, -1));
 
         cam_lbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         cam_lbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/211634_camera_icon.png"))); // NOI18N
         bg.add(cam_lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 130, 110, 50));
-
-        save_btn.setText("Save Changes");
-        save_btn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                save_btnMouseClicked(evt);
-            }
-        });
-        save_btn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                save_btnActionPerformed(evt);
-            }
-        });
-        bg.add(save_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 490, 110, -1));
 
         deactivate_btn.setText("Deactivate Account");
         deactivate_btn.addActionListener(new java.awt.event.ActionListener() {
@@ -247,24 +226,24 @@ public class AdminProfile extends javax.swing.JFrame {
         });
         bg.add(viewact_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 490, -1, -1));
 
-        accstatus_box
-                .setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Active", "Deactivated", "Banned" }));
+        accstatus_box.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Active", "Deactivated", "Banned" }));
         bg.add(accstatus_box, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 400, -1, -1));
 
         update_btn.setText("Update");
-        bg.add(update_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 60, -1, -1));
+        bg.add(update_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 490, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 960, Short.MAX_VALUE));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 960, Short.MAX_VALUE)
+        );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -387,7 +366,6 @@ public class AdminProfile extends javax.swing.JFrame {
     private javax.swing.JButton profilebtn;
     private javax.swing.JTextField regdate_fld;
     private javax.swing.JLabel regdate_lbl;
-    private javax.swing.JButton save_btn;
     private javax.swing.JPanel sidebar;
     private javax.swing.JPanel taskbar;
     private javax.swing.JButton update_btn;

@@ -9,20 +9,26 @@ import dao.UserDao;
 import model.UserData;
 import view.AdminProfile;
 
-public class ProfilePageController {
+public class ProfileController {
     private final AdminProfile profileView;
-    private final UserDao userDao;
-    private final String userEmail;
+    private UserDao userDao;
+    private int userId; 
 
-    public ProfilePageController(AdminProfile profileView, UserDao userDao, String userEmail) {
+    public ProfileController(AdminProfile profileView) {
         this.profileView = profileView;
-        this.userDao = userDao;
-        this.userEmail = userEmail;
-
-        loadProfile();
         this.profileView.addUpdateProfileListener(new UpdateProfileListener());
     }
+
+    public void setUserDao(UserDao userDao) {
+        this.userDao = userDao;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
     public void open() {
+        loadProfile(); 
         profileView.setVisible(true);
     }
 
@@ -32,7 +38,10 @@ public class ProfilePageController {
 
     private void loadProfile() {
         try {
-            UserData user = userDao.getProfile(userEmail);
+            if (userDao == null) {
+                throw new IllegalStateException("UserDao is not initialized.");
+            }
+            UserData user = userDao.getProfileById(userId);  
             if (user != null) {
                 profileView.displayUserProfile(user);
                 profileView.setFieldsEditable(false);
@@ -44,19 +53,18 @@ public class ProfilePageController {
                     JOptionPane.ERROR_MESSAGE);
         }
     }
-
     private void updateProfile() {
         try {
             UserData updatedUser = profileView.getUpdatedProfile();
-            updatedUser.setEmail(userEmail);
-
+            updatedUser.setId(userId); 
+    
             // Simple validation
             if (updatedUser.getUsername().trim().isEmpty()) {
                 JOptionPane.showMessageDialog(profileView, "Name cannot be empty.");
                 return;
             }
-
-            boolean success = userDao.updateProfile(updatedUser);
+    
+            boolean success = userDao.updateProfileById(updatedUser);  
             if (success) {
                 JOptionPane.showMessageDialog(profileView, "Profile updated successfully!");
                 loadProfile();
@@ -68,6 +76,7 @@ public class ProfilePageController {
                     JOptionPane.ERROR_MESSAGE);
         }
     }
+    
 
     private class UpdateProfileListener implements ActionListener {
         @Override

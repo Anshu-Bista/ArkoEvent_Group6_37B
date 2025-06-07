@@ -158,12 +158,13 @@ public class UserDao {
     }
 
     // Profile
-    public UserData getProfile(String email) {
-        Connection conn = mysql.openConnection();
-        String sql = "SELECT username, email, phone, account_status, profile_image, registration_date FROM users WHERE email = ?";
+    public UserData getProfileById(int id) {
+        String sql = "SELECT username, email, phone, account_status, profile_image, registration_date FROM users WHERE id = ?";
         
-        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, email);
+        try (Connection conn = mysql.openConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            
+            pstmt.setInt(1, id);
             ResultSet result = pstmt.executeQuery();
             
             if (result.next()) {
@@ -177,25 +178,23 @@ public class UserDao {
                 return user;
             }
         } catch (SQLException ex) {
-            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            mysql.closeConnection(conn);
+            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, "Error retrieving user profile by ID", ex);
         }
+        
         return null;
-    }
+    }    
 
     // Update user profile
-    public boolean updateProfile(UserData user) {
+    public boolean updateProfileById(UserData user) {
         Connection conn = mysql.openConnection();
-        String sql = "UPDATE users SET username = ?, phone = ?, account_status = ?, profile_image = ? WHERE email = ?";
-        
+        String sql = "UPDATE users SET username = ?, phone = ?, profile_image = ? WHERE id = ?";
+    
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, user.getUsername());
             pstmt.setString(2, user.getPhone());
-            pstmt.setString(3, user.getStatus());
-            pstmt.setBytes(4, user.getProfileImage());
-            pstmt.setString(5, user.getEmail());
-
+            pstmt.setBytes(3, user.getProfileImage());
+            pstmt.setInt(4, user.getId());
+    
             int rowsUpdated = pstmt.executeUpdate();
             return rowsUpdated > 0;
         } catch (SQLException ex) {
@@ -205,4 +204,5 @@ public class UserDao {
             mysql.closeConnection(conn);
         }
     }
+    
 }
