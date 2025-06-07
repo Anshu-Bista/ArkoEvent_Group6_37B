@@ -9,6 +9,8 @@ import java.time.LocalTime;
 
 import javax.swing.JOptionPane;
 
+import model.EventData;
+
 import java.awt.event.ActionListener;
 
 /**
@@ -33,7 +35,7 @@ public class CreateEvent extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         bg = new javax.swing.JPanel();
@@ -157,31 +159,29 @@ public class CreateEvent extends javax.swing.JFrame {
         taskbar.setBackground(new java.awt.Color(229, 179, 208));
 
         jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel15.setText("Profile");
+        jLabel15.setText("Event Sceduling");
 
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/user.png"))); // NOI18N
+        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/calendar-check.png"))); // NOI18N
 
         javax.swing.GroupLayout taskbarLayout = new javax.swing.GroupLayout(taskbar);
         taskbar.setLayout(taskbarLayout);
         taskbarLayout.setHorizontalGroup(
-                taskbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(taskbarLayout.createSequentialGroup()
-                                .addGap(17, 17, 17)
-                                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 50,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 149,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(488, Short.MAX_VALUE)));
+            taskbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(taskbarLayout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(488, Short.MAX_VALUE))
+        );
         taskbarLayout.setVerticalGroup(
-                taskbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(taskbarLayout.createSequentialGroup()
-                                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 38,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 2, Short.MAX_VALUE))
-                        .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE));
+            taskbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(taskbarLayout.createSequentialGroup()
+                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 2, Short.MAX_VALUE))
+            .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+        );
 
         bg.add(taskbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(248, 0, 710, 40));
 
@@ -189,31 +189,31 @@ public class CreateEvent extends javax.swing.JFrame {
         bg.add(img_fld, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 410, 120, 110));
 
         title.setText("Event Title");
-        bg.add(title, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 130, -1, -1));
+        bg.add(title, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 90, -1, -1));
 
         description.setText("Description");
-        bg.add(description, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 160, -1, -1));
+        bg.add(description, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 130, -1, -1));
 
         category.setText("Category");
-        bg.add(category, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 230, -1, -1));
+        bg.add(category, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 230, -1, -1));
 
         eventtype.setText("Type");
-        bg.add(eventtype, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 260, -1, -1));
+        bg.add(eventtype, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 260, -1, -1));
 
         end.setText("End Time");
-        bg.add(end, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 380, -1, 10));
+        bg.add(end, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 380, -1, 10));
 
         location.setText("Location");
-        bg.add(location, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 320, -1, -1));
+        bg.add(location, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 320, -1, -1));
 
         limit.setText("Participant Limit");
-        bg.add(limit, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 350, -1, -1));
+        bg.add(limit, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 350, -1, -1));
 
         deadline.setText("RSVP Deadline");
-        bg.add(deadline, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 380, -1, -1));
+        bg.add(deadline, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 380, -1, -1));
 
         event_img.setText("Image Banner");
-        bg.add(event_img, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 410, -1, -1));
+        bg.add(event_img, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 410, -1, -1));
 
         cam_lbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         cam_lbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/211634_camera_icon.png"))); // NOI18N
@@ -226,15 +226,15 @@ public class CreateEvent extends javax.swing.JFrame {
         bg.add(create_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 573, 540, 40));
 
         price.setText("Price");
-        bg.add(price, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 290, -1, -1));
+        bg.add(price, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 290, -1, -1));
 
         description_fld.setColumns(20);
         description_fld.setRows(5);
         jScrollPane1.setViewportView(description_fld);
 
-        bg.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 160, 510, 60));
+        bg.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 130, 500, 90));
         bg.add(deadline_fld, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 380, 80, -1));
-        bg.add(title_fld, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 130, 500, -1));
+        bg.add(title_fld, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 90, 500, -1));
 
         status_fld.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Draft", "Published" }));
         status_fld.addActionListener(new java.awt.event.ActionListener() {
@@ -244,9 +244,7 @@ public class CreateEvent extends javax.swing.JFrame {
         });
         bg.add(status_fld, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 490, -1, -1));
 
-        eventcategory_box.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Arts & Culture",
-                "Food & Drink", "Sports & Outdoors", "Education & Learning", "Business & Networking", "Family & Kids",
-                "Community & Charity", "Lifestyle & Hobbies", "Seasonal & Holiday", "Online/Virtual Events" }));
+        eventcategory_box.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Arts & Culture", "Food & Drink", "Sports & Outdoors", "Education & Learning", "Business & Networking", "Family & Kids", "Community & Charity", "Lifestyle & Hobbies", "Seasonal & Holiday", "Online/Virtual Events" }));
         eventcategory_box.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 eventcategory_boxActionPerformed(evt);
@@ -258,10 +256,10 @@ public class CreateEvent extends javax.swing.JFrame {
         bg.add(end_fld, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 370, 80, -1));
 
         event_status.setText("Event Status");
-        bg.add(event_status, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 490, -1, -1));
+        bg.add(event_status, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 490, -1, -1));
 
         date.setText("Date");
-        bg.add(date, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 230, -1, -1));
+        bg.add(date, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 230, -1, 20));
 
         limit_fld.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -272,7 +270,7 @@ public class CreateEvent extends javax.swing.JFrame {
         bg.add(date_fld, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 230, 90, -1));
 
         tickettype.setText("Ticket Type");
-        bg.add(tickettype, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 290, -1, -1));
+        bg.add(tickettype, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 290, -1, -1));
 
         ticketype_box.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Paid", "Free" }));
         ticketype_box.addActionListener(new java.awt.event.ActionListener() {
@@ -291,22 +289,21 @@ public class CreateEvent extends javax.swing.JFrame {
         bg.add(eventtype_box, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 260, -1, -1));
 
         start.setText("Start Time");
-        bg.add(start, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 350, -1, -1));
+        bg.add(start, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 350, -1, -1));
         bg.add(start_fld, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 340, 80, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(bg, javax.swing.GroupLayout.Alignment.TRAILING,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                Short.MAX_VALUE));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(bg, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, 634,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 6, Short.MAX_VALUE)));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, 634, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 6, Short.MAX_VALUE))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -500,24 +497,78 @@ public class CreateEvent extends javax.swing.JFrame {
     public int getTicketsAvailable() {
         return Integer.parseInt(limit_fld.getText());
     }
+    public void setEventType(String type) {
+        eventtype_box.setSelectedItem(type);
+    }
+    
+    public void setTicketType(String ticketType) {
+        ticketype_box.setSelectedItem(ticketType);
+    }
+    
+    public void setEventDate(LocalDate date) {
+        if (date != null) {
+            date_fld.setText(date.toString());
+        }
+    }
+    
+    public void setStartTime(LocalTime time) {
+        if (time != null) {
+            start_fld.setText(time.toString());
+        }
+    }
+    
+    public void setEndTime(LocalTime time) {
+        if (time != null) {
+            end_fld.setText(time.toString());
+        }
+    }
+    
+    public void setRsvpDeadline(LocalDate deadline) {
+        if (deadline != null) {
+            deadline_fld.setText(deadline.toString());
+        }
+    }
+    
+    public void setEventPrice(double price) {
+        price_fld.setText(String.valueOf(price));
+    }
+    
+    public void setTicketsAvailable(int tickets) {
+        limit_fld.setText(String.valueOf(tickets));
+    }
+    
 
-    public void clearFields() {
+    public void resetForm() {
         title_fld.setText("");
         location_fld.setText("");
         description_fld.setText("");
         eventcategory_box.setSelectedIndex(0);
         eventtype_box.setSelectedIndex(0);
         ticketype_box.setSelectedIndex(0);
-
-        if (date_fld.getText().equals("yyyy-mm-dd") || date_fld.getText().isBlank()) {
-            JOptionPane.showMessageDialog(this, "Please enter a valid event date in yyyy-mm-dd format.");
-            return;
-        }
-
+        date_fld.setText("");
+        start_fld.setText("");
+        end_fld.setText("");
+        deadline_fld.setText("");
         price_fld.setText("");
         limit_fld.setText("");
+        status_fld.setSelectedIndex(0); 
     }
-
+    
+    public void setFormData(EventData event) {
+        title_fld.setText(event.getTitle());
+        location_fld.setText(event.getLocation());
+        description_fld.setText(event.getDescription());
+        eventcategory_box.setSelectedItem(event.getCategory());
+        setEventType(event.getType());               // Updates eventtype_box
+        setTicketType(event.getTicketType());        // Updates ticketype_box
+        setEventDate(event.getEventDate());          // Updates date_fld
+        setStartTime(event.getStartTime());          // Updates start_fld
+        setEndTime(event.getEndTime());              // Updates end_fld
+        setRsvpDeadline(event.getRsvpDeadline());    // Updates deadline_fld
+        setEventPrice(event.getPrice());             // Updates price_fld
+        setTicketsAvailable(event.getTicketsAvailable()); // Updates limit_fld
+    }
+    
     public void addAddEventListener(ActionListener listener) {
         create_btn.addActionListener(listener);
     }
