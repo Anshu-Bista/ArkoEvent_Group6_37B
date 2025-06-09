@@ -5,7 +5,8 @@
 package arkoevent_group6_37b;
 
 import Controller.signUpController;
-import View.Registration;
+import View.*;
+import controller.*;
 
 /**
  *
@@ -17,8 +18,8 @@ public class ArkoEvent_Group6_37B {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-       Registration registerView = new Registration();
-       signUpController c = new signUpController(registerView);
+       EventDetail details = new EventDetail();
+       EventDetailsController c = new EventDetailsController(details,1,2);
        c.open();
     }
     
