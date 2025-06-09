@@ -9,6 +9,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.time.ZoneId;
@@ -173,7 +175,7 @@ public class UserDao {
                 user.setEmail(result.getString("email"));
                 user.setPhone(result.getString("phone"));
                 user.setStatus(result.getString("account_status"));
-                user.setProfileImage(result.getBytes("profile_image"));
+                user.setImagePath(result.getString("profile_image"));
                 user.setRegistrationDate(result.getTimestamp("registration_date"));
                 return user;
             }
@@ -192,7 +194,7 @@ public class UserDao {
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, user.getUsername());
             pstmt.setString(2, user.getPhone());
-            pstmt.setBytes(3, user.getProfileImage());
+            pstmt.setString(3, user.getImagePath());
             pstmt.setInt(4, user.getId());
     
             int rowsUpdated = pstmt.executeUpdate();
@@ -204,5 +206,29 @@ public class UserDao {
             mysql.closeConnection(conn);
         }
     }
+
+    //View All Users
+    public List<UserData> getAllUsers() {
+    List<UserData> users = new ArrayList<>();
+    Connection conn = mysql.openConnection(); 
+    String sql = "SELECT * FROM users";
+
+    try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        ResultSet rs = pstmt.executeQuery();
+        while (rs.next()) {
+            UserData user = new UserData();
+            user.setUsername(rs.getString("username"));
+            user.setImagePath(rs.getString("imagePath")); 
+            users.add(user);
+        }
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    } finally {
+        mysql.closeConnection(conn); // close your connection safely
+    }
+
+    return users;
+}
+
     
 }
