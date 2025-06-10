@@ -146,17 +146,7 @@ public class ViewUsers extends javax.swing.JFrame {
 
         jPanel1.add(taskbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(248, 0, 780, 40));
 
-        javax.swing.GroupLayout UserPanelLayout = new javax.swing.GroupLayout(UserPanel);
-        UserPanel.setLayout(UserPanelLayout);
-        UserPanelLayout.setHorizontalGroup(
-            UserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 728, Short.MAX_VALUE)
-        );
-        UserPanelLayout.setVerticalGroup(
-            UserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 528, Short.MAX_VALUE)
-        );
-
+        UserPanel.setLayout(new javax.swing.BoxLayout(UserPanel, javax.swing.BoxLayout.LINE_AXIS));
         userscroll.setViewportView(UserPanel);
 
         jPanel1.add(userscroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 120, 730, 500));
@@ -243,7 +233,7 @@ public class ViewUsers extends javax.swing.JFrame {
     private javax.swing.JScrollPane userscroll;
     // End of variables declaration//GEN-END:variables
 
-    public JPanel getProductPanel() {
+    public JPanel getUserPanel() {
         return UserPanel;
     }
 

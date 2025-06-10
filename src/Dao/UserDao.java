@@ -218,7 +218,7 @@ public class UserDao {
         while (rs.next()) {
             UserData user = new UserData();
             user.setUsername(rs.getString("username"));
-            user.setImagePath(rs.getString("imagePath")); 
+            user.setImagePath(rs.getString("profile_image")); 
             users.add(user);
         }
     } catch (SQLException ex) {
