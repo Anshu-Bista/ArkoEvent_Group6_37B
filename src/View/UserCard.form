@@ -24,10 +24,10 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="137" max="-2" attributes="0"/>
-                      <Component id="namelbl" min="-2" pref="114" max="-2" attributes="0"/>
+                      <Component id="namelbl" min="-2" pref="139" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="165" max="32767" attributes="0"/>
+              <EmptySpace pref="140" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jButton2" alignment="1" min="-2" pref="117" max="-2" attributes="0"/>
                   <Component id="ban_btn" alignment="1" min="-2" max="-2" attributes="0"/>
