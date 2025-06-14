@@ -7,7 +7,8 @@ import java.util.List;
 public class UserController {
     private final UserDao userDao = new UserDao();
 
-    public List<UserData> getAllUsers() {
-        return userDao.getAllUsers();
+    public List<UserData> getUsersByStatus(String status) {
+        return userDao.getUsersByStatus(status);
     }
+    
 }

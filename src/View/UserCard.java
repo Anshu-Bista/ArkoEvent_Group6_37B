@@ -106,9 +106,5 @@ public class UserCard extends javax.swing.JPanel {
     ImageIcon icon = new ImageIcon(user.getImagePath());
     Image img = icon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
     jLabel1.setIcon(new ImageIcon(img));
-}
-
-
-
-
+    }
 }

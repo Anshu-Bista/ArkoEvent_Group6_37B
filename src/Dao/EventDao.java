@@ -15,7 +15,6 @@ public class EventDao {
     }
 
     /**
-     * Inserts a new event into the events table.
      * 
      * @param event EventData object containing event details.
      * @return true if insert was successful, false otherwise.

@@ -162,13 +162,13 @@ public class UserDao {
     // Profile
     public UserData getProfileById(int id) {
         String sql = "SELECT username, email, phone, account_status, profile_image, registration_date FROM users WHERE id = ?";
-        
+
         try (Connection conn = mysql.openConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
             pstmt.setInt(1, id);
             ResultSet result = pstmt.executeQuery();
-            
+
             if (result.next()) {
                 UserData user = new UserData();
                 user.setUsername(result.getString("username"));
@@ -182,21 +182,21 @@ public class UserDao {
         } catch (SQLException ex) {
             Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, "Error retrieving user profile by ID", ex);
         }
-        
+
         return null;
-    }    
+    }
 
     // Update user profile
     public boolean updateProfileById(UserData user) {
         Connection conn = mysql.openConnection();
         String sql = "UPDATE users SET username = ?, phone = ?, profile_image = ? WHERE id = ?";
-    
+
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, user.getUsername());
             pstmt.setString(2, user.getPhone());
             pstmt.setString(3, user.getImagePath());
             pstmt.setInt(4, user.getId());
-    
+
             int rowsUpdated = pstmt.executeUpdate();
             return rowsUpdated > 0;
         } catch (SQLException ex) {
@@ -207,28 +207,52 @@ public class UserDao {
         }
     }
 
-    //View All Users
+    // View All Users
     public List<UserData> getAllUsers() {
-    List<UserData> users = new ArrayList<>();
-    Connection conn = mysql.openConnection(); 
-    String sql = "SELECT * FROM users";
-
-    try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-        ResultSet rs = pstmt.executeQuery();
-        while (rs.next()) {
-            UserData user = new UserData();
-            user.setUsername(rs.getString("username"));
-            user.setImagePath(rs.getString("profile_image")); 
-            users.add(user);
-        }
-    } catch (SQLException ex) {
-        ex.printStackTrace();
-    } finally {
-        mysql.closeConnection(conn); // close your connection safely
-    }
-
-    return users;
-}
-
+        List<UserData> users = new ArrayList<>();
+        Connection conn = mysql.openConnection(); 
+        String sql = "SELECT * FROM users";
     
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                UserData user = new UserData();
+                user.setUsername(rs.getString("username"));
+                user.setImagePath(rs.getString("profile_image")); 
+                users.add(user);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            mysql.closeConnection(conn); // close your connection safely
+        }
+    
+        return users;
+    }
+    
+    public List<UserData> getUsersByStatus(String status) {
+        List<UserData> users = new ArrayList<>();
+        Connection conn = mysql.openConnection(); 
+    
+        String sql = "SELECT * FROM users WHERE account_status = ?";
+    
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, status);  // "active", "banned", or "deactivated"
+            ResultSet rs = pstmt.executeQuery();
+    
+            while (rs.next()) {
+                UserData user = new UserData();
+                user.setUsername(rs.getString("username"));
+                user.setImagePath(rs.getString("profile_image"));
+                users.add(user);
+            }
+    
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            mysql.closeConnection(conn);
+        }
+    
+        return users;
+    }    
 }

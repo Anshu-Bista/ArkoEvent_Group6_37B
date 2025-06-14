@@ -4,6 +4,8 @@
  */
 package view;
 
+import java.awt.event.ActionListener;
+import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
 /**
@@ -36,13 +38,14 @@ public class ViewUsers extends javax.swing.JFrame {
         myeventsbtn = new javax.swing.JButton();
         discoverbtn = new javax.swing.JButton();
         profilebtn = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        logoutbtn = new javax.swing.JButton();
         plus_btn = new javax.swing.JButton();
         taskbar = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         userscroll = new javax.swing.JScrollPane();
         UserPanel = new javax.swing.JPanel();
+        statusComboBox = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -101,9 +104,9 @@ public class ViewUsers extends javax.swing.JFrame {
         });
         sidebar.add(profilebtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 220, 50));
 
-        jButton1.setBackground(new java.awt.Color(208, 202, 232));
-        jButton1.setText("Log Out");
-        sidebar.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 550, 220, 40));
+        logoutbtn.setBackground(new java.awt.Color(208, 202, 232));
+        logoutbtn.setText("Log Out");
+        sidebar.add(logoutbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 550, 220, 40));
 
         plus_btn.setBackground(new java.awt.Color(208, 202, 232));
         plus_btn.setFont(new java.awt.Font("Segoe UI Historic", 0, 48)); // NOI18N
@@ -149,7 +152,10 @@ public class ViewUsers extends javax.swing.JFrame {
         UserPanel.setLayout(new javax.swing.BoxLayout(UserPanel, javax.swing.BoxLayout.LINE_AXIS));
         userscroll.setViewportView(UserPanel);
 
-        jPanel1.add(userscroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 120, 730, 500));
+        jPanel1.add(userscroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 120, 730, 490));
+
+        statusComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Active", "Banned", "Deactivated" }));
+        jPanel1.add(statusComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 60, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1030, 640));
 
@@ -221,14 +227,15 @@ public class ViewUsers extends javax.swing.JFrame {
     private javax.swing.JButton discoverbtn;
     private javax.swing.JButton feedback_btn;
     private javax.swing.JButton homebtn;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton logoutbtn;
     private javax.swing.JButton myeventsbtn;
     private javax.swing.JButton plus_btn;
     private javax.swing.JButton profilebtn;
     private javax.swing.JPanel sidebar;
+    private javax.swing.JComboBox<String> statusComboBox;
     private javax.swing.JPanel taskbar;
     private javax.swing.JScrollPane userscroll;
     // End of variables declaration//GEN-END:variables
@@ -237,5 +244,11 @@ public class ViewUsers extends javax.swing.JFrame {
         return UserPanel;
     }
 
+    public JComboBox<String> getStatusComboBox() {
+    return statusComboBox;
+    }
 
+    public void StatusFilterListener(ActionListener listener) {
+        statusComboBox.addActionListener(listener);
+    }
 }
