@@ -2,13 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package controller;
+package Controller;
 
 import javax.swing.*;
 import java.sql.*;
 
 public class PasswordUpdateController {
-    private Connection conn;
+    private final Connection conn;
 
     public PasswordUpdateController(Connection conn) {
         this.conn = conn;
