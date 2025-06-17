@@ -1,29 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Database;
 
-/**
- *
- * @author Ekta Thapa
- */
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.*;
 
-
-
-
 public class MySqlConnection implements Database {
-  
+
     @Override
     public Connection openConnection() {
         try {
-            String username = "john_doe";
-            String password = "newPassword123";
-            String database = "ekta-98"; // ✅ Fixed: removed extra space
+            String username = "root";
+            String password = "ektathapa9848";
+            String database = "ArkoEvent";
 
             Connection connection = DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/" + database, username, password
@@ -35,7 +21,7 @@ public class MySqlConnection implements Database {
                 System.out.println("Database connection successful");
             }
             return connection;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println("Connection error: " + e);
             return null;
         }
@@ -48,18 +34,18 @@ public class MySqlConnection implements Database {
                 conn.close();
                 System.out.println("Connection closed");
             }
-        } catch (Exception e) {
-            System.out.println(e);
+        } catch (SQLException e) {
+            System.out.println("Error closing connection: " + e);
         }
     }
 
     @Override
     public ResultSet runQuery(Connection conn, String query) {
         try {
-            Statement stmp = conn.createStatement();
-            return stmp.executeQuery(query);
+            Statement stmt = conn.createStatement();
+            return stmt.executeQuery(query);
         } catch (SQLException e) {
-            System.out.println(e);
+            System.out.println("Query error: " + e);
             return null;
         }
     }
@@ -67,12 +53,12 @@ public class MySqlConnection implements Database {
     @Override
     public int executeUpdate(Connection conn, String query) {
         try {
-            Statement stmp = conn.createStatement();
-            return stmp.executeUpdate(query);
+            Statement stmt = conn.createStatement();
+            return stmt.executeUpdate(query);
         } catch (SQLException e) {
-            System.out.println(e);
+            System.out.println("Update error: " + e);
             return -1;
         }
     }
 }
-
+    
