@@ -123,7 +123,7 @@ public class ViewUsers extends javax.swing.JFrame {
         taskbar.setBackground(new java.awt.Color(229, 179, 208));
 
         jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel15.setText("Profile");
+        jLabel15.setText("Users");
 
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/user.png"))); // NOI18N

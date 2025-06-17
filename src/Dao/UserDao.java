@@ -217,8 +217,10 @@ public class UserDao {
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 UserData user = new UserData();
+                user.setId(rs.getInt("id")); 
                 user.setUsername(rs.getString("username"));
                 user.setImagePath(rs.getString("profile_image")); 
+                user.setStatus(rs.getString("account_status"));
                 users.add(user);
             }
         } catch (SQLException ex) {
@@ -242,8 +244,10 @@ public class UserDao {
     
             while (rs.next()) {
                 UserData user = new UserData();
+                user.setId(rs.getInt("id")); 
                 user.setUsername(rs.getString("username"));
                 user.setImagePath(rs.getString("profile_image"));
+                user.setStatus(rs.getString("account_status"));
                 users.add(user);
             }
     
@@ -255,4 +259,18 @@ public class UserDao {
     
         return users;
     }    
+
+    //Ban/Unban Users
+    public static boolean updateUserStatus(int userId, String newStatus) {
+        String sql = "UPDATE users SET account_status = ? WHERE id = ?";
+        try (Connection conn = new MySqlConnection().openConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, newStatus);
+            stmt.setInt(2, userId);
+            return stmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

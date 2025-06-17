@@ -6,6 +6,8 @@ package view;
 
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+
 import model.UserData;
 
 /**
@@ -106,5 +108,9 @@ public class UserCard extends javax.swing.JPanel {
     ImageIcon icon = new ImageIcon(user.getImagePath());
     Image img = icon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
     jLabel1.setIcon(new ImageIcon(img));
+    }
+
+    public JButton getActionButton() {
+        return ban_btn;
     }
 }

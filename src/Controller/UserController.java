@@ -10,5 +10,13 @@ public class UserController {
     public List<UserData> getUsersByStatus(String status) {
         return userDao.getUsersByStatus(status);
     }
+
+    public boolean banUser(int userId) {
+        return UserDao.updateUserStatus(userId, "banned");
+    }
+
+    public boolean unbanUser(int userId) {
+        return UserDao.updateUserStatus(userId, "active");
+    }
     
 }
