@@ -3,8 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package View;
-import Dao.UserDAO;
-import Model.UserData;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,7 +15,7 @@ public class Reset extends javax.swing.JFrame {
      * Creates new form Reset
      */
     public Reset() {
-        initComponents();
+    initComponents();
     }
 
     /**
@@ -216,21 +214,30 @@ public class Reset extends javax.swing.JFrame {
     
 
     private void ResetPasswordActionPerformed(java.awt.event.ActionEvent evt) {
-    String newPassword = new String(Password.getPassword());
-    String confirmPassword = new String(ConfirmPassword.getPassword());
+    String pass = new String(Password.getPassword());
+    String confirm = new String(ConfirmPassword.getPassword());
 
-    if (!newPassword.equals(confirmPassword)) {
-        JOptionPane.showMessageDialog(this, "Your reset password does not match.");
+    if (pass.equals(confirm)) {
+        int choice = JOptionPane.showConfirmDialog(
+            this,
+            "Your password will be changed. Proceed?",
+            "Confirm Reset",
+            JOptionPane.YES_NO_OPTION
+        );
+
+        if (choice == JOptionPane.YES_OPTION) {
+            // You can place actual saving logic here
+            JOptionPane.showMessageDialog(this, "Password reset successfully.");
+        } // No action if user clicks NO
     } else {
-        JOptionPane.showMessageDialog(this, "Your password has been reset successfully.");
+        JOptionPane.showMessageDialog(this, "Your passwords do not match.");
     }
 }
-                }
+
+     
     public static void main(String args[]) {
-    java.awt.EventQueue.invokeLater(new Runnable() {
-        public void run() {
-            new Reset().setVisible(true);
-        }
+    java.awt.EventQueue.invokeLater(() -> {
+        new Reset().setVisible(true);
     });
 }
 
