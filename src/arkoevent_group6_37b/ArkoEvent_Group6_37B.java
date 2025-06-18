@@ -4,17 +4,30 @@
  */
 package arkoevent_group6_37b;
 
+import Controller.LoginController;
+import View.Login;
+
+
+
 /**
  *
  * @author hp
  */
 public class ArkoEvent_Group6_37B {
-
+    public static void main(String[] args) { 
+       Login loginView = new Login(); 
+  
+       LoginController c;
+        c = new LoginController(loginView);
+       c.open();
+    }
+    
+    
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+  
         // TODO code application logic here
     }
     
-}
+
