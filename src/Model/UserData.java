@@ -18,15 +18,19 @@ public class UserData {
         this.username = username;
         this.email = email;
         this.password = password;
-        this.confirmPassword = confirmPassword;
+        this.confirmPassword = "";
         this.phone = phone;
-        this.imagePath = imagePath;
+        this.imagePath = "default.png";
         this.status = (status != null) ? status : "active";
         this.registrationDate = (registrationDate != null) ? registrationDate
                 : new Timestamp(System.currentTimeMillis());
     }
 
     public UserData() {
+    }
+
+    public UserData(String userName2, String email2, String password2, String contact) {
+      
     }
 
     public int getId() {

@@ -1,7 +1,7 @@
 package controller;
 
-import Dao.*;
-import View.*;
+import dao.EventDao;
+import view.*;
 import dao.BookingDao;
 
 import model.*;

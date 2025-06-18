@@ -2,7 +2,6 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
@@ -10,7 +9,6 @@ import java.time.format.DateTimeParseException;
 import javax.swing.JOptionPane;
 
 import dao.EventDao;
-import database.MySqlConnection;
 import model.EventData;
 import view.CreateEvent;
 
@@ -22,12 +20,13 @@ public class CreateEventController {
         this.createEventView = view;
 
         try {
-            Connection conn = new MySqlConnection().openConnection();
-            this.eventDao = new EventDao(conn);
+            // Initialize DAO
+            this.eventDao = new EventDao();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Database connection failed: " + e.getMessage());
         }
 
+        // Attach action listener to 'Add Event' button
         this.createEventView.addAddEventListener(new AddEventListener());
     }
 
@@ -46,14 +45,23 @@ public class CreateEventController {
         }
 
         try {
+            // Retrieve user input
             String eventTitle = createEventView.getEventTitle().trim();
             String eventLocation = createEventView.getEventLocation().trim();
             String eventDescription = createEventView.getEventDescription().trim();
             String eventCategory = createEventView.getEventCategory().trim();
             String eventType = createEventView.getEventType();
             String ticketType = createEventView.getTicketType();
-            String eventStatus;
 
+            // Validate required fields
+            if (eventTitle.isEmpty() || eventLocation.isEmpty() || eventCategory.isEmpty()
+                    || eventType == null || ticketType == null) {
+                JOptionPane.showMessageDialog(createEventView, "Please fill in all required fields.");
+                return;
+            }
+
+            // Confirm publishing
+            String eventStatus;
             int confirm = JOptionPane.showConfirmDialog(
                 createEventView, "Are you sure you want to publish this event?",
                 "Confirm Publish", JOptionPane.YES_NO_OPTION
@@ -68,18 +76,17 @@ public class CreateEventController {
                 return;
             }
 
+            // Parse time & date
             LocalDate eventDate = createEventView.getEventDate();
             LocalTime startTime = createEventView.getStartTime();
             LocalTime endTime = createEventView.getEndTime();
             LocalDate rsvpDeadline = createEventView.getRsvpDeadline();
-
             double ticketPrice = createEventView.getEventPrice();
             int totalTickets = createEventView.getTicketsAvailable();
 
-            if (eventTitle.isEmpty() || eventLocation.isEmpty() || eventCategory.isEmpty()
-                    || eventDate == null || startTime == null || endTime == null
-                    || rsvpDeadline == null || eventType == null || ticketType == null) {
-                JOptionPane.showMessageDialog(createEventView, "Please fill in all required fields.");
+            // Date/time validation
+            if (eventDate == null || startTime == null || endTime == null || rsvpDeadline == null) {
+                JOptionPane.showMessageDialog(createEventView, "Date and time fields cannot be empty.");
                 return;
             }
 
@@ -93,6 +100,7 @@ public class CreateEventController {
                 return;
             }
 
+            // Ticket price validation
             if (ticketType.equalsIgnoreCase("Free")) {
                 ticketPrice = 0;
             } else if (ticketPrice < 0) {
@@ -100,6 +108,7 @@ public class CreateEventController {
                 return;
             }
 
+            // Create EventData object
             EventData event = new EventData(
                 0, eventTitle, eventLocation, eventDescription,
                 eventCategory, eventType, ticketType, eventStatus,
@@ -107,6 +116,7 @@ public class CreateEventController {
                 ticketPrice, totalTickets, 0
             );
 
+            // Save event
             boolean success = eventDao.createEvent(event);
 
             if (success) {
@@ -123,6 +133,7 @@ public class CreateEventController {
         }
     }
 
+    // ActionListener for the 'Add Event' button
     class AddEventListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             handleCreateEvent();

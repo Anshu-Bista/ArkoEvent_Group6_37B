@@ -69,7 +69,7 @@ public class signUpController {
                 }
                 
               //aaba try reegeestering ani check if data go
-                RegData user = new RegData(email,userName,password,contact);
+              UserData user = new UserData(userName, email, password, contact);
                 if(userDao.checkUser(user)){
                     JOptionPane.showMessageDialog(null, "Duplicate User");
                     return;
