@@ -38,5 +38,11 @@ public class ArkoEvent_Group6_37B {
      * Reset resetView = new Reset(); // No parameter
      * resetView.setVisible(true);
      * }
-     */
+     
+       EventDetail details = new EventDetail();
+       EventDetailsController c = new EventDetailsController(details,1,2);
+       c.open();
+    }
+       */
+    
 }
