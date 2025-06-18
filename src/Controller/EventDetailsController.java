@@ -3,8 +3,7 @@ package controller;
 import dao.EventDao;
 import view.EventDetail;
 import dao.BookingDao;
-
-import model.*;
+import model.EventData;
 
 
 import javax.swing.*;
