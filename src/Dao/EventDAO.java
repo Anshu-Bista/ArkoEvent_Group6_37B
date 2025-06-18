@@ -1,6 +1,6 @@
-package dao;
+package Dao;
 
-import model.Event;
+import Model.Event;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -49,7 +49,7 @@ public class EventDAO {
         String sql = "SELECT * FROM events";
 
         try (Statement stmt = conn.createStatement();
-                ResultSet rs = stmt.executeQuery(sql)) {
+             ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
                 list.add(mapEvent(rs));
@@ -61,10 +61,13 @@ public class EventDAO {
 
     private Event mapEvent(ResultSet rs) throws SQLException {
         return new Event(
-                rs.getInt("id"),
-                rs.getString("title"),
-                rs.getString("category"),
-                rs.getString("date"),
-                rs.getString("location"));
+            rs.getInt("id"),
+            rs.getString("title"),
+            rs.getString("category"),
+            rs.getString("date"),
+            rs.getString("location")
+        );
     }
 }
+
+
