@@ -403,5 +403,10 @@ public class AdminProfile extends javax.swing.JFrame {
     public void addUpdateProfileListener(ActionListener listener) {
         update_btn.addActionListener(listener);
     }
+    
+    public void addDeactivateListener(ActionListener listener) {
+        deactivate_btn.addActionListener(listener);
+    }
+
 
 }

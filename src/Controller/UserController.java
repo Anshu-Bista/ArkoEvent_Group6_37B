@@ -12,11 +12,11 @@ public class UserController {
     }
 
     public boolean banUser(int userId) {
-        return UserDao.updateUserStatus(userId, "banned");
+        return userDao.updateUserStatus(userId, "banned");
     }
 
     public boolean unbanUser(int userId) {
-        return UserDao.updateUserStatus(userId, "active");
+        return userDao.updateUserStatus(userId, "active");
     }
 
 }

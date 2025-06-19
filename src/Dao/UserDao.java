@@ -261,9 +261,9 @@ public class UserDao {
     }    
 
     //Ban/Unban Users
-    public static boolean updateUserStatus(int userId, String newStatus) {
+    public boolean updateUserStatus(int userId, String newStatus) {
         String sql = "UPDATE users SET account_status = ? WHERE id = ?";
-        try (Connection conn = new MySqlConnection().openConnection();
+        try (Connection conn = mysql.openConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, newStatus);
             stmt.setInt(2, userId);

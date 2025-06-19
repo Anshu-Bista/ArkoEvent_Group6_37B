@@ -17,6 +17,7 @@ public class ProfileController {
     public ProfileController(AdminProfile profileView) {
         this.profileView = profileView;
         this.profileView.addUpdateProfileListener(new UpdateProfileListener());
+        this.profileView.addDeactivateListener(new DeactivateAccountListener());
     }
 
     public void setUserDao(UserDao userDao) {
@@ -95,5 +96,24 @@ public class ProfileController {
         }
     }
 
-    
+    private class DeactivateAccountListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            int confirm = JOptionPane.showConfirmDialog(profileView,
+                    "Are you sure you want to deactivate your account?",
+                    "Confirm Deactivation",
+                    JOptionPane.YES_NO_OPTION);
+
+            if (confirm == JOptionPane.YES_OPTION) {
+                boolean success = userDao.updateUserStatus(userId, "deactivated");
+                if (success) {
+                    JOptionPane.showMessageDialog(profileView, "Account deactivated. Application will exit.");
+                    System.exit(0); // or redirect to login
+                } else {
+                    JOptionPane.showMessageDialog(profileView, "Failed to deactivate account.");
+                }
+            }
+        }
+    }
+
 }
