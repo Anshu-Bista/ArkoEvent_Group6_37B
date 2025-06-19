@@ -39,7 +39,7 @@ public class AdminProfile extends javax.swing.JFrame {
         bookingsbtn = new javax.swing.JButton();
         discoverbtn = new javax.swing.JButton();
         profilebtn = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        logout_btn = new javax.swing.JButton();
         myeventsbtn = new javax.swing.JButton();
         plus_btn = new javax.swing.JButton();
         taskbar = new javax.swing.JPanel();
@@ -111,9 +111,9 @@ public class AdminProfile extends javax.swing.JFrame {
         });
         sidebar.add(profilebtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 220, 50));
 
-        jButton1.setBackground(new java.awt.Color(208, 202, 232));
-        jButton1.setText("Log Out");
-        sidebar.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 550, 220, 40));
+        logout_btn.setBackground(new java.awt.Color(208, 202, 232));
+        logout_btn.setText("Log Out");
+        sidebar.add(logout_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 550, 220, 40));
 
         myeventsbtn.setBackground(new java.awt.Color(208, 202, 232));
         myeventsbtn.setText("My Events");
@@ -351,10 +351,10 @@ public class AdminProfile extends javax.swing.JFrame {
     private javax.swing.JLabel email_lbl;
     private javax.swing.JButton feedback_btn;
     private javax.swing.JButton homebtn;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JButton logout_btn;
     private javax.swing.JButton myeventsbtn;
     private javax.swing.JTextField name_fld;
     private javax.swing.JLabel name_lbl;
@@ -407,6 +407,11 @@ public class AdminProfile extends javax.swing.JFrame {
     public void addDeactivateListener(ActionListener listener) {
         deactivate_btn.addActionListener(listener);
     }
+    
+    public void addLogoutListener(ActionListener listener) {
+        logout_btn.addActionListener(listener);
+    }
+
 
 
 }

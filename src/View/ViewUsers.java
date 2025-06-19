@@ -32,7 +32,7 @@ public class ViewUsers extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
@@ -43,7 +43,7 @@ public class ViewUsers extends javax.swing.JFrame {
         myeventsbtn = new javax.swing.JButton();
         discoverbtn = new javax.swing.JButton();
         profilebtn = new javax.swing.JButton();
-        logoutbtn = new javax.swing.JButton();
+        logout_btn = new javax.swing.JButton();
         plus_btn = new javax.swing.JButton();
         taskbar = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
@@ -109,9 +109,9 @@ public class ViewUsers extends javax.swing.JFrame {
         });
         sidebar.add(profilebtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 220, 50));
 
-        logoutbtn.setBackground(new java.awt.Color(208, 202, 232));
-        logoutbtn.setText("Log Out");
-        sidebar.add(logoutbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 550, 220, 40));
+        logout_btn.setBackground(new java.awt.Color(208, 202, 232));
+        logout_btn.setText("Log Out");
+        sidebar.add(logout_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 550, 220, 40));
 
         plus_btn.setBackground(new java.awt.Color(208, 202, 232));
         plus_btn.setFont(new java.awt.Font("Segoe UI Historic", 0, 48)); // NOI18N
@@ -136,24 +136,21 @@ public class ViewUsers extends javax.swing.JFrame {
         javax.swing.GroupLayout taskbarLayout = new javax.swing.GroupLayout(taskbar);
         taskbar.setLayout(taskbarLayout);
         taskbarLayout.setHorizontalGroup(
-                taskbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(taskbarLayout.createSequentialGroup()
-                                .addGap(17, 17, 17)
-                                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 50,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 149,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(558, Short.MAX_VALUE)));
+            taskbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(taskbarLayout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(558, Short.MAX_VALUE))
+        );
         taskbarLayout.setVerticalGroup(
-                taskbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(taskbarLayout.createSequentialGroup()
-                                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 38,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 2, Short.MAX_VALUE))
-                        .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                Short.MAX_VALUE));
+            taskbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(taskbarLayout.createSequentialGroup()
+                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 2, Short.MAX_VALUE))
+            .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
 
         jPanel1.add(taskbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(248, 0, 780, 40));
 
@@ -165,8 +162,7 @@ public class ViewUsers extends javax.swing.JFrame {
 
         jPanel1.add(userscroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 120, 730, 490));
 
-        statusComboBox
-                .setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Active", "Banned", "Deactivated" }));
+        statusComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Active", "Banned", "Deactivated" }));
         jPanel1.add(statusComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 60, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1030, 640));
@@ -246,7 +242,7 @@ public class ViewUsers extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JButton logoutbtn;
+    private javax.swing.JButton logout_btn;
     private javax.swing.JButton myeventsbtn;
     private javax.swing.JButton plus_btn;
     private javax.swing.JButton profilebtn;
@@ -266,5 +262,9 @@ public class ViewUsers extends javax.swing.JFrame {
 
     public void StatusFilterListener(ActionListener listener) {
         statusComboBox.addActionListener(listener);
+    }
+    
+    public void addLogoutListener(ActionListener listener) {
+        logout_btn.addActionListener(listener);
     }
 }

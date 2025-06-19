@@ -9,6 +9,7 @@ import view.ViewUsers;
 
 import javax.swing.*;
 import java.util.List;
+import util.SessionUtil;
 
 public class ViewAllUsersController {
     private final UserController userController;
@@ -17,6 +18,8 @@ public class ViewAllUsersController {
     public ViewAllUsersController(ViewUsers view) {
         this.view = view;
         this.userController = new UserController();
+        this.view.addLogoutListener(e -> SessionUtil.logout(view));
+
 
         this.view.getStatusComboBox().addActionListener(new StatusFilterListener());
 

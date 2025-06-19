@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 
 import dao.UserDao;
 import model.UserData;
+import util.SessionUtil;
 import view.AdminProfile;
 
 public class ProfileController {
@@ -18,6 +19,7 @@ public class ProfileController {
         this.profileView = profileView;
         this.profileView.addUpdateProfileListener(new UpdateProfileListener());
         this.profileView.addDeactivateListener(new DeactivateAccountListener());
+        this.profileView.addLogoutListener(e -> SessionUtil.logout(profileView));
     }
 
     public void setUserDao(UserDao userDao) {

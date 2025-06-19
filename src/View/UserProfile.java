@@ -4,6 +4,9 @@
  */
 package view;
 
+import java.awt.event.ActionListener;
+import model.UserData;
+
 /**
  *
  * @author hp
@@ -31,7 +34,7 @@ public class UserProfile extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        logout_btn = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
@@ -73,9 +76,9 @@ public class UserProfile extends javax.swing.JFrame {
         jButton4.setText("Profile");
         sidebar.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 200, 40));
 
-        jButton5.setBackground(new java.awt.Color(208, 202, 232));
-        jButton5.setText("Log Out");
-        sidebar.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 570, 220, 40));
+        logout_btn.setBackground(new java.awt.Color(208, 202, 232));
+        logout_btn.setText("Log Out");
+        sidebar.add(logout_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 570, 220, 40));
 
         bg.add(sidebar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -2, 256, 630));
 
@@ -266,11 +269,11 @@ public class UserProfile extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton logout_btn;
     private javax.swing.JTextField name_fld;
     private javax.swing.JLabel name_lbl;
     private javax.swing.JTextField phone_fld;
@@ -282,4 +285,45 @@ public class UserProfile extends javax.swing.JFrame {
     private javax.swing.JButton update_btn;
     private javax.swing.JButton viewact_btn;
     // End of variables declaration//GEN-END:variables
+    
+    public void setFieldsEditable(boolean editable) {
+        name_fld.setEditable(editable);
+        phone_fld.setEditable(editable);
+        email_fld.setEditable(false); // Always non-editable
+        regdate_fld.setEditable(false); // Always non-editable
+        accstatus_box.setEnabled(false); // Always disabled for now
+    }
+
+    public boolean isEditable() {
+        return name_fld.isEditable() && phone_fld.isEditable();
+    }
+
+    public UserData getUpdatedProfile() {
+        UserData user = new UserData();
+        user.setUsername(name_fld.getText());
+        user.setPhone(phone_fld.getText());
+        user.setStatus((String) accstatus_box.getSelectedItem());
+        return user;
+    }
+
+    public void displayUserProfile(UserData user) {
+        name_fld.setText(user.getUsername());
+        phone_fld.setText(user.getPhone());
+        accstatus_box.setSelectedItem(user.getStatus());
+        email_fld.setText(user.getEmail()); // Read-only
+        regdate_fld.setText(user.getRegistrationDate().toString()); // Read-only
+    }
+
+    public void addUpdateProfileListener(ActionListener listener) {
+        update_btn.addActionListener(listener);
+    }
+    
+    public void addDeactivateListener(ActionListener listener) {
+        deactivate_btn.addActionListener(listener);
+    }
+    
+    public void addLogoutListener(ActionListener listener) {
+        logout_btn.addActionListener(listener);
+    }
+
 }

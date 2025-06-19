@@ -44,7 +44,7 @@ public class CreateEvent extends javax.swing.JFrame {
         myeventsbtn = new javax.swing.JButton();
         discoverbtn = new javax.swing.JButton();
         profilebtn = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        logout_btn = new javax.swing.JButton();
         plus_btn = new javax.swing.JButton();
         taskbar = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
@@ -138,9 +138,9 @@ public class CreateEvent extends javax.swing.JFrame {
         });
         sidebar.add(profilebtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 220, 50));
 
-        jButton1.setBackground(new java.awt.Color(208, 202, 232));
-        jButton1.setText("Log Out");
-        sidebar.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 550, 220, 40));
+        logout_btn.setBackground(new java.awt.Color(208, 202, 232));
+        logout_btn.setText("Log Out");
+        sidebar.add(logout_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 550, 220, 40));
 
         plus_btn.setBackground(new java.awt.Color(208, 202, 232));
         plus_btn.setFont(new java.awt.Font("Segoe UI Historic", 0, 48)); // NOI18N
@@ -423,7 +423,6 @@ public class CreateEvent extends javax.swing.JFrame {
     private javax.swing.JButton feedback_btn;
     private javax.swing.JButton homebtn;
     private javax.swing.JLabel img_fld;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JScrollPane jScrollPane1;
@@ -431,6 +430,7 @@ public class CreateEvent extends javax.swing.JFrame {
     private javax.swing.JTextField limit_fld;
     private javax.swing.JLabel location;
     private javax.swing.JTextField location_fld;
+    private javax.swing.JButton logout_btn;
     private javax.swing.JButton myeventsbtn;
     private javax.swing.JButton plus_btn;
     private javax.swing.JLabel price;
@@ -516,5 +516,8 @@ public class CreateEvent extends javax.swing.JFrame {
     public void addAddEventListener(ActionListener listener) {
         create_btn.addActionListener(listener);
     }
-   
+    
+    public void addLogoutListener(ActionListener listener) {
+        logout_btn.addActionListener(listener);
+    }
 }

@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import dao.EventDao;
 import database.MySqlConnection;
 import model.EventData;
+import util.SessionUtil;
 import view.CreateEvent;
 
 public class CreateEventController {
@@ -20,6 +21,7 @@ public class CreateEventController {
 
     public CreateEventController(CreateEvent view) {
         this.createEventView = view;
+        this.createEventView.addLogoutListener(e -> SessionUtil.logout(createEventView));
 
         try {
             Connection conn = new MySqlConnection().openConnection();
