@@ -18,5 +18,5 @@ public class UserController {
     public boolean unbanUser(int userId) {
         return UserDao.updateUserStatus(userId, "active");
     }
-    
+
 }
