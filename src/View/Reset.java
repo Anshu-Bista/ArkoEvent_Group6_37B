@@ -203,8 +203,14 @@ public class Reset extends javax.swing.JFrame {
     private void PasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PasswordActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_PasswordActionPerformed
-                                                
- 
+
+    private void ConfirmPasswordActionPerformed(java.awt.event.ActionEvent evt) {                                                
+     if (Password.getText().isEmpty() || Password.getText().equals("Enter new password")) {
+        JOptionPane.showMessageDialog(this, "Please enter your new password.");
+        return;
+}
+    }
+    
 
     private void ResetPasswordActionPerformed(java.awt.event.ActionEvent evt) {
     String pass = new String(Password.getPassword());
