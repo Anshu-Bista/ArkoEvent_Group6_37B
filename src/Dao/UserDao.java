@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 
 public class UserDao {
     MySqlConnection mysql = new MySqlConnection();
-    //check check check
+    //again again
     /**
      * Updates the user's password using the provided username.
      *
@@ -39,4 +39,5 @@ public class UserDao {
     }
 }
 
+//final
 
