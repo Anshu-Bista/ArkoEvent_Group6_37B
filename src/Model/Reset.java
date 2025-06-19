@@ -1,100 +1,47 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Model;
 
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPasswordField;
+import javax.swing.*;
 
-/**
- *
- * @author Ekta Thapa
- */
-   
 public class Reset extends JFrame {
 
-    private JPasswordField Password;
-    private JPasswordField ConfirmPassword;
-    private JButton submitButton;
+    public class ResetPasswordModel {
+    private String password;
+    private String confirmPassword;
 
-    public Reset() {
-        setTitle("Reset Password");
-        setSize(400, 250);
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(new GridBagLayout());
-
-        // UI elements
-        JLabel titleLabel = new JLabel("Reset Your Password");
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 16));
-
-        JLabel passwordLabel = new JLabel("New Password:");
-        Password = new JPasswordField(20);
-
-        JLabel confirmPasswordLabel = new JLabel("Confirm Password:");
-        ConfirmPassword = new JPasswordField(20);
-
-        submitButton = new JButton("Update Password");
-
-        // Layout setup
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(10, 10, 10, 10);
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.gridwidth = 2;
-        add(titleLabel, gbc);
-
-        gbc.gridwidth = 1;
-        gbc.gridy++;
-        add(passwordLabel, gbc);
-        gbc.gridx = 1;
-        add(Password, gbc);
-
-        gbc.gridx = 0;
-        gbc.gridy++;
-        add(confirmPasswordLabel, gbc);
-        gbc.gridx = 1;
-        add(ConfirmPassword, gbc);
-
-        gbc.gridx = 0;
-        gbc.gridy++;
-        gbc.gridwidth = 2;
-        add(submitButton, gbc);
+    public ResetPasswordModel() {
     }
 
-    // --- Getter and Setter methods ---
+    public ResetPasswordModel(String password, String confirmPassword) {
+        this.password = password;
+        this.confirmPassword = confirmPassword;
+    }
 
+    // Getters and setters
     public String getPassword() {
-        return new String(Password.getPassword());
+        return password;
     }
 
     public void setPassword(String password) {
-        this.Password.setText(password);
+        this.password = password;
     }
 
     public String getConfirmPassword() {
-        return new String(ConfirmPassword.getPassword());
+        return confirmPassword;
     }
 
     public void setConfirmPassword(String confirmPassword) {
-        this.ConfirmPassword.setText(confirmPassword);
+        this.confirmPassword = confirmPassword;
     }
 
-    public JButton getSubmitButton() {
-        return submitButton;
+    // Validation method to check if passwords match and are valid
+    public boolean isValid() {
+        if (password == null || confirmPassword == null) {
+            return false;
+        }
+        if (password.isEmpty() || confirmPassword.isEmpty()) {
+            return false;
+        }
+        return password.equals(confirmPassword);
     }
-
-    public void setSubmitButton(JButton submitButton) {
-        this.submitButton = submitButton;
     }
 }
-
