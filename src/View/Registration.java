@@ -2,11 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package view;
+package View;
 
 
+import Controller.LoginController;
+import View.Login;
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.logging.*;
 
 /**
@@ -174,6 +178,11 @@ public class Registration extends javax.swing.JFrame {
         gotoLogin.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         gotoLogin.setForeground(new java.awt.Color(0, 102, 102));
         gotoLogin.setText("Log In");
+        gotoLogin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                gotoLoginMouseClicked(evt);
+            }
+        });
 
         contactField.setForeground(new java.awt.Color(180, 180, 180));
         contactField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("##########"))));
@@ -386,6 +395,13 @@ public class Registration extends javax.swing.JFrame {
             }
     }//GEN-LAST:event_contactFieldFocusLost
 
+    private void gotoLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gotoLoginMouseClicked
+        Login registerForm = new Login();
+        LoginController c = new LoginController(registerForm);
+        c.open();
+        dispose();
+    }//GEN-LAST:event_gotoLoginMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -447,7 +463,9 @@ public class Registration extends javax.swing.JFrame {
         registerBtn.addActionListener(listener);
     }
     
-    
+    public void gotoLoginListener(MouseEvent e) {
+        gotoLogin.addMouseListener((MouseListener) e);
+    }
     public String getuName(){return userNameField.getText();}
     public String getEmail(){return emailField.getText();}
     public String getContact(){return contactField.getText();} 

@@ -5,8 +5,8 @@
 package Controller;
 
 import dao.UserDao;
-import Model.UserData;
-import view.Registration;
+import Model.*;
+import View.*;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author hp
+ * @author Aayusha
  */
 public class SignUpController {
     private final UserDao userDao = new UserDao();

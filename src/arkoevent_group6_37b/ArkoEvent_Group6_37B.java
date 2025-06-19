@@ -2,6 +2,7 @@ package arkoevent_group6_37b;
 
 
 import Controller.*;
+import View.Login;
 import view.*;
 
 public class ArkoEvent_Group6_37B {
@@ -11,9 +12,9 @@ public class ArkoEvent_Group6_37B {
         controller.open();
         */
        
-       Registration view = new Registration();
-       SignUpController c = new SignUpController(view);
-       c.open();
+        Login registerForm = new Login();
+        LoginController c = new LoginController(registerForm);
+        c.open();
     }
 
     /*
