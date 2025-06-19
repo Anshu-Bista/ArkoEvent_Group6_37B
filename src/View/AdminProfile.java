@@ -4,7 +4,6 @@
  */
 package view;
 
-import controller.ProfileController;
 import java.awt.event.ActionListener;
 import model.UserData;
 
