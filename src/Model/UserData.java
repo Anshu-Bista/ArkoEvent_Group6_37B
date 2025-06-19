@@ -1,4 +1,4 @@
-package model;
+package Model;
 
 import java.sql.Timestamp;
 
@@ -29,8 +29,11 @@ public class UserData {
     public UserData() {
     }
 
-    public UserData(String userName2, String email2, String password2, String contact) {
-      
+    public UserData(String userName, String email, String password, String contact) {
+      this.username = userName;
+      this.email = email;
+      this.password = password;
+      this.phone = contact;
     }
 
     public int getId() {

@@ -1,19 +1,19 @@
 package arkoevent_group6_37b;
 
-//import controller.CreateEventController;
-import controller.ViewAllUsersController;
-//import controller.ProfileController;
-//import controller.ProfileController;
-//import dao.UserDao;
-//import view.AdminProfile;
-//import view.CreateEvent;
-import view.ViewUsers;
+
+import Controller.*;
+import view.*;
 
 public class ArkoEvent_Group6_37B {
     public static void main(String[] args) {
-        ViewUsers view = new ViewUsers();
+       /* ViewUsers view = new ViewUsers();
         ViewAllUsersController controller = new ViewAllUsersController(view);
         controller.open();
+        */
+       
+       Registration view = new Registration();
+       SignUpController c = new SignUpController(view);
+       c.open();
     }
 
     /*

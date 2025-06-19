@@ -16,7 +16,8 @@ import java.util.logging.Logger;
 
 
 import database.MySqlConnection;
-import model.UserData;
+import Model.UserData;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -27,24 +28,28 @@ public class UserDao {
     Connection conn = mysql.openConnection();
 
     // Sign Up
-    public void signUp(UserData user) {
-        if (!user.getPassword().equals(user.getConfirmPassword())) {
-            throw new IllegalArgumentException("Passwords donot match.");
-        }
-        String sql = "INSERT into users(username, email, password, phone, account_status, registration_date) values(?, ?, ?, ?, ?, ?)";
+    public boolean signUp(UserData user) {
+        
+        String sql = "INSERT into users(username, email, password, phone, account_status) values(?, ?, ?, ?, ?)";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, user.getUsername());
             pstmt.setString(2, user.getEmail());
             pstmt.setString(3, user.getPassword());
             pstmt.setString(4, user.getPhone());
             pstmt.setString(5, "active");
-            pstmt.setTimestamp(6, user.getRegistrationDate());
-            pstmt.executeUpdate();
+            int rowsAffected = pstmt.executeUpdate();
+            if (rowsAffected > 0) {
+                JOptionPane.showMessageDialog(null, "Signup successful");
+                return true;
+            } else{
+                JOptionPane.showMessageDialog(null, "Signup Failed");
+            }
         } catch (SQLException ex) {
             Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             mysql.closeConnection(conn);
         }
+        return false;
     }
 
     // Checks if the user is present
