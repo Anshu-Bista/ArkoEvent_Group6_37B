@@ -1,7 +1,7 @@
 package controller;
 
+import View.EventDetail;
 import dao.EventDao;
-import view.EventDetail;
 import dao.BookingDao;
 import model.EventData;
 
@@ -52,15 +52,10 @@ public class EventDetailsController {
         }
     }
 
-    class LoadEventDetailsListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            loadEventDetails();
-        }
-    }
-
     public class BookEventListener implements ActionListener {
       
 
+        @Override
         public void actionPerformed(ActionEvent e) {
          
          int ticketCount = Integer.parseInt(eventDetailView.ticketCount.getValue().toString());
