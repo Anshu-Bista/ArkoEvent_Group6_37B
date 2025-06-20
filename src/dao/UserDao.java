@@ -87,6 +87,7 @@ public class UserDao {
                 user.setPassword(result.getString("password"));
                 user.setPhone(result.getString("phone"));
                 user.setStatus(result.getString("account_status"));
+                user.setRole(result.getString("role"));
                 user.setRegistrationDate(result.getTimestamp("registration_date"));
                 user.setImagePath(result.getString("profile_image"));
                 return user;
@@ -152,6 +153,7 @@ public class UserDao {
                 user.setPhone(result.getString("phone"));
                 user.setStatus(result.getString("account_status"));
                 user.setImagePath(result.getString("profile_image"));
+                user.setRole(result.getString("role"));
                 user.setRegistrationDate(result.getTimestamp("registration_date"));
                 return user;
             }

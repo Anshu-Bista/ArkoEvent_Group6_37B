@@ -74,8 +74,14 @@ public class SignUpController {
                     JOptionPane.showMessageDialog(registerView, "Duplicate User");
                     return;
                 }
+                
                 if(userDao.signUp(user)){
-                    JOptionPane.showMessageDialog(registerView,"LoginPage showww");
+                    Login view =  new Login();
+                    LoginController c = new LoginController(view);
+                    c.open();
+                    close();
+                }else{
+                    JOptionPane.showMessageDialog(registerView, "Unable to Register");
                 }
                 
                 
