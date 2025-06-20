@@ -43,12 +43,15 @@ public class LoginController {
             String email = loginView.username.getText();
             String password = loginView.password.getText();
             UserData user = dao.login(email, password);
-            System.out.println(user.getId());
+            
             if(user == null){
                 JOptionPane.showMessageDialog(loginView, "Invalid UserName or Password");
             }
             else if (user.getRole().equals("user")){
-                JOptionPane.showMessageDialog(loginView, "User Dashboard");
+                UserDashboard dashboard = new UserDashboard();
+                UserDashboardController c = new UserDashboardController(dashboard,user);
+                c.open();
+                close();
             }
             else  if(user.getRole().equals("admin")){
                 JOptionPane.showMessageDialog(loginView, "Admin Dashboard");
@@ -63,7 +66,7 @@ public class LoginController {
         @Override
         public void actionPerformed(ActionEvent e) {
             Registration view = new Registration();
-            SignupController c = new SignupController(view);
+            signUpController c = new signUpController(view);
             c.open();
             close();
         }
