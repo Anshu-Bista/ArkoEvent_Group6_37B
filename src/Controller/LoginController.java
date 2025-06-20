@@ -63,7 +63,7 @@ public class LoginController {
         @Override
         public void actionPerformed(ActionEvent e) {
             Registration view = new Registration();
-            SignUpController c = new SignUpController(view);
+            SignupController c = new SignupController(view);
             c.open();
             close();
         }

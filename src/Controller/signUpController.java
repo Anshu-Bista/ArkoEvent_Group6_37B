@@ -16,11 +16,11 @@ import javax.swing.JOptionPane;
  *
  * @author Aayusha
  */
-public class SignUpController {
+public class SignupController {
     private final UserDao userDao = new UserDao();
     private final Registration registerView;
     
-    public SignUpController(Registration registerView){
+    public SignupController(Registration registerView){
         this.registerView = registerView;
         registerView.AddUserListener(new AddUserListener());
     }

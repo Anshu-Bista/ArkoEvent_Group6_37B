@@ -2,8 +2,7 @@ package arkoevent_group6_37b;
 
 
 import Controller.*;
-import View.Login;
-import view.*;
+import View.*;
 
 public class ArkoEvent_Group6_37B {
     public static void main(String[] args) {
