@@ -31,9 +31,9 @@ public class UserProfile extends javax.swing.JFrame {
 
         bg = new javax.swing.JPanel();
         sidebar = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        myeventsbtn = new javax.swing.JButton();
+        homebtn = new javax.swing.JButton();
+        profilebtn = new javax.swing.JButton();
         logout_btn = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
@@ -64,17 +64,17 @@ public class UserProfile extends javax.swing.JFrame {
         sidebar.setBackground(new java.awt.Color(208, 202, 232));
         sidebar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton2.setBackground(new java.awt.Color(208, 202, 232));
-        jButton2.setText("My Events");
-        sidebar.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 200, 40));
+        myeventsbtn.setBackground(new java.awt.Color(208, 202, 232));
+        myeventsbtn.setText("My Events");
+        sidebar.add(myeventsbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 200, 40));
 
-        jButton3.setBackground(new java.awt.Color(208, 202, 232));
-        jButton3.setText("Home");
-        sidebar.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 200, 40));
+        homebtn.setBackground(new java.awt.Color(208, 202, 232));
+        homebtn.setText("Home");
+        sidebar.add(homebtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 200, 40));
 
-        jButton4.setBackground(new java.awt.Color(180, 175, 204));
-        jButton4.setText("Profile");
-        sidebar.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 200, 40));
+        profilebtn.setBackground(new java.awt.Color(180, 175, 204));
+        profilebtn.setText("Profile");
+        sidebar.add(profilebtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 200, 40));
 
         logout_btn.setBackground(new java.awt.Color(208, 202, 232));
         logout_btn.setText("Log Out");
@@ -265,20 +265,20 @@ public class UserProfile extends javax.swing.JFrame {
     private javax.swing.JButton deactivate_btn;
     private javax.swing.JTextField email_fld;
     private javax.swing.JLabel email_lbl;
+    private javax.swing.JButton homebtn;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton logout_btn;
+    private javax.swing.JButton myeventsbtn;
     private javax.swing.JTextField name_fld;
     private javax.swing.JLabel name_lbl;
     private javax.swing.JTextField phone_fld;
     private javax.swing.JLabel phone_lbl;
     private javax.swing.JLabel pic_lbl;
+    private javax.swing.JButton profilebtn;
     private javax.swing.JTextField regdate_fld;
     private javax.swing.JLabel regdate_lbl;
     private javax.swing.JPanel sidebar;
@@ -314,16 +314,29 @@ public class UserProfile extends javax.swing.JFrame {
         regdate_fld.setText(user.getRegistrationDate().toString()); // Read-only
     }
 
+    //btns
+    public void addLogoutListener(ActionListener listener) {
+        logout_btn.addActionListener(listener);
+    }
+
+    public void addProfileListener(ActionListener listener) {
+        profilebtn.addActionListener(listener);
+    }
+
+    public void addHomeListener(ActionListener listener) {
+        homebtn.addActionListener(listener);
+    }
+
+    public void addMyEventsListener(ActionListener listener) {
+        myeventsbtn.addActionListener(listener);
+    }
+
     public void addUpdateProfileListener(ActionListener listener) {
         update_btn.addActionListener(listener);
     }
     
     public void addDeactivateListener(ActionListener listener) {
         deactivate_btn.addActionListener(listener);
-    }
-    
-    public void addLogoutListener(ActionListener listener) {
-        logout_btn.addActionListener(listener);
     }
 
 }

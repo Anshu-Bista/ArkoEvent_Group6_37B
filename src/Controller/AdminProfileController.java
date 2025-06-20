@@ -7,21 +7,46 @@ import javax.swing.JOptionPane;
 
 import dao.UserDao;
 import model.UserData;
+import util.NavigationUtil;
 import util.SessionUtil;
 import view.AdminProfile;
 
-public class ProfileController {
+public class AdminProfileController {
     private final AdminProfile profileView;
     private UserDao userDao;
     private int userId; 
 
-    public ProfileController(AdminProfile profileView) {
-        this.profileView = profileView;
-        this.profileView.addUpdateProfileListener(new UpdateProfileListener());
-        this.profileView.addDeactivateListener(new DeactivateAccountListener());
-        this.profileView.addLogoutListener(e -> SessionUtil.logout(profileView));
-    }
+    public AdminProfileController(AdminProfile profileView) {
+    this.profileView = profileView;
 
+    this.profileView.addUpdateProfileListener(new UpdateProfileListener());
+    this.profileView.addDeactivateListener(new DeactivateAccountListener());
+    
+    this.profileView.addLogoutListener(e -> SessionUtil.logout(profileView));
+
+    this.profileView.addProfileListener(e -> {
+        profileView.dispose();
+        NavigationUtil.goToProfile();
+    });
+
+    this.profileView.addCreateEventListener(e -> {
+        profileView.dispose();
+        NavigationUtil.goToCreateEvent();
+    });
+
+    this.profileView.addHomeListener(e -> {
+        profileView.dispose();
+        NavigationUtil.goToDashboard(); // Treat dashboard as home
+    });
+
+    this.profileView.addMyEventsListener(e -> {
+        JOptionPane.showMessageDialog(profileView, "My Events page is under development.");
+    });
+
+    this.profileView.addDiscoverListener(e -> {
+        JOptionPane.showMessageDialog(profileView, "Discover page is under development.");
+    });
+}
     public void setUserDao(UserDao userDao) {
         this.userDao = userDao;
     }

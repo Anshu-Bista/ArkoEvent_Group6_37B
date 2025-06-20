@@ -2,29 +2,32 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.EventData;
+import database.MySqlConnection; // Import your connection helper
 
 public class EventDao {
-    private final Connection connection;
+    private MySqlConnection mysql = new MySqlConnection();
 
-    public EventDao(Connection connection) {
-        this.connection = connection;
+    public EventDao() {
     }
 
-    /**
-     * 
-     * @param event EventData object containing event details.
-     * @return true if insert was successful, false otherwise.
-     */
+    private Connection openConnection() {
+        return mysql.openConnection();
+    }
+
+    //Create Events
     public boolean createEvent(EventData event) {
         String sql = "INSERT INTO events (title, location, description, category, type, ticket_type, "
                 + "event_status, event_date, start_time, end_time, rsvp_deadline, price, tickets_available, tickets_sold) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+        try (Connection conn = openConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
             stmt.setString(1, event.getTitle());
             stmt.setString(2, event.getLocation());
             stmt.setString(3, event.getDescription());
@@ -42,11 +45,28 @@ public class EventDao {
 
             int affectedRows = stmt.executeUpdate();
             return affectedRows > 0;
+
         } catch (SQLException ex) {
             Logger.getLogger(EventDao.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("SQL Error: " + ex.getMessage());
             ex.printStackTrace();
             return false;
         }
+    }
+
+        
+    // Total Users for Admin Dashboard
+    public int getEventCount() {
+        String query = "SELECT COUNT(*) FROM events";
+        try (Connection conn = openConnection();
+             PreparedStatement stmt = conn.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(EventDao.class.getName()).log(Level.SEVERE, null, e);
+            e.printStackTrace();
+        }
+        return 0;
     }
 }

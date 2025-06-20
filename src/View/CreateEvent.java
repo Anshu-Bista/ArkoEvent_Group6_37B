@@ -33,7 +33,8 @@ public class CreateEvent extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         bg = new javax.swing.JPanel();
@@ -165,21 +166,23 @@ public class CreateEvent extends javax.swing.JFrame {
         javax.swing.GroupLayout taskbarLayout = new javax.swing.GroupLayout(taskbar);
         taskbar.setLayout(taskbarLayout);
         taskbarLayout.setHorizontalGroup(
-            taskbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(taskbarLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(488, Short.MAX_VALUE))
-        );
+                taskbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(taskbarLayout.createSequentialGroup()
+                                .addGap(17, 17, 17)
+                                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 50,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 149,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(488, Short.MAX_VALUE)));
         taskbarLayout.setVerticalGroup(
-            taskbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(taskbarLayout.createSequentialGroup()
-                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 2, Short.MAX_VALUE))
-            .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-        );
+                taskbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(taskbarLayout.createSequentialGroup()
+                                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 38,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 2, Short.MAX_VALUE))
+                        .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE));
 
         bg.add(taskbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(248, 0, 710, 40));
 
@@ -242,7 +245,9 @@ public class CreateEvent extends javax.swing.JFrame {
         });
         bg.add(status_fld, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 490, -1, -1));
 
-        eventcategory_box.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Arts & Culture", "Food & Drink", "Sports & Outdoors", "Education & Learning", "Business & Networking", "Family & Kids", "Community & Charity", "Lifestyle & Hobbies", "Seasonal & Holiday", "Online/Virtual Events" }));
+        eventcategory_box.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Arts & Culture",
+                "Food & Drink", "Sports & Outdoors", "Education & Learning", "Business & Networking", "Family & Kids",
+                "Community & Charity", "Lifestyle & Hobbies", "Seasonal & Holiday", "Online/Virtual Events" }));
         eventcategory_box.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 eventcategory_boxActionPerformed(evt);
@@ -293,15 +298,16 @@ public class CreateEvent extends javax.swing.JFrame {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(bg, javax.swing.GroupLayout.Alignment.TRAILING,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                Short.MAX_VALUE));
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, 634, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 6, Short.MAX_VALUE))
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, 634,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 6, Short.MAX_VALUE)));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -513,11 +519,37 @@ public class CreateEvent extends javax.swing.JFrame {
         limit_fld.setText("");
     }
 
+    // btns
     public void addAddEventListener(ActionListener listener) {
         create_btn.addActionListener(listener);
     }
-    
+
     public void addLogoutListener(ActionListener listener) {
         logout_btn.addActionListener(listener);
     }
+
+    public void addProfileListener(ActionListener listener) {
+        profilebtn.addActionListener(listener);
+    }
+
+    public void addCreateEventListener(ActionListener listener) {
+        plus_btn.addActionListener(listener);
+    }
+
+    public void addBookingListener(ActionListener listener) {
+        bookingsbtn.addActionListener(listener);
+    }
+
+    public void addHomeListener(ActionListener listener) {
+        homebtn.addActionListener(listener);
+    }
+
+    public void addDiscoverListener(ActionListener listener) {
+        discoverbtn.addActionListener(listener);
+    }
+
+    public void addMyEventsListener(ActionListener listener) {
+        myeventsbtn.addActionListener(listener);
+    }
+
 }

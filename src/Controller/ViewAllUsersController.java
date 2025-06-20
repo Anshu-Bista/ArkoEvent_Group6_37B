@@ -9,6 +9,8 @@ import view.ViewUsers;
 
 import javax.swing.*;
 import java.util.List;
+
+import util.NavigationUtil;
 import util.SessionUtil;
 
 public class ViewAllUsersController {
@@ -18,8 +20,31 @@ public class ViewAllUsersController {
     public ViewAllUsersController(ViewUsers view) {
         this.view = view;
         this.userController = new UserController();
+
         this.view.addLogoutListener(e -> SessionUtil.logout(view));
 
+        this.view.addProfileListener(e -> {
+            view.dispose();
+            NavigationUtil.goToProfile();
+        });
+
+        this.view.addCreateEventListener(e -> {
+            view.dispose();
+            NavigationUtil.goToCreateEvent();
+        });
+
+        this.view.addHomeListener(e -> {
+            view.dispose();
+            NavigationUtil.goToDashboard(); // Treat dashboard as home
+        });
+
+        this.view.addMyEventsListener(e -> {
+            JOptionPane.showMessageDialog(view, "My Events page is under development.");
+        });
+
+        this.view.addDiscoverListener(e -> {
+            JOptionPane.showMessageDialog(view, "Discover page is under development.");
+        });
 
         this.view.getStatusComboBox().addActionListener(new StatusFilterListener());
 

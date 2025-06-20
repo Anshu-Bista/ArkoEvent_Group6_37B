@@ -4,17 +4,19 @@ import java.sql.Timestamp;
 
 public class UserData {
     private int id;
+    private String role; // 'user' or 'admin'
     private String username;
     private String email;
     private String password;
     private String phone;
     private String confirmPassword;
-    private String status;
-    private String imagePath; //changed from byte[] to String
+    private String status; // 'active' or 'banned' or 'deactivated'
+    private String imagePath; // changed from byte[] to String
     private Timestamp registrationDate;
 
-    public UserData(String username, String email, String password, String confirmPassword, String phone,
+    public UserData(String role, String username, String email, String password, String confirmPassword, String phone,
             String imagePath, String status, Timestamp registrationDate) {
+        this.role = role;
         this.username = username;
         this.email = email;
         this.password = password;
@@ -35,6 +37,14 @@ public class UserData {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public String getUsername() {

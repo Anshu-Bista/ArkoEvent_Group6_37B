@@ -1,38 +1,34 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.time.ZoneId;
 
 import database.MySqlConnection;
 import model.UserData;
 
-/**
- *
- * @author hp
- */
 public class UserDao {
-    MySqlConnection mysql = new MySqlConnection();
-    Connection conn = mysql.openConnection();
+    private final MySqlConnection mysql = new MySqlConnection();
+
+    private Connection openConnection() {
+        return mysql.openConnection();
+    }
 
     // Sign Up
     public void signUp(UserData user) {
         if (!user.getPassword().equals(user.getConfirmPassword())) {
-            throw new IllegalArgumentException("Passwords donot match.");
+            throw new IllegalArgumentException("Passwords do not match.");
         }
-        String sql = "INSERT into users(username, email, password, phone, account_status, registration_date) values(?, ?, ?, ?, ?, ?)";
-        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+        String sql = "INSERT INTO users(username, email, password, phone, account_status, registration_date) "
+                + "VALUES (?, ?, ?, ?, ?, ?)";
+        try (Connection conn = openConnection();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, user.getUsername());
             pstmt.setString(2, user.getEmail());
             pstmt.setString(3, user.getPassword());
@@ -42,235 +38,187 @@ public class UserDao {
             pstmt.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            mysql.closeConnection(conn);
         }
     }
 
     // Checks if the user is present
     public boolean checkUser(UserData user) {
-        Connection conn1 = mysql.openConnection();
-        String sql = "SELECT* FROM users where email = ? or username = ?";
-        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        String sql = "SELECT * FROM users WHERE email = ? OR username = ?";
+        try (Connection conn = openConnection();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, user.getEmail());
             pstmt.setString(2, user.getUsername());
-            ResultSet result = pstmt.executeQuery();
-            return result.next();
+            try (ResultSet result = pstmt.executeQuery()) {
+                return result.next();
+            }
         } catch (SQLException ex) {
             Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            mysql.closeConnection(conn1);
         }
         return false;
     }
 
     // Log In
     public boolean login(String email, String password) {
-        Connection conn2 = mysql.openConnection();
-        String sql = "SELECT* FROM users where email = ? AND password = ?";
-        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        String sql = "SELECT * FROM users WHERE email = ? AND password = ?";
+        try (Connection conn = openConnection();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, email);
             pstmt.setString(2, password);
-            ResultSet result = pstmt.executeQuery();
-            return result.next();
-        } catch (SQLException ex) {
-            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            mysql.closeConnection(conn2);
-        }
-        return false;
-    }
-
-    // Forgot Password
-    // check if email is in the table
-    public boolean checkEmail(UserData user) {
-        Connection conn3 = mysql.openConnection();
-        String sql = "SELECT id FROM users where email = ?";
-        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, user.getEmail());
-            ResultSet result = pstmt.executeQuery();
-            return result.next();
-        } catch (SQLException ex) {
-            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            mysql.closeConnection(conn3);
-        }
-        return false;
-    }
-
-    // save reset code and current timestamp
-    public void saveResetCode(String email, String resetCode) {
-        Connection conn4 = mysql.openConnection();
-        String sql = "UPDATE users SET reset_code = ?, reset_code_timestamp = NOW() WHERE email = ?";
-        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, resetCode);
-            pstmt.setString(2, email);
-            pstmt.executeUpdate();
-        } catch (SQLException ex) {
-            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            mysql.closeConnection(conn4);
-        }
-    }
-
-    // verify the code and time
-    public boolean verifyResetCode(String email, String resetCode) {
-        Connection conn5 = mysql.openConnection();
-        String sql = "SELECT reset_code_timestamp FROM users WHERE email= ? AND reset_code = ? ";
-        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, email);
-            pstmt.setString(2, resetCode);
-            ResultSet result = pstmt.executeQuery();
-
-            if (result.next()) {
-                LocalDateTime generatedAt = result.getTimestamp("reset_code_timestamp").toLocalDateTime();
-                LocalDateTime now = LocalDateTime.now(ZoneId.systemDefault());
-                // valid only if within 3 minutes
-                if (generatedAt.plusMinutes(3).isAfter(now)) {
-                    return true;
-                }
+            try (ResultSet result = pstmt.executeQuery()) {
+                return result.next();
             }
         } catch (SQLException ex) {
             Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            mysql.closeConnection(conn5);
         }
         return false;
     }
 
-    // update password and clear reset code nad timestamp
+    // Forgot Password - check if email exists
+    public boolean checkEmail(UserData user) {
+        String sql = "SELECT id FROM users WHERE email = ?";
+        try (Connection conn = openConnection();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, user.getEmail());
+            try (ResultSet result = pstmt.executeQuery()) {
+                return result.next();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
+    // Update password and clear reset code and timestamp
     public boolean updatePassword(String email, String newPassword, String confirmPassword) {
         if (!newPassword.equals(confirmPassword)) {
             return false;
         }
-        Connection conn6 = mysql.openConnection();
-        String sql = "UPDATE users SET password = ?, reset_code = null, reset_code_timestamp = null WHERE email = ?";
-        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        String sql = "UPDATE users SET password = ?, reset_code = NULL, reset_code_timestamp = NULL WHERE email = ?";
+        try (Connection conn = openConnection();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, newPassword);
             pstmt.setString(2, email);
             int rowsUpdated = pstmt.executeUpdate();
-            return rowsUpdated > 0; // success if atleast one row was updated
-
+            return rowsUpdated > 0;
         } catch (SQLException ex) {
             Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            mysql.closeConnection(conn6);
         }
         return false;
     }
 
-    // Profile
+    // Get user profile by ID
     public UserData getProfileById(int id) {
-        String sql = "SELECT username, email, phone, account_status, profile_image, registration_date FROM users WHERE id = ?";
-
-        try (Connection conn = mysql.openConnection();
+        String sql = "SELECT username, email, phone, account_status, profile_image, registration_date, role FROM users WHERE id = ?";
+        try (Connection conn = openConnection();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
             pstmt.setInt(1, id);
-            ResultSet result = pstmt.executeQuery();
-
-            if (result.next()) {
-                UserData user = new UserData();
-                user.setUsername(result.getString("username"));
-                user.setEmail(result.getString("email"));
-                user.setPhone(result.getString("phone"));
-                user.setStatus(result.getString("account_status"));
-                user.setImagePath(result.getString("profile_image"));
-                user.setRegistrationDate(result.getTimestamp("registration_date"));
-                return user;
+            try (ResultSet result = pstmt.executeQuery()) {
+                if (result.next()) {
+                    UserData user = new UserData();
+                    user.setUsername(result.getString("username"));
+                    user.setEmail(result.getString("email"));
+                    user.setPhone(result.getString("phone"));
+                    user.setStatus(result.getString("account_status"));
+                    user.setImagePath(result.getString("profile_image"));
+                    user.setRegistrationDate(result.getTimestamp("registration_date"));
+                    user.setRole(result.getString("role"));
+                    return user;
+                }
             }
         } catch (SQLException ex) {
             Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, "Error retrieving user profile by ID", ex);
         }
-
         return null;
     }
 
-    // Update user profile
+    // Update user profile by ID
     public boolean updateProfileById(UserData user) {
-        Connection conn = mysql.openConnection();
         String sql = "UPDATE users SET username = ?, phone = ?, profile_image = ? WHERE id = ?";
-
-        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try (Connection conn = openConnection();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, user.getUsername());
             pstmt.setString(2, user.getPhone());
-            pstmt.setString(3, user.getImagePath());
+            pstmt.setString(3, user.getImagePath()); // Assuming this is a String path
             pstmt.setInt(4, user.getId());
 
             int rowsUpdated = pstmt.executeUpdate();
             return rowsUpdated > 0;
         } catch (SQLException ex) {
             Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
-        } finally {
-            mysql.closeConnection(conn);
         }
+        return false;
     }
 
-    // View All Users
+    // Get all users
     public List<UserData> getAllUsers() {
         List<UserData> users = new ArrayList<>();
-        Connection conn = mysql.openConnection(); 
         String sql = "SELECT * FROM users";
-    
-        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            ResultSet rs = pstmt.executeQuery();
+        try (Connection conn = openConnection();
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                ResultSet rs = pstmt.executeQuery()) {
             while (rs.next()) {
                 UserData user = new UserData();
-                user.setId(rs.getInt("id")); 
-                user.setUsername(rs.getString("username"));
-                user.setImagePath(rs.getString("profile_image")); 
-                user.setStatus(rs.getString("account_status"));
-                users.add(user);
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } finally {
-            mysql.closeConnection(conn); // close your connection safely
-        }
-    
-        return users;
-    }
-    
-    public List<UserData> getUsersByStatus(String status) {
-        List<UserData> users = new ArrayList<>();
-        Connection conn = mysql.openConnection(); 
-    
-        String sql = "SELECT * FROM users WHERE account_status = ?";
-    
-        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, status);  // "active", "banned", or "deactivated"
-            ResultSet rs = pstmt.executeQuery();
-    
-            while (rs.next()) {
-                UserData user = new UserData();
-                user.setId(rs.getInt("id")); 
+                user.setId(rs.getInt("id"));
                 user.setUsername(rs.getString("username"));
                 user.setImagePath(rs.getString("profile_image"));
                 user.setStatus(rs.getString("account_status"));
                 users.add(user);
             }
-    
         } catch (SQLException ex) {
-            ex.printStackTrace();
-        } finally {
-            mysql.closeConnection(conn);
+            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
         }
-    
         return users;
-    }    
+    }
 
-    //Ban/Unban Users
+    // Get users filtered by status
+    public List<UserData> getUsersByStatus(String status) {
+        List<UserData> users = new ArrayList<>();
+        String sql = "SELECT * FROM users WHERE account_status = ?";
+        try (Connection conn = openConnection();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, status);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    UserData user = new UserData();
+                    user.setId(rs.getInt("id"));
+                    user.setUsername(rs.getString("username"));
+                    user.setImagePath(rs.getString("profile_image"));
+                    user.setStatus(rs.getString("account_status"));
+                    users.add(user);
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return users;
+    }
+
+    // Ban/Unban Users
     public boolean updateUserStatus(int userId, String newStatus) {
         String sql = "UPDATE users SET account_status = ? WHERE id = ?";
-        try (Connection conn = mysql.openConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = openConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, newStatus);
             stmt.setInt(2, userId);
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
-            e.printStackTrace();
+            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, e);
             return false;
         }
+    }
+
+    // Total Users for Admin Dashboard
+    public int getUserCount() {
+        String query = "SELECT COUNT(*) FROM users";
+        try (Connection conn = openConnection();
+                PreparedStatement stmt = conn.prepareStatement(query);
+                ResultSet rs = stmt.executeQuery()) {
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
     }
 }

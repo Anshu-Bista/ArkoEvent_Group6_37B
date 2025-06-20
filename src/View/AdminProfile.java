@@ -399,6 +399,35 @@ public class AdminProfile extends javax.swing.JFrame {
         email_fld.setText(user.getEmail()); // Read-only
         regdate_fld.setText(user.getRegistrationDate().toString()); // Read-only
     }
+    
+    //btns
+    public void addLogoutListener(ActionListener listener) {
+        logout_btn.addActionListener(listener);
+    }
+
+    public void addProfileListener(ActionListener listener) {
+        profilebtn.addActionListener(listener);
+    }
+
+    public void addCreateEventListener(ActionListener listener) {
+        plus_btn.addActionListener(listener);
+    }
+
+    public void addBookingListener(ActionListener listener) {
+        bookingsbtn.addActionListener(listener);
+    }
+
+    public void addHomeListener(ActionListener listener) {
+        homebtn.addActionListener(listener);
+    }
+
+    public void addDiscoverListener(ActionListener listener) {
+        discoverbtn.addActionListener(listener);
+    }
+
+    public void addMyEventsListener(ActionListener listener) {
+        myeventsbtn.addActionListener(listener);
+    }
 
     public void addUpdateProfileListener(ActionListener listener) {
         update_btn.addActionListener(listener);
@@ -408,10 +437,5 @@ public class AdminProfile extends javax.swing.JFrame {
         deactivate_btn.addActionListener(listener);
     }
     
-    public void addLogoutListener(ActionListener listener) {
-        logout_btn.addActionListener(listener);
-    }
-
-
 
 }

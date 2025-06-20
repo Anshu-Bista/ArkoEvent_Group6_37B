@@ -4,25 +4,20 @@
  */
 package view;
 
-import javax.swing.BoxLayout;
-
 import java.awt.event.ActionListener;
-import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
 /**
  *
  * @author hp
  */
-public class ViewUsers extends javax.swing.JFrame {
+public class AdminDashboard extends javax.swing.JFrame {
 
     /**
-     * Creates new form ViewUsers
+     * Creates new form AdminDashboard
      */
-    public ViewUsers() {
+    public AdminDashboard() {
         initComponents();
-        UserPanel.setLayout(new BoxLayout(UserPanel, BoxLayout.Y_AXIS));
-
     }
 
     /**
@@ -32,30 +27,29 @@ public class ViewUsers extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
         sidebar = new javax.swing.JPanel();
         feedback_btn = new javax.swing.JButton();
         homebtn = new javax.swing.JButton();
         bookingsbtn = new javax.swing.JButton();
-        myeventsbtn = new javax.swing.JButton();
         discoverbtn = new javax.swing.JButton();
         profilebtn = new javax.swing.JButton();
         logout_btn = new javax.swing.JButton();
+        myeventsbtn = new javax.swing.JButton();
         plus_btn = new javax.swing.JButton();
         taskbar = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        userscroll = new javax.swing.JScrollPane();
-        UserPanel = new javax.swing.JPanel();
-        statusComboBox = new javax.swing.JComboBox<>();
+        FeedbackScroll = new javax.swing.JScrollPane();
+        FeedbackPanel = new javax.swing.JPanel();
+        event_btn = new javax.swing.JButton();
+        user_btn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         sidebar.setBackground(new java.awt.Color(208, 202, 232));
         sidebar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -82,15 +76,6 @@ public class ViewUsers extends javax.swing.JFrame {
         bookingsbtn.setText("Bookings");
         sidebar.add(bookingsbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 220, 50));
 
-        myeventsbtn.setBackground(new java.awt.Color(208, 202, 232));
-        myeventsbtn.setText("My Events");
-        myeventsbtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                myeventsbtnActionPerformed(evt);
-            }
-        });
-        sidebar.add(myeventsbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 160, 50));
-
         discoverbtn.setBackground(new java.awt.Color(208, 202, 232));
         discoverbtn.setText("Discover");
         discoverbtn.addActionListener(new java.awt.event.ActionListener() {
@@ -113,6 +98,15 @@ public class ViewUsers extends javax.swing.JFrame {
         logout_btn.setText("Log Out");
         sidebar.add(logout_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 550, 220, 40));
 
+        myeventsbtn.setBackground(new java.awt.Color(208, 202, 232));
+        myeventsbtn.setText("My Events");
+        myeventsbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                myeventsbtnActionPerformed(evt);
+            }
+        });
+        sidebar.add(myeventsbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 160, 50));
+
         plus_btn.setBackground(new java.awt.Color(208, 202, 232));
         plus_btn.setFont(new java.awt.Font("Segoe UI Historic", 0, 48)); // NOI18N
         plus_btn.setText("+");
@@ -121,51 +115,52 @@ public class ViewUsers extends javax.swing.JFrame {
                 plus_btnActionPerformed(evt);
             }
         });
-        sidebar.add(plus_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 223, 60, 60));
+        sidebar.add(plus_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 230, 60, 50));
 
-        jPanel1.add(sidebar, new org.netbeans.lib.awtextra.AbsoluteConstraints(-4, 0, 260, 640));
+        getContentPane().add(sidebar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -2, 256, 630));
 
         taskbar.setBackground(new java.awt.Color(229, 179, 208));
 
         jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel15.setText("Users");
+        jLabel15.setText("Home");
 
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/user.png"))); // NOI18N
+        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/326656_home_icon.png"))); // NOI18N
 
         javax.swing.GroupLayout taskbarLayout = new javax.swing.GroupLayout(taskbar);
         taskbar.setLayout(taskbarLayout);
         taskbarLayout.setHorizontalGroup(
-            taskbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(taskbarLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(558, Short.MAX_VALUE))
-        );
+                taskbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(taskbarLayout.createSequentialGroup()
+                                .addGap(17, 17, 17)
+                                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 50,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 149,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(488, Short.MAX_VALUE)));
         taskbarLayout.setVerticalGroup(
-            taskbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(taskbarLayout.createSequentialGroup()
-                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 2, Short.MAX_VALUE))
-            .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+                taskbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(taskbarLayout.createSequentialGroup()
+                                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 38,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 2, Short.MAX_VALUE))
+                        .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                Short.MAX_VALUE));
 
-        jPanel1.add(taskbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(248, 0, 780, 40));
+        getContentPane().add(taskbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(248, 0, 710, 40));
 
-        userscroll.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        userscroll.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        FeedbackPanel.setLayout(new javax.swing.BoxLayout(FeedbackPanel, javax.swing.BoxLayout.LINE_AXIS));
+        FeedbackScroll.setViewportView(FeedbackPanel);
 
-        UserPanel.setLayout(new javax.swing.BoxLayout(UserPanel, javax.swing.BoxLayout.LINE_AXIS));
-        userscroll.setViewportView(UserPanel);
+        getContentPane().add(FeedbackScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 120, 330, 490));
 
-        jPanel1.add(userscroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 120, 730, 490));
+        event_btn.setText("jButton1");
+        getContentPane().add(event_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 290, 100, 40));
 
-        statusComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Active", "Banned", "Deactivated" }));
-        jPanel1.add(statusComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 60, -1, -1));
-
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1030, 640));
+        user_btn.setText("jButton1");
+        getContentPane().add(user_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 240, 100, 40));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -178,10 +173,6 @@ public class ViewUsers extends javax.swing.JFrame {
         // TODO add your handling code here:
     }// GEN-LAST:event_homebtnActionPerformed
 
-    private void myeventsbtnActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_myeventsbtnActionPerformed
-        // TODO add your handling code here:
-    }// GEN-LAST:event_myeventsbtnActionPerformed
-
     private void discoverbtnActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_discoverbtnActionPerformed
         // TODO add your handling code here:
     }// GEN-LAST:event_discoverbtnActionPerformed
@@ -189,6 +180,10 @@ public class ViewUsers extends javax.swing.JFrame {
     private void profilebtnActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_profilebtnActionPerformed
         // TODO add your handling code here:
     }// GEN-LAST:event_profilebtnActionPerformed
+
+    private void myeventsbtnActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_myeventsbtnActionPerformed
+        // TODO add your handling code here:
+    }// GEN-LAST:event_myeventsbtnActionPerformed
 
     private void plus_btnActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_plus_btnActionPerformed
         // TODO add your handling code here:
@@ -215,58 +210,63 @@ public class ViewUsers extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ViewUsers.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null,
+                    ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ViewUsers.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null,
+                    ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ViewUsers.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null,
+                    ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ViewUsers.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null,
+                    ex);
         }
         // </editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ViewUsers().setVisible(true);
+                new AdminDashboard().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel UserPanel;
+    private javax.swing.JPanel FeedbackPanel;
+    private javax.swing.JScrollPane FeedbackScroll;
     private javax.swing.JButton bookingsbtn;
     private javax.swing.JButton discoverbtn;
+    private javax.swing.JButton event_btn;
     private javax.swing.JButton feedback_btn;
     private javax.swing.JButton homebtn;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JButton logout_btn;
     private javax.swing.JButton myeventsbtn;
     private javax.swing.JButton plus_btn;
     private javax.swing.JButton profilebtn;
     private javax.swing.JPanel sidebar;
-    private javax.swing.JComboBox<String> statusComboBox;
     private javax.swing.JPanel taskbar;
-    private javax.swing.JScrollPane userscroll;
+    private javax.swing.JButton user_btn;
     // End of variables declaration//GEN-END:variables
 
-    public JPanel getUserPanel() {
-        return UserPanel;
+    public void updateDashboardCounts(int userCount, int eventCount) {
+        user_btn.setText("Users: " + userCount);
+        event_btn.setText("Events: " + eventCount);
     }
 
-    public JComboBox<String> getStatusComboBox() {
-        return statusComboBox;
+    public JPanel getFeedbackPanel() {
+        return FeedbackPanel;
     }
 
-    public void StatusFilterListener(ActionListener listener) {
-        statusComboBox.addActionListener(listener);
-    }
-    
     //btns
     public void addLogoutListener(ActionListener listener) {
         logout_btn.addActionListener(listener);
+    }
+
+    public void addUserListener(ActionListener listener) {
+        user_btn.addActionListener(listener);
     }
 
     public void addProfileListener(ActionListener listener) {
@@ -275,6 +275,10 @@ public class ViewUsers extends javax.swing.JFrame {
 
     public void addCreateEventListener(ActionListener listener) {
         plus_btn.addActionListener(listener);
+    }
+
+    public void addEventListener(ActionListener listener) {
+        event_btn.addActionListener(listener);
     }
 
     public void addBookingListener(ActionListener listener) {
@@ -292,4 +296,6 @@ public class ViewUsers extends javax.swing.JFrame {
     public void addMyEventsListener(ActionListener listener) {
         myeventsbtn.addActionListener(listener);
     }
+
+    
 }
