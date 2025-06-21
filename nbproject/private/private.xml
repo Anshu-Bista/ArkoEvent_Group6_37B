@@ -3,28 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
             <file>file:/D:/java/ArkoEvent_Group6_37B/src/view/ViewUsers.java</file>
             <file>file:/D:/java/ArkoEvent_Group6_37B/src/arkoevent_group6_37b/ArkoEvent_Group6_37B.java</file>
-            <file>file:/D:/java/ArkoEvent_Group6_37B/src/view/AdminDashboard.java</file>
-            <file>file:/D:/java/ArkoEvent_Group6_37B/src/view/FeedbackCard.java</file>
-=======
-            <file>file:/Users/thismac/Desktop/ArkoEvent_Group6_37B/src/View/CreateEvent.java</file>
-            <file>file:/Users/thismac/Desktop/ArkoEvent_Group6_37B/src/View/Login.java</file>
-            <file>file:/Users/thismac/Desktop/ArkoEvent_Group6_37B/src/View/Registration.java</file>
-            <file>file:/Users/thismac/Desktop/ArkoEvent_Group6_37B/src/Controller/LoginController.java</file>
-            <file>file:/Users/thismac/Desktop/ArkoEvent_Group6_37B/src/View/ViewUsers.java</file>
-            <file>file:/Users/thismac/Desktop/ArkoEvent_Group6_37B/src/View/UserProfile.java</file>
-            <file>file:/Users/thismac/Desktop/ArkoEvent_Group6_37B/src/arkoevent_group6_37b/ArkoEvent_Group6_37B.java</file>
-            <file>file:/Users/thismac/Desktop/ArkoEvent_Group6_37B/src/View/AdminProfile.java</file>
-            <file>file:/Users/thismac/Desktop/ArkoEvent_Group6_37B/src/View/UserCard.java</file>
-            <file>file:/Users/thismac/Desktop/ArkoEvent_Group6_37B/src/dao/UserDao.java</file>
-            <file>file:/Users/thismac/Desktop/ArkoEvent_Group6_37B/src/Controller/UserController.java</file>
-            <file>file:/Users/thismac/Desktop/ArkoEvent_Group6_37B/src/Controller/SignUpController.java</file>
-            <file>file:/Users/thismac/Desktop/ArkoEvent_Group6_37B/src/Database/MySqlConnection.java</file>
-            <file>file:/Users/thismac/Desktop/ArkoEvent_Group6_37B/src/Controller/ProfileController.java</file>
-            <file>file:/Users/thismac/Desktop/ArkoEvent_Group6_37B/src/Model/UserData.java</file>
->>>>>>> 9ae970e972bc722a164c547c9fe11bd192ae1ecd
+            <file>file:/D:/java/ArkoEvent_Group6_37B/src/controller/ViewAllUsersController.java</file>
+            <file>file:/D:/java/ArkoEvent_Group6_37B/src/model/UserData.java</file>
+            <file>file:/D:/java/ArkoEvent_Group6_37B/src/controller/EventDetailsController.java</file>
+            <file>file:/D:/java/ArkoEvent_Group6_37B/src/view/EventDetail.java</file>
+            <file>file:/D:/java/ArkoEvent_Group6_37B/src/view/UserProfile.java</file>
+            <file>file:/D:/java/ArkoEvent_Group6_37B/src/view/Registration.java</file>
         </group>
     </open-files>
 </project-private>

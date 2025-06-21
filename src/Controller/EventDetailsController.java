@@ -1,10 +1,10 @@
 package controller;
 
+import view.EventDetail;
 import dao.EventDao;
 import view.EventDetail;
 import dao.BookingDao;
 import model.EventData;
-
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -59,13 +59,12 @@ public class EventDetailsController {
     }
 
     public class BookEventListener implements ActionListener {
-      
 
         public void actionPerformed(ActionEvent e) {
-         
-         int ticketCount = Integer.parseInt(eventDetailView.ticketCount.getValue().toString());
+
+            int ticketCount = Integer.parseInt(eventDetailView.ticketCount.getValue().toString());
             try {
-              
+
                 boolean booked = bDao.bookEvent(event.getId(), userId, ticketCount, event.getPrice());
                 if (booked) {
                     JOptionPane.showMessageDialog(null, "Event booked successfully!");
