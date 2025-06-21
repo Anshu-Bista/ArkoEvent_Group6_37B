@@ -20,11 +20,7 @@ public class UserDao {
     }
 
     // Sign Up
-    public void signUp(UserData user) {
-        if (!user.getPassword().equals(user.getConfirmPassword())) {
-            throw new IllegalArgumentException("Passwords do not match.");
-        }
-
+    public boolean signUp(UserData user) {
         String sql = "INSERT INTO users(username, email, password, phone, account_status, registration_date) "
                 + "VALUES (?, ?, ?, ?, ?, ?)";
         try (Connection conn = openConnection();
@@ -35,11 +31,15 @@ public class UserDao {
             pstmt.setString(4, user.getPhone());
             pstmt.setString(5, user.getStatus());
             pstmt.setTimestamp(6, user.getRegistrationDate());
-            pstmt.executeUpdate();
+            int rows = pstmt.executeUpdate();
+            return rows > 0;
         } catch (SQLException ex) {
             Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
+            return false;
         }
     }
+    
 
     // Checks if the user is present
     public boolean checkUser(UserData user) {

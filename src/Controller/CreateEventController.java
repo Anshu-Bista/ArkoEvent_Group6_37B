@@ -33,7 +33,7 @@ public class CreateEventController {
         });
 
         this.createEventView.addHomeListener(e -> {
-           createEventView.dispose();
+            createEventView.dispose();
             NavigationUtil.goToDashboard(); // Treat dashboard as home
         });
 
@@ -51,6 +51,7 @@ public class CreateEventController {
             JOptionPane.showMessageDialog(null, "Database connection failed: " + e.getMessage());
         }
 
+        // Attach action listener to 'Add Event' button
         this.createEventView.addAddEventListener(new AddEventListener());
         this.createEventView.addEventStatusListener(new EventStatusListener());
     }
@@ -70,13 +71,14 @@ public class CreateEventController {
         }
     
         try {
+            // Retrieve user input
             String eventTitle = createEventView.getEventTitle().trim();
             String eventLocation = createEventView.getEventLocation().trim();
             String eventDescription = createEventView.getEventDescription().trim();
             String eventCategory = createEventView.getEventCategory().trim();
             String eventType = createEventView.getEventType();
             String ticketType = createEventView.getTicketType();
-            String eventStatus = createEventView.getEventStatus(); // Assuming you have a getter for status combobox
+            String eventStatus = createEventView.getEventStatus(); // Selected status from UI
     
             // Validate required fields
             if (eventTitle.isEmpty() || eventLocation.isEmpty() || eventCategory.isEmpty()
@@ -89,13 +91,16 @@ public class CreateEventController {
             LocalTime startTime = createEventView.getStartTime();
             LocalTime endTime = createEventView.getEndTime();
             LocalDate rsvpDeadline = createEventView.getRsvpDeadline();
+            double ticketPrice = createEventView.getEventPrice();
+            int totalTickets = createEventView.getTicketsAvailable();
     
+            // Validate date/time fields
             if (eventDate == null || startTime == null || endTime == null || rsvpDeadline == null) {
-                JOptionPane.showMessageDialog(createEventView, "Please fill in all date/time fields.");
+                JOptionPane.showMessageDialog(createEventView, "Date and time fields cannot be empty.");
                 return;
             }
     
-            // Validate times and dates
+            // Validate time logic
             if (endTime.isBefore(startTime)) {
                 JOptionPane.showMessageDialog(createEventView, "End time cannot be before start time.");
                 return;
@@ -106,9 +111,7 @@ public class CreateEventController {
                 return;
             }
     
-            double ticketPrice = createEventView.getEventPrice();
-            int totalTickets = createEventView.getTicketsAvailable();
-    
+            // Ticket price validation
             if (ticketType.equalsIgnoreCase("Free")) {
                 ticketPrice = 0;
             } else if (ticketPrice < 0) {
@@ -116,25 +119,23 @@ public class CreateEventController {
                 return;
             }
     
-            // New logic: handle status confirmation based on selected status
+            // Handle event status confirmation based on selected status
             if ("Draft".equalsIgnoreCase(eventStatus)) {
-                // Confirm saving as draft
                 int confirm = JOptionPane.showConfirmDialog(
                     createEventView, "Do you want to save this event as a draft?",
                     "Confirm Save as Draft", JOptionPane.YES_NO_OPTION
                 );
-    
+
                 if (confirm != JOptionPane.YES_OPTION) {
                     JOptionPane.showMessageDialog(createEventView, "Draft save cancelled.");
                     return;
                 }
             } else if ("Published".equalsIgnoreCase(eventStatus)) {
-                // Confirm publishing event
                 int confirm = JOptionPane.showConfirmDialog(
                     createEventView, "Are you sure you want to publish this event?",
                     "Confirm Publish", JOptionPane.YES_NO_OPTION
                 );
-    
+
                 if (confirm != JOptionPane.YES_OPTION) {
                     JOptionPane.showMessageDialog(createEventView, "Event saved as draft instead.");
                     eventStatus = "Draft";
@@ -144,6 +145,7 @@ public class CreateEventController {
                 eventStatus = "Draft";
             }
     
+            // Create EventData object
             EventData event = new EventData(
                 0, eventTitle, eventLocation, eventDescription,
                 eventCategory, eventType, ticketType, eventStatus,
@@ -151,6 +153,7 @@ public class CreateEventController {
                 ticketPrice, totalTickets, 0
             );
     
+            // Save event to DB
             boolean success = eventDao.createEvent(event);
     
             if (success) {
@@ -166,7 +169,8 @@ public class CreateEventController {
             JOptionPane.showMessageDialog(createEventView, "Error creating event: " + ex.getMessage());
         }
     }
-    
+
+    // ActionListener for the 'Add Event' button
     class AddEventListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -174,6 +178,7 @@ public class CreateEventController {
         }
     }
     
+    // ActionListener for event status change - just logs for now
     class EventStatusListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {

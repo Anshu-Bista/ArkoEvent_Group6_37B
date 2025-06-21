@@ -21,6 +21,7 @@ public class ArkoEvent_Group6_37B {
         c.open();
         
     }
+}
     
     /*
      * public static void main(String[] args) {
@@ -60,4 +61,12 @@ public class ArkoEvent_Group6_37B {
         controller.open();
     }*/
 
-}
+/*
+    public static void main(String[] args) {
+       
+        Login registerForm = new Login();
+        LoginController c = new LoginController(registerForm);
+        c.open();
+    }
+
+   */

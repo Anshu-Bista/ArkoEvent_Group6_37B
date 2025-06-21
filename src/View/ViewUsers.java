@@ -122,7 +122,7 @@ public class ViewUsers extends javax.swing.JFrame {
                 plus_btnActionPerformed(evt);
             }
         });
-        sidebar.add(plus_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 223, 60, 60));
+        sidebar.add(plus_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 233, 60, 50));
 
         jPanel1.add(sidebar, new org.netbeans.lib.awtextra.AbsoluteConstraints(-4, 0, 260, 640));
 
@@ -156,7 +156,10 @@ public class ViewUsers extends javax.swing.JFrame {
         jPanel1.add(taskbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(248, 0, 780, 40));
 
         userscroll.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+<<<<<<< HEAD
         userscroll.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+=======
+>>>>>>> 9ae970e972bc722a164c547c9fe11bd192ae1ecd
 
         UserPanel.setLayout(new javax.swing.BoxLayout(UserPanel, javax.swing.BoxLayout.LINE_AXIS));
         userscroll.setViewportView(UserPanel);

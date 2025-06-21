@@ -20,15 +20,23 @@ public class UserData {
         this.username = username;
         this.email = email;
         this.password = password;
-        this.confirmPassword = confirmPassword;
+        this.confirmPassword = "";
         this.phone = phone;
-        this.imagePath = imagePath;
+        this.imagePath = "default.png";
         this.status = (status != null) ? status : "active";
+        this.role = role;
         this.registrationDate = (registrationDate != null) ? registrationDate
                 : new Timestamp(System.currentTimeMillis());
     }
 
     public UserData() {
+    }
+
+    public UserData(String userName, String email, String password, String contact) {
+        this.username = userName;
+        this.email = email;
+        this.password = password;
+        this.phone = contact;
     }
 
     public int getId() {
