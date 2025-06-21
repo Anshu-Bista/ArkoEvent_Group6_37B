@@ -6,7 +6,6 @@ package view;
 
 
 import controller.LoginController;
-import view.Login;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;

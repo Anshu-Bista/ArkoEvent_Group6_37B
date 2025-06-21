@@ -58,20 +58,30 @@ public class UserDao {
     }
 
     // Log In
-    public boolean login(String email, String password) {
+    public UserData login(String email, String password) {
         String sql = "SELECT * FROM users WHERE email = ? AND password = ?";
         try (Connection conn = openConnection();
-                PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, email);
-            pstmt.setString(2, password);
-            try (ResultSet result = pstmt.executeQuery()) {
-                return result.next();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, email);
+            stmt.setString(2, password);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                UserData user = new UserData();
+                user.setId(rs.getInt("id"));
+                user.setUsername(rs.getString("username"));
+                user.setEmail(rs.getString("email"));
+                user.setRole(rs.getString("role"));
+                // set other fields as needed
+                return user;
+            } else {
+                return null; // login failed
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
         }
-        return false;
     }
+    
 
     // Forgot Password - check if email exists
     public boolean checkEmail(UserData user) {

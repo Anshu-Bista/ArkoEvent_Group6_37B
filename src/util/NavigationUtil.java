@@ -14,6 +14,37 @@ public class NavigationUtil {
         return null;
     }
 
+    public static void goToLogin() {
+        Login loginView = new Login();
+        LoginController loginController = new LoginController(loginView);
+        loginController.open();
+    }
+
+    public static void goToSignUp() {
+        Registration registrationView = new Registration();
+        SignUpController signUpController = new SignUpController(registrationView);
+        signUpController.open();
+    }
+
+    public static void goToDashboard() {
+        String role = getUserRole();
+        if ("admin".equalsIgnoreCase(role)) {
+            AdminDashboard dashboardView = new AdminDashboard();
+            DashboardController dashboardController = new DashboardController(dashboardView);
+            dashboardController.open();
+        } else if ("user".equalsIgnoreCase(role)) {
+            /*
+             * UserDashboard userDashboardView = new UserDashboard();
+             * UserDashboardController userDashboardController = new
+             * UserDashboardController(userDashboardView);
+             * userDashboardController.open();
+             */
+            javax.swing.JOptionPane.showMessageDialog(null, "User dashboard is under development.");
+        } else {
+            showAccessDenied();
+        }
+    }
+
     public static void goToProfile() {
         String role = getUserRole();
         if ("admin".equalsIgnoreCase(role)) {
@@ -47,24 +78,6 @@ public class NavigationUtil {
             CreateEventController createController = new CreateEventController(createView);
             createController.open();
         } else {
-            showAccessDenied();
-        }
-    }
-
-    public static void goToDashboard() {
-        String role = getUserRole();
-        if ("admin".equalsIgnoreCase(role)) {
-            AdminDashboard dashboardView = new AdminDashboard();
-            DashboardController dashboardController = new DashboardController(dashboardView);
-            dashboardController.open();
-        } /*
-           * else if ("user".equalsIgnoreCase(role)) {
-           * UserDashboard userDashboardView = new UserDashboard();
-           * UserDashboardController userDashboardController = new
-           * UserDashboardController(userDashboardView);
-           * userDashboardController.open();
-           * }
-           */else {
             showAccessDenied();
         }
     }

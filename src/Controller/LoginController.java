@@ -1,73 +1,61 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
 import model.UserData;
 import view.Login;
 import dao.UserDao;
+import util.SessionUtil;
+import util.NavigationUtil;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
-
-/**
- *
- * @author Prashanna
- */
 public class LoginController {
-    
+
     private final Login loginView;
     private final UserDao dao = new UserDao();
-    
-    public LoginController(Login loginView){
+
+    public LoginController(Login loginView) {
         this.loginView = loginView;
-        this.loginView.loginListener(new loginUser());
-        this.loginView.signupListener(new gotoSignUp());
+        this.loginView.loginListener(new LoginUser());
+        this.loginView.signupListener(new GoToSignUp());
     }
-    
-    public void open(){
+
+    public void open() {
         this.loginView.setVisible(true);
     }
-    
-    public void close(){
+
+    public void close() {
         this.loginView.setVisible(false);
     }
 
-    private class loginUser implements ActionListener {
-
+    private class LoginUser implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             String email = loginView.username.getText();
             String password = loginView.password.getText();
-            UserData user = dao.login(email, password);
-            System.out.println(user.getId());
-            if(user == null){
-                JOptionPane.showMessageDialog(loginView, "Invalid UserName or Password");
-            }
-            else if (user.getRole().equals("user")){
-                JOptionPane.showMessageDialog(loginView, "User Dashboard");
-            }
-            else  if(user.getRole().equals("admin")){
-                JOptionPane.showMessageDialog(loginView, "Admin Dashboard");
-            }
-            
-        }
 
+            UserData user = dao.login(email, password);
+
+            if (user == null) {
+                JOptionPane.showMessageDialog(loginView, "Invalid Username or Password");
+            } else {
+                SessionUtil.setCurrentUser(user); // Store user in session globally
+                loginView.dispose(); // Close login window
+                NavigationUtil.goToDashboard(); // Navigate based on role
+            }
+        }
     }
 
-    private class gotoSignUp implements ActionListener {
-
+    private class GoToSignUp implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            Registration view = new Registration();
-            SignUpController c = new SignUpController(view);
-            c.open();
-            close();
+            if (SessionUtil.getCurrentUser() != null) {
+                JOptionPane.showMessageDialog(loginView, "You are already logged in!");
+                return;
+            }
+            loginView.dispose();
+            NavigationUtil.goToSignUp();
         }
-
     }
-    
 }

@@ -1,7 +1,6 @@
 package util;
 
 import javax.swing.*;
-
 import model.UserData;
 
 public class SessionUtil {
@@ -15,11 +14,20 @@ public class SessionUtil {
         return currentUser;
     }
 
+    public static boolean isLoggedIn() {
+        return currentUser != null;
+    }
+
     public static void logout(JFrame currentFrame) {
-        int confirm = JOptionPane.showConfirmDialog(currentFrame, "Are you sure you want to logout?", "Logout", JOptionPane.YES_NO_OPTION);
+        int confirm = JOptionPane.showConfirmDialog(currentFrame, 
+            "Are you sure you want to logout?", 
+            "Logout", 
+            JOptionPane.YES_NO_OPTION);
+
         if (confirm == JOptionPane.YES_OPTION) {
+            currentUser = null;  // Clear session
             currentFrame.dispose();  // Close current window
-            //new LoginView().setVisible(true);  // Redirect to login
+            NavigationUtil.goToLogin(); // Redirect to login page
         }
     }
 }

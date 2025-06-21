@@ -2,8 +2,8 @@ package arkoevent_group6_37b;
 
 //import controller.CreateEventController;
 
-import controller.DashboardController;
-import view.AdminDashboard;
+//import controller.DashboardController;
+//import view.AdminDashboard;
 
 //import controller.ViewAllUsersController;
 //import controller.AdminProfileController;
@@ -13,15 +13,17 @@ import view.AdminDashboard;
 //import view.AdminProfile;
 //import view.CreateEvent;
 //import view.ViewUsers;
+import view.Login;
+import controller.LoginController;
 
-public class ArkoEvent_Group6_37B {
+public class ArkoEvent_Group6_37B {/*
     public static void main(String[] args) {
         AdminDashboard dashboardView = new AdminDashboard();
         DashboardController c= new DashboardController(dashboardView);
         c.open();
         
-    }
-}
+    }*/
+
     
     /*
      * public static void main(String[] args) {
@@ -61,12 +63,12 @@ public class ArkoEvent_Group6_37B {
         controller.open();
     }*/
 
-/*
+
     public static void main(String[] args) {
        
-        Login registerForm = new Login();
-        LoginController c = new LoginController(registerForm);
+        Login form = new Login();
+        LoginController c = new LoginController(form);
         c.open();
     }
 
-   */
+}

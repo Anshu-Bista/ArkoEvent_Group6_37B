@@ -2,7 +2,6 @@ package controller;
 
 import view.EventDetail;
 import dao.EventDao;
-import view.EventDetail;
 import dao.BookingDao;
 import model.EventData;
 
