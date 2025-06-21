@@ -16,7 +16,7 @@ public class FeedbackDao {
 
     public List<FeedbackData> getAllFeedbacks() {
         List<FeedbackData> feedbackList = new ArrayList<>();
-        String sql = "{CALL GetAllFeedbacksSummary()}";
+        String sql = "{CALL GetAllFeedbacks()}";
 
         try (Connection conn = mysql.openConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);

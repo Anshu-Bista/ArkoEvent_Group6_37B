@@ -10,6 +10,7 @@ import java.time.LocalTime;
 import javax.swing.JOptionPane;
 
 import java.awt.event.ActionListener;
+import javax.swing.JComboBox;
 
 /**
  *
@@ -34,7 +35,7 @@ public class CreateEvent extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         bg = new javax.swing.JPanel();
@@ -67,7 +68,7 @@ public class CreateEvent extends javax.swing.JFrame {
         description_fld = new javax.swing.JTextArea();
         deadline_fld = new javax.swing.JTextField();
         title_fld = new javax.swing.JTextField();
-        status_fld = new javax.swing.JComboBox<>();
+        statusComboBox = new javax.swing.JComboBox<>();
         eventcategory_box = new javax.swing.JComboBox<>();
         price_fld = new javax.swing.JTextField();
         location_fld = new javax.swing.JTextField();
@@ -166,23 +167,21 @@ public class CreateEvent extends javax.swing.JFrame {
         javax.swing.GroupLayout taskbarLayout = new javax.swing.GroupLayout(taskbar);
         taskbar.setLayout(taskbarLayout);
         taskbarLayout.setHorizontalGroup(
-                taskbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(taskbarLayout.createSequentialGroup()
-                                .addGap(17, 17, 17)
-                                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 50,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 149,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(488, Short.MAX_VALUE)));
+            taskbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(taskbarLayout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(488, Short.MAX_VALUE))
+        );
         taskbarLayout.setVerticalGroup(
-                taskbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(taskbarLayout.createSequentialGroup()
-                                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 38,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 2, Short.MAX_VALUE))
-                        .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE));
+            taskbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(taskbarLayout.createSequentialGroup()
+                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 2, Short.MAX_VALUE))
+            .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+        );
 
         bg.add(taskbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(248, 0, 710, 40));
 
@@ -237,17 +236,10 @@ public class CreateEvent extends javax.swing.JFrame {
         bg.add(deadline_fld, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 380, 80, -1));
         bg.add(title_fld, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 130, 500, -1));
 
-        status_fld.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Draft", "Published" }));
-        status_fld.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                status_fldActionPerformed(evt);
-            }
-        });
-        bg.add(status_fld, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 490, -1, -1));
+        statusComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Draft", "Published" }));
+        bg.add(statusComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 490, -1, -1));
 
-        eventcategory_box.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Arts & Culture",
-                "Food & Drink", "Sports & Outdoors", "Education & Learning", "Business & Networking", "Family & Kids",
-                "Community & Charity", "Lifestyle & Hobbies", "Seasonal & Holiday", "Online/Virtual Events" }));
+        eventcategory_box.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Arts & Culture", "Food & Drink", "Sports & Outdoors", "Education & Learning", "Business & Networking", "Family & Kids", "Community & Charity", "Lifestyle & Hobbies", "Seasonal & Holiday", "Online/Virtual Events" }));
         eventcategory_box.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 eventcategory_boxActionPerformed(evt);
@@ -298,16 +290,15 @@ public class CreateEvent extends javax.swing.JFrame {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(bg, javax.swing.GroupLayout.Alignment.TRAILING,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                Short.MAX_VALUE));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(bg, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, 634,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 6, Short.MAX_VALUE)));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, 634, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 6, Short.MAX_VALUE))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -445,7 +436,7 @@ public class CreateEvent extends javax.swing.JFrame {
     private javax.swing.JPanel sidebar;
     private javax.swing.JLabel start;
     private javax.swing.JTextField start_fld;
-    private javax.swing.JComboBox<String> status_fld;
+    private javax.swing.JComboBox<String> statusComboBox;
     private javax.swing.JPanel taskbar;
     private javax.swing.JLabel tickettype;
     private javax.swing.JComboBox<String> ticketype_box;
@@ -501,6 +492,15 @@ public class CreateEvent extends javax.swing.JFrame {
     public int getTicketsAvailable() {
         return Integer.parseInt(limit_fld.getText());
     }
+    
+    public String getEventStatus() {
+        return statusComboBox.getSelectedItem().toString();
+    }
+
+    public void addEventStatusListener(ActionListener listener) {
+        statusComboBox.addActionListener(listener);
+    }
+
 
     public void clearFields() {
         title_fld.setText("");

@@ -52,6 +52,7 @@ public class CreateEventController {
         }
 
         this.createEventView.addAddEventListener(new AddEventListener());
+        this.createEventView.addEventStatusListener(new EventStatusListener());
     }
 
     public void open() {
@@ -167,8 +168,17 @@ public class CreateEventController {
     }
     
     class AddEventListener implements ActionListener {
+        @Override
         public void actionPerformed(ActionEvent e) {
             handleCreateEvent();
+        }
+    }
+    
+    class EventStatusListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String selectedStatus = createEventView.getEventStatus();
+            System.out.println("Status selected: " + selectedStatus);
         }
     }
 }

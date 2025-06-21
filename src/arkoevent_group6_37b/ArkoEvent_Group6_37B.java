@@ -1,16 +1,27 @@
 package arkoevent_group6_37b;
 
 //import controller.CreateEventController;
+
+import controller.DashboardController;
+import view.AdminDashboard;
+
 //import controller.ViewAllUsersController;
-import controller.AdminProfileController;
-import dao.UserDao;
-import model.UserData;
-import util.SessionUtil;
-import view.AdminProfile;
+//import controller.AdminProfileController;
+//import dao.UserDao;
+//import model.UserData;
+//import util.SessionUtil;
+//import view.AdminProfile;
 //import view.CreateEvent;
 //import view.ViewUsers;
 
 public class ArkoEvent_Group6_37B {
+    public static void main(String[] args) {
+        AdminDashboard dashboardView = new AdminDashboard();
+        DashboardController c= new DashboardController(dashboardView);
+        c.open();
+        
+    }
+    
     /*
      * public static void main(String[] args) {
      * ViewUsers view = new ViewUsers();
@@ -25,6 +36,7 @@ public class ArkoEvent_Group6_37B {
      * controller.open();
      * }
      */
+    /*
     public static void main(String[] args) {
         UserDao userDao = new UserDao();
         int userId = 12; // Replace with actual logged-in user ID
@@ -46,6 +58,6 @@ public class ArkoEvent_Group6_37B {
         controller.setUserDao(userDao);
         controller.setUserId(userId);
         controller.open();
-    }
+    }*/
 
 }
