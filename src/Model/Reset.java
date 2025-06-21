@@ -1,54 +1,47 @@
 package Model;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import javax.swing.*;
 
-public class Reset {
+public class Reset extends JFrame {
 
-    private final String username;
-    private final String password;
-    private final String confirmPassword;
+    public class ResetPasswordModel {
+    private String password;
+    private String confirmPassword;
 
-    // Constructor
-    public Reset(String username, String password, String confirmPassword) {
-        this.username = username;
+    public ResetPasswordModel() {
+    }
+
+    public ResetPasswordModel(String password, String confirmPassword) {
         this.password = password;
         this.confirmPassword = confirmPassword;
     }
 
-    // Method to update password in the database
-    public boolean updatePassword() {
-        boolean isUpdated = false;
+    // Getters and setters
+    public String getPassword() {
+        return password;
+    }
 
-        // Check if passwords match
-        if (!password.equals(confirmPassword)) {
-            System.out.println("Passwords do not match.");
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
+    }
+
+    // Validation method to check if passwords match and are valid
+    public boolean isValid() {
+        if (password == null || confirmPassword == null) {
             return false;
         }
-
-        String url = "jdbc:mysql://localhost:3306/your_database"; // Replace with your DB name
-        String dbUser = ""; // DB username
-        String dbPass = "mypassword123";     // DB password
-       
-        String sql = "UPDATE users SET password = ? WHERE password = ?";
-
-        try (Connection conn = DriverManager.getConnection(url, dbUser, dbPass);
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setString(1, password);     // Store plain password (NOT recommended for real apps)
-            stmt.setString(2, username);
-
-            int rowsAffected = stmt.executeUpdate();
-            isUpdated = rowsAffected > 0;
-
-        } catch (SQLException e) {
-            System.err.println("SQL Exception: " + e.getMessage());
-        } catch (Exception e) {
-            System.err.println("Exception: " + e.getMessage());
+        if (password.isEmpty() || confirmPassword.isEmpty()) {
+            return false;
         }
-
-        return isUpdated;
+        return password.equals(confirmPassword);
+    }
     }
 }
