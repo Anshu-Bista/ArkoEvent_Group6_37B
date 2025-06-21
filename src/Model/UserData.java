@@ -1,4 +1,4 @@
-package model;
+package Model;
 
 import java.sql.Timestamp;
 
@@ -10,11 +10,12 @@ public class UserData {
     private String phone;
     private String confirmPassword;
     private String status;
-    private String imagePath; //changed from byte[] to String
+    private String imagePath;
+    private String role;
     private Timestamp registrationDate;
 
     public UserData(String username, String email, String password, String confirmPassword, String phone,
-            String imagePath, String status, Timestamp registrationDate) {
+        String imagePath, String status, String role, Timestamp registrationDate) {
         this.username = username;
         this.email = email;
         this.password = password;
@@ -22,6 +23,7 @@ public class UserData {
         this.phone = phone;
         this.imagePath = "default.png";
         this.status = (status != null) ? status : "active";
+        this.role = role;
         this.registrationDate = (registrationDate != null) ? registrationDate
                 : new Timestamp(System.currentTimeMillis());
     }
@@ -29,8 +31,11 @@ public class UserData {
     public UserData() {
     }
 
-    public UserData(String userName2, String email2, String password2, String contact) {
-      
+    public UserData(String userName, String email, String password, String contact) {
+      this.username = userName;
+      this.email = email;
+      this.password = password;
+      this.phone = contact;
     }
 
     public int getId() {
@@ -104,4 +109,16 @@ public class UserData {
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
     }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+
+    
+    
 }

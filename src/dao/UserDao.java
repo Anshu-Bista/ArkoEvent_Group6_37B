@@ -14,37 +14,42 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 import database.MySqlConnection;
-import model.UserData;
+import Model.UserData;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author hp
  */
 public class UserDao {
+
     MySqlConnection mysql = new MySqlConnection();
     Connection conn = mysql.openConnection();
 
     // Sign Up
-    public void signUp(UserData user) {
-        if (!user.getPassword().equals(user.getConfirmPassword())) {
-            throw new IllegalArgumentException("Passwords donot match.");
-        }
-        String sql = "INSERT into users(username, email, password, phone, account_status, registration_date) values(?, ?, ?, ?, ?, ?)";
+    public boolean signUp(UserData user) {
+
+        String sql = "INSERT into users(username, email, password, phone, account_status) values(?, ?, ?, ?, ?)";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, user.getUsername());
             pstmt.setString(2, user.getEmail());
             pstmt.setString(3, user.getPassword());
             pstmt.setString(4, user.getPhone());
             pstmt.setString(5, "active");
-            pstmt.setTimestamp(6, user.getRegistrationDate());
-            pstmt.executeUpdate();
+            int rowsAffected = pstmt.executeUpdate();
+            if (rowsAffected > 0) {
+                JOptionPane.showMessageDialog(null, "Signup successful");
+                return true;
+            } else {
+                JOptionPane.showMessageDialog(null, "Signup Failed");
+            }
         } catch (SQLException ex) {
             Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             mysql.closeConnection(conn);
         }
+        return false;
     }
 
     // Checks if the user is present
@@ -65,20 +70,37 @@ public class UserDao {
     }
 
     // Log In
-    public boolean login(String email, String password) {
-        Connection conn2 = mysql.openConnection();
-        String sql = "SELECT* FROM users where email = ? AND password = ?";
+    public UserData login(String email, String password) {
+        Connection conn = mysql.openConnection();
+        String sql = "SELECT * FROM users WHERE username = ? AND password = ?";
+
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, email);
             pstmt.setString(2, password);
             ResultSet result = pstmt.executeQuery();
-            return result.next();
+            
+            if (result.next()) {
+                UserData user = new UserData();
+                user.setId(result.getInt("id"));
+                user.setUsername(result.getString("username"));
+                user.setEmail(result.getString("email"));
+                user.setPassword(result.getString("password"));
+                user.setPhone(result.getString("phone"));
+                user.setStatus(result.getString("account_status"));
+                user.setRole(result.getString("role"));
+                user.setRegistrationDate(result.getTimestamp("registration_date"));
+                user.setImagePath(result.getString("profile_image"));
+                return user;
+            }else{
+                System.out.println("nothing");
+            }
         } catch (SQLException ex) {
             Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            mysql.closeConnection(conn2);
+            mysql.closeConnection(conn);
         }
-        return false;
+
+        return null; // Login failed
     }
 
     // Forgot Password
@@ -111,8 +133,9 @@ public class UserDao {
         } finally {
             mysql.closeConnection(conn);
         }
-        return false;   
+        return false;
     }
+
     // Profile
     public UserData getProfileById(int id) {
         String sql = "SELECT username, email, phone, account_status, profile_image, registration_date FROM users WHERE id = ?";
@@ -130,6 +153,7 @@ public class UserDao {
                 user.setPhone(result.getString("phone"));
                 user.setStatus(result.getString("account_status"));
                 user.setImagePath(result.getString("profile_image"));
+                user.setRole(result.getString("role"));
                 user.setRegistrationDate(result.getTimestamp("registration_date"));
                 return user;
             }
@@ -164,16 +188,16 @@ public class UserDao {
     // View All Users
     public List<UserData> getAllUsers() {
         List<UserData> users = new ArrayList<>();
-        Connection conn = mysql.openConnection(); 
+        Connection conn = mysql.openConnection();
         String sql = "SELECT * FROM users";
-    
+
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 UserData user = new UserData();
-                user.setId(rs.getInt("id")); 
+                user.setId(rs.getInt("id"));
                 user.setUsername(rs.getString("username"));
-                user.setImagePath(rs.getString("profile_image")); 
+                user.setImagePath(rs.getString("profile_image"));
                 user.setStatus(rs.getString("account_status"));
                 users.add(user);
             }
@@ -182,43 +206,43 @@ public class UserDao {
         } finally {
             mysql.closeConnection(conn); // close your connection safely
         }
-    
+
         return users;
     }
-    
+
     public List<UserData> getUsersByStatus(String status) {
         List<UserData> users = new ArrayList<>();
-        Connection conn = mysql.openConnection(); 
-    
+        Connection conn = mysql.openConnection();
+
         String sql = "SELECT * FROM users WHERE account_status = ?";
-    
+
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, status);  // "active", "banned", or "deactivated"
             ResultSet rs = pstmt.executeQuery();
-    
+
             while (rs.next()) {
                 UserData user = new UserData();
-                user.setId(rs.getInt("id")); 
+                user.setId(rs.getInt("id"));
                 user.setUsername(rs.getString("username"));
                 user.setImagePath(rs.getString("profile_image"));
                 user.setStatus(rs.getString("account_status"));
                 users.add(user);
             }
-    
+
         } catch (SQLException ex) {
             ex.printStackTrace();
         } finally {
             mysql.closeConnection(conn);
         }
-    
+
         return users;
-    }    
+    }
 
     //Ban/Unban Users
     public static boolean updateUserStatus(int userId, String newStatus) {
         String sql = "UPDATE users SET account_status = ? WHERE id = ?";
         try (Connection conn = new MySqlConnection().openConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, newStatus);
             stmt.setInt(2, userId);
             return stmt.executeUpdate() > 0;
@@ -228,3 +252,6 @@ public class UserDao {
         }
     }
 }
+//check prashanna prashanna prashanna
+//hello 
+//hello

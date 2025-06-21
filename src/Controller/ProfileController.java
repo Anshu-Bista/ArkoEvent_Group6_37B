@@ -1,4 +1,4 @@
-package controller;
+package Controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
 import dao.UserDao;
-import model.UserData;
+import Model.UserData;
 import view.AdminProfile;
 
 public class ProfileController {

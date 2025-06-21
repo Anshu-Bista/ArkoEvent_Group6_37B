@@ -2,11 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package controller;
+package Controller;
 
 import dao.UserDao;
-import model.UserData;
-import view.Registration;
+import Model.*;
+import View.*;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,13 +14,13 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author hp
+ * @author Aayusha
  */
-public class SignUpController {
+public class signUpController {
     private final UserDao userDao = new UserDao();
     private final Registration registerView;
     
-    public SignUpController(Registration registerView){
+    public signUpController(Registration registerView){
         this.registerView = registerView;
         registerView.AddUserListener(new AddUserListener());
     }
@@ -45,36 +45,44 @@ public class SignUpController {
                 String password = registerView.getPassword();
                 
                 if(userName.isEmpty()){
-                    JOptionPane.showMessageDialog(null, "Username is required");
+                    JOptionPane.showMessageDialog(registerView, "Username is required");
                     return;
                 }
                 if(email.isEmpty()){
-                    JOptionPane.showMessageDialog(null, "Emaill is required");
+                    JOptionPane.showMessageDialog(registerView, "Emaill is required");
                     return;
                 }
                 if(contact.isEmpty()){
-                    JOptionPane.showMessageDialog(null, "Contact is required");
+                    JOptionPane.showMessageDialog(registerView, "Contact is required");
                     return;
                 }
                 if(password.isEmpty()){
-                    JOptionPane.showMessageDialog(null, "Password required");
+                    JOptionPane.showMessageDialog(registerView, "Password required");
                     return;
                 }
                 if(password.equals("mismatch")){
-                    JOptionPane.showMessageDialog(null, "Passwords Mismatch");
+                    JOptionPane.showMessageDialog(registerView, "Passwords Mismatch");
                 }
                 if (!email.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
-                    JOptionPane.showMessageDialog(null, "Invalid email format.");
+                    JOptionPane.showMessageDialog(registerView, "Invalid email format.");
                     return;
                 }
                 
               //aaba try reegeestering ani check if data go
               UserData user = new UserData(userName, email, password, contact);
                 if(userDao.checkUser(user)){
-                    JOptionPane.showMessageDialog(null, "Duplicate User");
+                    JOptionPane.showMessageDialog(registerView, "Duplicate User");
                     return;
                 }
-                userDao.signUp(user);
+                
+                if(userDao.signUp(user)){
+                    Login view =  new Login();
+                    LoginController c = new LoginController(view);
+                    c.open();
+                    close();
+                }else{
+                    JOptionPane.showMessageDialog(registerView, "Unable to Register");
+                }
                 
                 
             }catch (HeadlessException ex){

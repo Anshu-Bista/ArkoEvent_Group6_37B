@@ -3,12 +3,21 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/D:/java/ArkoEvent_Group6_37B/src/dao/UserDao.java</file>
             <file>file:/D:/java/ArkoEvent_Group6_37B/src/arkoevent_group6_37b/ArkoEvent_Group6_37B.java</file>
             <file>file:/D:/java/ArkoEvent_Group6_37B/src/dao/EventDao.java</file>
             <file>file:/D:/java/ArkoEvent_Group6_37B/src/controller/CreateEventController.java</file>
             <file>file:/D:/java/ArkoEvent_Group6_37B/src/model/EventData.java</file>
             <file>file:/D:/java/ArkoEvent_Group6_37B/src/controller/ViewAllUsersController.java</file>
+=======
+            <file>file:/Users/thismac/Desktop/ArkoEvent_Group6_37B/src/Controller/LoginController.java</file>
+            <file>file:/Users/thismac/Desktop/ArkoEvent_Group6_37B/src/View/Login.java</file>
+            <file>file:/Users/thismac/Desktop/ArkoEvent_Group6_37B/src/Controller/signUpController.java</file>
+            <file>file:/Users/thismac/Desktop/ArkoEvent_Group6_37B/src/View/UserDashboard.java</file>
+            <file>file:/Users/thismac/Desktop/ArkoEvent_Group6_37B/src/Controller/UserDashboardController.java</file>
+            <file>file:/Users/thismac/Desktop/ArkoEvent_Group6_37B/src/View/Registration.java</file>
+>>>>>>> cd4f9c71f5cfaf2d428c419bb767849781823198
         </group>
     </open-files>
 </project-private>
