@@ -13,41 +13,39 @@ import view.UserProfile;
 
 public class UserProfileController {
     private final UserProfile profView;
-    private UserDao userDao;
-    private int userId;
+    private final UserDao userDao;
+    private final int userId;
 
     public UserProfileController(UserProfile profileView) {
-    this.profView = profileView;
+        this.profView = profileView;
 
-    this.profView.addUpdateProfileListener(new UpdateProfileListener());
-    this.profView.addDeactivateListener(new DeactivateAccountListener());
-    this.profView.addLogoutListener(e -> SessionUtil.logout(profileView));
+        this.userDao = new UserDao(); // Initialize DAO and User ID from session
+        UserData currentUser = SessionUtil.getCurrentUser();
 
-    // Add navigation listeners here using lambdas:
-    this.profView.addHomeListener(e -> {
-        profView.dispose();
-        NavigationUtil.goToDashboard();
-    });
+        if (currentUser == null) {
+            throw new IllegalStateException("No user is currently logged in.");
+        }
 
-    this.profView.addProfileListener(e -> {
-        profView.dispose();
-        NavigationUtil.goToProfile();
-    });
+        this.userId = currentUser.getId();
 
-    this.profView.addMyEventsListener(e -> {
-        profView.dispose();
-        JOptionPane.showMessageDialog(profView, "My Events page is under development.");
-    });
+        this.profView.addUpdateProfileListener(new UpdateProfileListener());
+        this.profView.addDeactivateListener(new DeactivateAccountListener());
+        this.profView.addLogoutListener(e -> SessionUtil.logout(profileView));
 
-}
+        this.profView.addHomeListener(e -> {
+            profView.dispose();
+            NavigationUtil.goToDashboard();
+        });
 
+        this.profView.addProfileListener(e -> {
+            profView.dispose();
+            NavigationUtil.goToProfile();
+        });
 
-    public void setUserDao(UserDao userDao) {
-        this.userDao = userDao;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
+        this.profView.addMyEventsListener(e -> {
+            profView.dispose();
+            JOptionPane.showMessageDialog(profView, "My Events page is under development.");
+        });
     }
 
     public void open() {
@@ -61,9 +59,6 @@ public class UserProfileController {
 
     private void loadProfile() {
         try {
-            if (userDao == null) {
-                throw new IllegalStateException("UserDao is not initialized.");
-            }
             UserData user = userDao.getProfileById(userId);
             if (user != null) {
                 profView.displayUserProfile(user);
@@ -82,7 +77,6 @@ public class UserProfileController {
             UserData updatedUser = profView.getUpdatedProfile();
             updatedUser.setId(userId);
 
-            // Simple validation
             if (updatedUser.getUsername().trim().isEmpty()) {
                 JOptionPane.showMessageDialog(profView, "Name cannot be empty.");
                 return;
@@ -114,7 +108,6 @@ public class UserProfileController {
                     profView.setFieldsEditable(false);
                 }
             }
-
         }
     }
 
@@ -130,12 +123,11 @@ public class UserProfileController {
                 boolean success = userDao.updateUserStatus(userId, "deactivated");
                 if (success) {
                     JOptionPane.showMessageDialog(profView, "Account deactivated. Application will exit.");
-                    System.exit(0); // or redirect to login
+                    System.exit(0);
                 } else {
                     JOptionPane.showMessageDialog(profView, "Failed to deactivate account.");
                 }
             }
         }
     }
-
 }

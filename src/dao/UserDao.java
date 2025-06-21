@@ -60,12 +60,14 @@ public class UserDao {
     // Log In
     public UserData login(String email, String password) {
         String sql = "SELECT * FROM users WHERE email = ? AND password = ?";
+        System.out.println("Login attempt with email: '" + email + "', password: '" + password + "'");
         try (Connection conn = openConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, email);
-            stmt.setString(2, password);
+            stmt.setString(1, email.trim());
+            stmt.setString(2, password.trim());
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
+                System.out.println("User found: " + rs.getString("username"));
                 UserData user = new UserData();
                 user.setId(rs.getInt("id"));
                 user.setUsername(rs.getString("username"));
@@ -74,13 +76,15 @@ public class UserDao {
                 // set other fields as needed
                 return user;
             } else {
-                return null; // login failed
+                System.out.println("No matching user found.");
+                return null;
             }
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
         }
     }
+    
     
 
     // Forgot Password - check if email exists

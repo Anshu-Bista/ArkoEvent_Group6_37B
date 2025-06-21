@@ -13,50 +13,51 @@ import view.AdminProfile;
 
 public class AdminProfileController {
     private final AdminProfile profileView;
-    private UserDao userDao;
-    private int userId; 
+    private final UserDao userDao;
+    private final int userId;
 
     public AdminProfileController(AdminProfile profileView) {
-    this.profileView = profileView;
+        this.profileView = profileView;
 
-    this.profileView.addUpdateProfileListener(new UpdateProfileListener());
-    this.profileView.addDeactivateListener(new DeactivateAccountListener());
-    
-    this.profileView.addLogoutListener(e -> SessionUtil.logout(profileView));
+        this.userDao = new UserDao();   // Directly initialize from session
+        UserData currentUser = SessionUtil.getCurrentUser();
 
-    this.profileView.addProfileListener(e -> {
-        profileView.dispose();
-        NavigationUtil.goToProfile();
-    });
+        if (currentUser == null) {
+            throw new IllegalStateException("No user is currently logged in.");
+        }
 
-    this.profileView.addCreateEventListener(e -> {
-        profileView.dispose();
-        NavigationUtil.goToCreateEvent();
-    });
+        this.userId = currentUser.getId();
 
-    this.profileView.addHomeListener(e -> {
-        profileView.dispose();
-        NavigationUtil.goToDashboard(); // Treat dashboard as home
-    });
+        this.profileView.addUpdateProfileListener(new UpdateProfileListener());
+        this.profileView.addDeactivateListener(new DeactivateAccountListener());
+        this.profileView.addLogoutListener(e -> SessionUtil.logout(profileView));
 
-    this.profileView.addMyEventsListener(e -> {
-        JOptionPane.showMessageDialog(profileView, "My Events page is under development.");
-    });
+        this.profileView.addProfileListener(e -> {
+            profileView.dispose();
+            NavigationUtil.goToProfile();
+        });
 
-    this.profileView.addDiscoverListener(e -> {
-        JOptionPane.showMessageDialog(profileView, "Discover page is under development.");
-    });
-}
-    public void setUserDao(UserDao userDao) {
-        this.userDao = userDao;
-    }
+        this.profileView.addCreateEventListener(e -> {
+            profileView.dispose();
+            NavigationUtil.goToCreateEvent();
+        });
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+        this.profileView.addHomeListener(e -> {
+            profileView.dispose();
+            NavigationUtil.goToDashboard();
+        });
+
+        this.profileView.addMyEventsListener(e -> {
+            JOptionPane.showMessageDialog(profileView, "My Events page is under development.");
+        });
+
+        this.profileView.addDiscoverListener(e -> {
+            JOptionPane.showMessageDialog(profileView, "Discover page is under development.");
+        });
     }
 
     public void open() {
-        loadProfile(); 
+        loadProfile();
         profileView.setVisible(true);
     }
 
@@ -66,10 +67,7 @@ public class AdminProfileController {
 
     private void loadProfile() {
         try {
-            if (userDao == null) {
-                throw new IllegalStateException("UserDao is not initialized.");
-            }
-            UserData user = userDao.getProfileById(userId);  
+            UserData user = userDao.getProfileById(userId);
             if (user != null) {
                 profileView.displayUserProfile(user);
                 profileView.setFieldsEditable(false);
@@ -81,18 +79,18 @@ public class AdminProfileController {
                     JOptionPane.ERROR_MESSAGE);
         }
     }
+
     private void updateProfile() {
         try {
             UserData updatedUser = profileView.getUpdatedProfile();
-            updatedUser.setId(userId); 
-    
-            // Simple validation
+            updatedUser.setId(userId);
+
             if (updatedUser.getUsername().trim().isEmpty()) {
                 JOptionPane.showMessageDialog(profileView, "Name cannot be empty.");
                 return;
             }
-    
-            boolean success = userDao.updateProfileById(updatedUser);  
+
+            boolean success = userDao.updateProfileById(updatedUser);
             if (success) {
                 JOptionPane.showMessageDialog(profileView, "Profile updated successfully!");
                 loadProfile();
@@ -104,7 +102,6 @@ public class AdminProfileController {
                     JOptionPane.ERROR_MESSAGE);
         }
     }
-    
 
     private class UpdateProfileListener implements ActionListener {
         @Override
@@ -119,7 +116,6 @@ public class AdminProfileController {
                     profileView.setFieldsEditable(false);
                 }
             }
-
         }
     }
 
@@ -135,12 +131,11 @@ public class AdminProfileController {
                 boolean success = userDao.updateUserStatus(userId, "deactivated");
                 if (success) {
                     JOptionPane.showMessageDialog(profileView, "Account deactivated. Application will exit.");
-                    System.exit(0); // or redirect to login
+                    System.exit(0);
                 } else {
                     JOptionPane.showMessageDialog(profileView, "Failed to deactivate account.");
                 }
             }
         }
     }
-
 }
