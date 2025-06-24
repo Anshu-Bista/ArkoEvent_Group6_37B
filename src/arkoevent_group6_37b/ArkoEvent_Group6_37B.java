@@ -13,8 +13,9 @@ package arkoevent_group6_37b;
 //import view.AdminProfile;
 //import view.CreateEvent;
 //import view.ViewUsers;
-import view.Login;
-import controller.LoginController;
+
+import Controller.LoginController;
+import View.Login;
 
 public class ArkoEvent_Group6_37B {/*
     public static void main(String[] args) {

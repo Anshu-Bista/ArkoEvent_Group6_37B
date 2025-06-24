@@ -1,11 +1,11 @@
-package controller;
+package Controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import model.UserData;
-import view.UserCard;
-import view.ViewUsers;
+import View.*;
+
 
 import javax.swing.*;
 import java.util.List;

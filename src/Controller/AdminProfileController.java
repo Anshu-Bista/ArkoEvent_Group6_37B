@@ -1,26 +1,32 @@
-package controller;
+package Controller;
 
+import View.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
 
 import dao.UserDao;
+import java.io.File;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import model.UserData;
 import util.NavigationUtil;
 import util.SessionUtil;
-import view.AdminProfile;
+
 
 public class AdminProfileController {
     private final AdminProfile profileView;
     private final UserDao userDao;
     private final int userId;
+    private UserData currentUser;
 
     public AdminProfileController(AdminProfile profileView) {
         this.profileView = profileView;
 
         this.userDao = new UserDao();   // Directly initialize from session
-        UserData currentUser = SessionUtil.getCurrentUser();
+        currentUser = SessionUtil.getCurrentUser();
+        
 
         if (currentUser == null) {
             throw new IllegalStateException("No user is currently logged in.");
@@ -30,30 +36,30 @@ public class AdminProfileController {
 
         this.profileView.addUpdateProfileListener(new UpdateProfileListener());
         this.profileView.addDeactivateListener(new DeactivateAccountListener());
+        this.profileView.uploadPicListener(new updatePic());
         this.profileView.addLogoutListener(e -> SessionUtil.logout(profileView));
+        
 
         this.profileView.addProfileListener(e -> {
-            profileView.dispose();
+            this.profileView.dispose();
             NavigationUtil.goToProfile();
         });
 
         this.profileView.addCreateEventListener(e -> {
-            profileView.dispose();
+             this.profileView.dispose();
             NavigationUtil.goToCreateEvent();
         });
 
         this.profileView.addHomeListener(e -> {
-            profileView.dispose();
+             this.profileView.dispose();
             NavigationUtil.goToDashboard();
         });
 
         this.profileView.addMyEventsListener(e -> {
-            JOptionPane.showMessageDialog(profileView, "My Events page is under development.");
+             this.profileView.dispose();
+            NavigationUtil.goToMyEvents();
         });
 
-        this.profileView.addDiscoverListener(e -> {
-            JOptionPane.showMessageDialog(profileView, "Discover page is under development.");
-        });
     }
 
     public void open() {
@@ -103,17 +109,51 @@ public class AdminProfileController {
         }
     }
 
+    private class updatePic implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setDialogTitle("Choose Profile Image");
+
+            // Optional: set filter for image files only
+            FileNameExtensionFilter imageFilter = new FileNameExtensionFilter(
+                    "Image files", "jpg", "jpeg", "png", "gif");
+            fileChooser.setFileFilter(imageFilter);
+
+            int result = fileChooser.showOpenDialog(null);
+            if (result == JFileChooser.APPROVE_OPTION) {
+                File selectedFile = fileChooser.getSelectedFile();
+                String imagePath = selectedFile.getAbsolutePath();
+
+                // Set image path to user object
+                currentUser.setImagePath(imagePath);
+                boolean success = userDao.updateProfileById(currentUser);
+                if(success){
+                    loadProfile();
+                } else{
+                    JOptionPane.showMessageDialog(profileView, "Couldnot update pofile picture");
+                }
+
+            }
+        }
+
+       
+    }
+
     private class UpdateProfileListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (!profileView.isEditable()) {
                 profileView.setFieldsEditable(true);
+                profileView.update_btn.setText("Save");
             } else {
                 int option = JOptionPane.showConfirmDialog(profileView, "Do you want to save changes?", "Confirm",
                         JOptionPane.YES_NO_OPTION);
                 if (option == JOptionPane.YES_OPTION) {
                     updateProfile();
                     profileView.setFieldsEditable(false);
+                    profileView.update_btn.setText("Update");
                 }
             }
         }

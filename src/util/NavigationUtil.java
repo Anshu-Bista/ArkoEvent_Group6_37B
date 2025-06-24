@@ -1,7 +1,10 @@
 package util;
 
-import controller.*;
-import view.*;
+import Controller.*;
+import View.*;
+import Controller.*;
+
+
 import model.UserData;
 
 public class NavigationUtil {
@@ -77,6 +80,17 @@ public class NavigationUtil {
             CreateEvent createView = new CreateEvent();
             CreateEventController createController = new CreateEventController(createView);
             createController.open();
+        } else {
+            showAccessDenied();
+        }
+    }
+    
+    public static void goToMyEvents() {
+        String role = getUserRole();
+        if ("admin".equalsIgnoreCase(role)) {
+            myEvents view = new myEvents();
+            myEventsController myEvents = new myEventsController(view);
+            myEvents.open();
         } else {
             showAccessDenied();
         }

@@ -2,9 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package view;
+package View;
 
+import java.awt.Image;
 import java.awt.event.ActionListener;
+import javax.swing.ImageIcon;
 import model.UserData;
 
 /**
@@ -40,7 +42,7 @@ public class UserProfile extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         pic_lbl = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        upload_btn = new javax.swing.JButton();
         email_lbl = new javax.swing.JLabel();
         name_lbl = new javax.swing.JLabel();
         phone_lbl = new javax.swing.JLabel();
@@ -115,16 +117,16 @@ public class UserProfile extends javax.swing.JFrame {
         pic_lbl.setForeground(new java.awt.Color(153, 255, 0));
         pic_lbl.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         pic_lbl.setPreferredSize(new java.awt.Dimension(134, 172));
-        bg.add(pic_lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 80, 130, 140));
+        bg.add(pic_lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 80, 140, 140));
         bg.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 290, -1, -1));
 
-        jButton1.setText("Upload your Profile Picture");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        upload_btn.setText("Upload your Profile Picture");
+        upload_btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                upload_btnActionPerformed(evt);
             }
         });
-        bg.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 230, -1, -1));
+        bg.add(upload_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 230, -1, -1));
 
         email_lbl.setText("Email");
         bg.add(email_lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 310, -1, -1));
@@ -201,9 +203,9 @@ public class UserProfile extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void upload_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_upload_btnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_upload_btnActionPerformed
 
     private void name_fldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_name_fldActionPerformed
         // TODO add your handling code here:
@@ -266,7 +268,6 @@ public class UserProfile extends javax.swing.JFrame {
     private javax.swing.JTextField email_fld;
     private javax.swing.JLabel email_lbl;
     private javax.swing.JButton homebtn;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel18;
@@ -283,6 +284,7 @@ public class UserProfile extends javax.swing.JFrame {
     private javax.swing.JLabel regdate_lbl;
     private javax.swing.JPanel sidebar;
     private javax.swing.JButton update_btn;
+    private javax.swing.JButton upload_btn;
     private javax.swing.JButton viewact_btn;
     // End of variables declaration//GEN-END:variables
     
@@ -307,6 +309,21 @@ public class UserProfile extends javax.swing.JFrame {
     }
 
     public void displayUserProfile(UserData user) {
+        String path = user.getImagePath();
+        if (path != null && !path.isEmpty()) {
+            try {
+                ImageIcon originalIcon = new ImageIcon(path);
+                Image originalImage = originalIcon.getImage();
+
+                // Resize image to 140x140
+                Image scaledImage = originalImage.getScaledInstance(140, 140, Image.SCALE_SMOOTH);
+
+                // Set the scaled image as icon
+                pic_lbl.setIcon(new ImageIcon(scaledImage));
+            } catch (Exception e) {
+                e.printStackTrace(); 
+            }
+        }
         name_fld.setText(user.getUsername());
         phone_fld.setText(user.getPhone());
         accstatus_box.setSelectedItem(user.getStatus());
@@ -315,6 +332,11 @@ public class UserProfile extends javax.swing.JFrame {
     }
 
     //btns
+    
+    public void addDpListener(ActionListener listener){
+        upload_btn.addActionListener(listener);
+    }
+    
     public void addLogoutListener(ActionListener listener) {
         logout_btn.addActionListener(listener);
     }
@@ -338,5 +360,6 @@ public class UserProfile extends javax.swing.JFrame {
     public void addDeactivateListener(ActionListener listener) {
         deactivate_btn.addActionListener(listener);
     }
+    
 
 }

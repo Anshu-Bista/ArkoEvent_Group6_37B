@@ -1,10 +1,11 @@
-package model;
+package Model;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class EventData {
     private int id;
+    private int userId;
     private String title;
     private String location;
     private String description;
@@ -19,11 +20,12 @@ public class EventData {
     private double price;
     private int ticketsAvailable;
     private int ticketsSold;
+    private String banner;
 
     public EventData(int id, String title, String location, String description,
                      String category, String type, String ticketType, String eventStatus,
                      LocalDate eventDate, LocalTime startTime, LocalTime endTime,
-                     LocalDate rsvpDeadline, double price, int ticketsAvailable, int ticketsSold) {
+                     LocalDate rsvpDeadline, double price, int ticketsAvailable, int ticketsSold, String banner) {
         this.id = id;
         this.title = title;
         this.location = location;
@@ -39,6 +41,7 @@ public class EventData {
         this.price = price;
         this.ticketsAvailable = ticketsAvailable;
         this.ticketsSold = ticketsSold;
+        this.banner = banner;
     }
 
     // Getters and setters for all fields
@@ -133,4 +136,22 @@ public class EventData {
     public void setTicketsSold(int ticketsSold) {
         this.ticketsSold = ticketsSold;
     }
+
+    public String getBanner() {
+        return banner;
+    }
+
+    public void setBanner(String banner) {
+        this.banner = banner;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+    
+    
 }

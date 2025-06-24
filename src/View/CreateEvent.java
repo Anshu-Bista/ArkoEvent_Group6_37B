@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package view;
+package View;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -44,14 +44,12 @@ public class CreateEvent extends javax.swing.JFrame {
         homebtn = new javax.swing.JButton();
         bookingsbtn = new javax.swing.JButton();
         myeventsbtn = new javax.swing.JButton();
-        discoverbtn = new javax.swing.JButton();
         profilebtn = new javax.swing.JButton();
         logout_btn = new javax.swing.JButton();
         plus_btn = new javax.swing.JButton();
         taskbar = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        img_fld = new javax.swing.JLabel();
         title = new javax.swing.JLabel();
         description = new javax.swing.JLabel();
         category = new javax.swing.JLabel();
@@ -61,7 +59,6 @@ public class CreateEvent extends javax.swing.JFrame {
         limit = new javax.swing.JLabel();
         deadline = new javax.swing.JLabel();
         event_img = new javax.swing.JLabel();
-        cam_lbl = new javax.swing.JLabel();
         create_btn = new javax.swing.JButton();
         price = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -82,6 +79,7 @@ public class CreateEvent extends javax.swing.JFrame {
         eventtype_box = new javax.swing.JComboBox<>();
         start = new javax.swing.JLabel();
         start_fld = new javax.swing.JTextField();
+        bannerSelector = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -121,15 +119,6 @@ public class CreateEvent extends javax.swing.JFrame {
             }
         });
         sidebar.add(myeventsbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 160, 50));
-
-        discoverbtn.setBackground(new java.awt.Color(208, 202, 232));
-        discoverbtn.setText("Discover");
-        discoverbtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                discoverbtnActionPerformed(evt);
-            }
-        });
-        sidebar.add(discoverbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 220, 50));
 
         profilebtn.setBackground(new java.awt.Color(208, 202, 232));
         profilebtn.setText("Profile");
@@ -185,9 +174,6 @@ public class CreateEvent extends javax.swing.JFrame {
 
         bg.add(taskbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(248, 0, 710, 40));
 
-        img_fld.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        bg.add(img_fld, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 410, 120, 110));
-
         title.setText("Event Title");
         bg.add(title, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 130, -1, -1));
 
@@ -207,17 +193,13 @@ public class CreateEvent extends javax.swing.JFrame {
         bg.add(location, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 320, -1, -1));
 
         limit.setText("Participant Limit");
-        bg.add(limit, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 350, -1, -1));
+        bg.add(limit, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 350, -1, -1));
 
         deadline.setText("RSVP Deadline");
         bg.add(deadline, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 380, -1, -1));
 
         event_img.setText("Image Banner");
         bg.add(event_img, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 410, -1, -1));
-
-        cam_lbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        cam_lbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/211634_camera_icon.png"))); // NOI18N
-        bg.add(cam_lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 440, 40, 40));
 
         create_btn.setBackground(new java.awt.Color(180, 175, 204));
         create_btn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -236,7 +218,9 @@ public class CreateEvent extends javax.swing.JFrame {
         bg.add(deadline_fld, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 380, 80, -1));
         bg.add(title_fld, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 130, 500, -1));
 
+        statusComboBox.setEditable(true);
         statusComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Draft", "Published" }));
+        statusComboBox.setSelectedIndex(1);
         bg.add(statusComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 490, -1, -1));
 
         eventcategory_box.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Arts & Culture", "Food & Drink", "Sports & Outdoors", "Education & Learning", "Business & Networking", "Family & Kids", "Community & Charity", "Lifestyle & Hobbies", "Seasonal & Holiday", "Online/Virtual Events" }));
@@ -286,6 +270,9 @@ public class CreateEvent extends javax.swing.JFrame {
         start.setText("Start Time");
         bg.add(start, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 350, -1, -1));
         bg.add(start_fld, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 340, 80, -1));
+
+        bannerSelector.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/211634_camera_icon.png"))); // NOI18N
+        bg.add(bannerSelector, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 410, 220, 120));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -398,9 +385,9 @@ public class CreateEvent extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton bannerSelector;
     private javax.swing.JPanel bg;
     private javax.swing.JButton bookingsbtn;
-    private javax.swing.JLabel cam_lbl;
     private javax.swing.JLabel category;
     private javax.swing.JButton create_btn;
     private javax.swing.JLabel date;
@@ -409,7 +396,6 @@ public class CreateEvent extends javax.swing.JFrame {
     private javax.swing.JTextField deadline_fld;
     private javax.swing.JLabel description;
     private javax.swing.JTextArea description_fld;
-    private javax.swing.JButton discoverbtn;
     private javax.swing.JLabel end;
     private javax.swing.JTextField end_fld;
     private javax.swing.JLabel event_img;
@@ -419,7 +405,6 @@ public class CreateEvent extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> eventtype_box;
     private javax.swing.JButton feedback_btn;
     private javax.swing.JButton homebtn;
-    private javax.swing.JLabel img_fld;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JScrollPane jScrollPane1;
@@ -502,28 +487,18 @@ public class CreateEvent extends javax.swing.JFrame {
     }
 
 
-    public void clearFields() {
-        title_fld.setText("");
-        location_fld.setText("");
-        description_fld.setText("");
-        eventcategory_box.setSelectedIndex(0);
-        eventtype_box.setSelectedIndex(0);
-        ticketype_box.setSelectedIndex(0);
-
-        if (date_fld.getText().equals("yyyy-mm-dd") || date_fld.getText().isBlank()) {
-            JOptionPane.showMessageDialog(this, "Please enter a valid event date in yyyy-mm-dd format.");
-            return;
-        }
-
-        price_fld.setText("");
-        limit_fld.setText("");
-    }
 
     // btns
     public void addAddEventListener(ActionListener listener) {
         create_btn.addActionListener(listener);
     }
+    
+    public void uploadBannerListener(ActionListener listener){
+        bannerSelector.addActionListener(listener);
+    }
+    
 
+    
     public void addLogoutListener(ActionListener listener) {
         logout_btn.addActionListener(listener);
     }
@@ -544,9 +519,7 @@ public class CreateEvent extends javax.swing.JFrame {
         homebtn.addActionListener(listener);
     }
 
-    public void addDiscoverListener(ActionListener listener) {
-        discoverbtn.addActionListener(listener);
-    }
+
 
     public void addMyEventsListener(ActionListener listener) {
         myeventsbtn.addActionListener(listener);

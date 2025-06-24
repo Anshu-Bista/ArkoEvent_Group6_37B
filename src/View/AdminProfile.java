@@ -2,10 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package view;
+package View;
 
+import java.awt.Image;
 import java.awt.event.ActionListener;
+import javax.swing.ImageIcon;
 import model.UserData;
+import util.SessionUtil;
 
 /**
  *
@@ -37,7 +40,6 @@ public class AdminProfile extends javax.swing.JFrame {
         feedback_btn = new javax.swing.JButton();
         homebtn = new javax.swing.JButton();
         bookingsbtn = new javax.swing.JButton();
-        discoverbtn = new javax.swing.JButton();
         profilebtn = new javax.swing.JButton();
         logout_btn = new javax.swing.JButton();
         myeventsbtn = new javax.swing.JButton();
@@ -92,15 +94,6 @@ public class AdminProfile extends javax.swing.JFrame {
         bookingsbtn.setBackground(new java.awt.Color(208, 202, 232));
         bookingsbtn.setText("Bookings");
         sidebar.add(bookingsbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 220, 50));
-
-        discoverbtn.setBackground(new java.awt.Color(208, 202, 232));
-        discoverbtn.setText("Discover");
-        discoverbtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                discoverbtnActionPerformed(evt);
-            }
-        });
-        sidebar.add(discoverbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 220, 50));
 
         profilebtn.setBackground(new java.awt.Color(208, 202, 232));
         profilebtn.setText("Profile");
@@ -169,7 +162,7 @@ public class AdminProfile extends javax.swing.JFrame {
         pic_lbl.setForeground(new java.awt.Color(153, 255, 0));
         pic_lbl.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         pic_lbl.setPreferredSize(new java.awt.Dimension(134, 172));
-        bg.add(pic_lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 80, 130, 140));
+        bg.add(pic_lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 80, 140, 140));
         bg.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 290, -1, -1));
 
         upload_btn.setText("Upload your Profile Picture");
@@ -183,7 +176,7 @@ public class AdminProfile extends javax.swing.JFrame {
         email_lbl.setText("Email");
         bg.add(email_lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 310, -1, -1));
 
-        name_lbl.setText("Full Name");
+        name_lbl.setText("User Name");
         bg.add(name_lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 280, -1, -1));
 
         phone_lbl.setText("Contact Number");
@@ -346,7 +339,6 @@ public class AdminProfile extends javax.swing.JFrame {
     private javax.swing.JButton bookingsbtn;
     private javax.swing.JLabel cam_lbl;
     private javax.swing.JButton deactivate_btn;
-    private javax.swing.JButton discoverbtn;
     private javax.swing.JTextField email_fld;
     private javax.swing.JLabel email_lbl;
     private javax.swing.JButton feedback_btn;
@@ -367,7 +359,7 @@ public class AdminProfile extends javax.swing.JFrame {
     private javax.swing.JLabel regdate_lbl;
     private javax.swing.JPanel sidebar;
     private javax.swing.JPanel taskbar;
-    private javax.swing.JButton update_btn;
+    public javax.swing.JButton update_btn;
     private javax.swing.JButton upload_btn;
     private javax.swing.JButton viewact_btn;
     // End of variables declaration//GEN-END:variables
@@ -385,7 +377,7 @@ public class AdminProfile extends javax.swing.JFrame {
     }
 
     public UserData getUpdatedProfile() {
-        UserData user = new UserData();
+        UserData user = SessionUtil.getCurrentUser();
         user.setUsername(name_fld.getText());
         user.setPhone(phone_fld.getText());
         user.setStatus((String) accstatus_box.getSelectedItem());
@@ -398,6 +390,22 @@ public class AdminProfile extends javax.swing.JFrame {
         accstatus_box.setSelectedItem(user.getStatus());
         email_fld.setText(user.getEmail()); // Read-only
         regdate_fld.setText(user.getRegistrationDate().toString()); // Read-only
+        
+        String path = user.getImagePath();
+        if (path != null && !path.isEmpty()) {
+            try {
+                ImageIcon originalIcon = new ImageIcon(path);
+                Image originalImage = originalIcon.getImage();
+
+                // Resize image to 140x140
+                Image scaledImage = originalImage.getScaledInstance(140, 140, Image.SCALE_SMOOTH);
+
+                // Set the scaled image as icon
+                pic_lbl.setIcon(new ImageIcon(scaledImage));
+            } catch (Exception e) {
+                e.printStackTrace(); 
+            }
+        }
     }
     
     //btns
@@ -421,9 +429,6 @@ public class AdminProfile extends javax.swing.JFrame {
         homebtn.addActionListener(listener);
     }
 
-    public void addDiscoverListener(ActionListener listener) {
-        discoverbtn.addActionListener(listener);
-    }
 
     public void addMyEventsListener(ActionListener listener) {
         myeventsbtn.addActionListener(listener);
@@ -437,5 +442,8 @@ public class AdminProfile extends javax.swing.JFrame {
         deactivate_btn.addActionListener(listener);
     }
     
+    public void uploadPicListener(ActionListener listener){
+        upload_btn.addActionListener(listener);
+    }
 
 }

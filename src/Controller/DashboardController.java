@@ -1,11 +1,11 @@
-package controller;
+package Controller;
 
 import dao.EventDao;
 import dao.FeedbackDao;
 import dao.UserDao;
 import model.FeedbackData;
-import view.AdminDashboard;
-import view.FeedbackCard;
+import View.*;
+
 
 import javax.swing.*;
 import java.util.List;
@@ -26,32 +26,31 @@ public class DashboardController {
         this.feedbackDao = new FeedbackDao();
         
         this.dashboardView.addUserListener(e -> {
-            dashboardView.dispose();
+            this.dashboardView.dispose();
             NavigationUtil.goToUsers();
         });
 
         this.dashboardView.addProfileListener(e -> {
-            dashboardView.dispose();
+            this.dashboardView.dispose();
             NavigationUtil.goToProfile();
         });
 
         this.dashboardView.addCreateEventListener(e -> {
-            dashboardView.dispose();
+            this.dashboardView.dispose();
             NavigationUtil.goToCreateEvent();
         });
 
         this.dashboardView.addHomeListener(e -> {
-            dashboardView.dispose();
+            this.dashboardView.dispose();
             NavigationUtil.goToDashboard(); // Treat dashboard as home
         });
 
         this.dashboardView.addMyEventsListener(e -> {
-            JOptionPane.showMessageDialog(dashboardView, "My Events page is under development.");
+            this.dashboardView.dispose();
+            NavigationUtil.goToMyEvents();
         });
 
-        this.dashboardView.addDiscoverListener(e -> {
-            JOptionPane.showMessageDialog(dashboardView, "Discover page is under development.");
-        });
+
 
         /*
         this.dashboardView.addEventListener(e -> {

@@ -1,9 +1,10 @@
-package controller;
+package Controller;
 
-import view.EventDetail;
+import View.*;
+
 import dao.EventDao;
 import dao.BookingDao;
-import model.EventData;
+import Model.EventData;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -40,7 +41,7 @@ public class EventDetailsController {
 
     private void loadEventDetails() {
         try {
-            event = eventDao.getEventById(eventId);// db
+            event = (EventData) eventDao.getEventById(eventId);// db
             if (event == null) {
                 JOptionPane.showMessageDialog(null, "Event not found.");
             } else {

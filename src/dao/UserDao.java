@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import Database.MySqlConnection;
 
-import database.MySqlConnection;
 import model.UserData;
 
 public class UserDao {
@@ -29,7 +29,7 @@ public class UserDao {
             pstmt.setString(2, user.getEmail());
             pstmt.setString(3, user.getPassword());
             pstmt.setString(4, user.getPhone());
-            pstmt.setString(5, user.getStatus());
+            pstmt.setString(5, "active");
             pstmt.setTimestamp(6, user.getRegistrationDate());
             int rows = pstmt.executeUpdate();
             return rows > 0;
@@ -59,8 +59,8 @@ public class UserDao {
 
     // Log In
     public UserData login(String email, String password) {
-        String sql = "SELECT * FROM users WHERE email = ? AND password = ?";
-        System.out.println("Login attempt with email: '" + email + "', password: '" + password + "'");
+        String sql = "SELECT * FROM users WHERE username = ? AND password = ?";
+        System.out.println("Login attempt with username: '" + email + "', password: '" + password + "'");
         try (Connection conn = openConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, email.trim());
@@ -73,6 +73,7 @@ public class UserDao {
                 user.setUsername(rs.getString("username"));
                 user.setEmail(rs.getString("email"));
                 user.setRole(rs.getString("role"));
+                user.setStatus(rs.getString("account_status"));
                 // set other fields as needed
                 return user;
             } else {
@@ -107,7 +108,7 @@ public class UserDao {
         if (!newPassword.equals(confirmPassword)) {
             return false;
         }
-        String sql = "UPDATE users SET password = ?, reset_code = NULL, reset_code_timestamp = NULL WHERE email = ?";
+        String sql = "UPDATE users SET password = ? WHERE email = ?";
         try (Connection conn = openConnection();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, newPassword);

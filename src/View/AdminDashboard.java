@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package view;
+package View;
 
 import java.awt.event.ActionListener;
 import javax.swing.BoxLayout;
@@ -39,7 +39,6 @@ public class AdminDashboard extends javax.swing.JFrame {
         feedback_btn = new javax.swing.JButton();
         homebtn = new javax.swing.JButton();
         bookingsbtn = new javax.swing.JButton();
-        discoverbtn = new javax.swing.JButton();
         profilebtn = new javax.swing.JButton();
         logout_btn = new javax.swing.JButton();
         myeventsbtn = new javax.swing.JButton();
@@ -79,15 +78,6 @@ public class AdminDashboard extends javax.swing.JFrame {
         bookingsbtn.setBackground(new java.awt.Color(208, 202, 232));
         bookingsbtn.setText("Bookings");
         sidebar.add(bookingsbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 220, 50));
-
-        discoverbtn.setBackground(new java.awt.Color(208, 202, 232));
-        discoverbtn.setText("Discover");
-        discoverbtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                discoverbtnActionPerformed(evt);
-            }
-        });
-        sidebar.add(discoverbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 220, 50));
 
         profilebtn.setBackground(new java.awt.Color(208, 202, 232));
         profilebtn.setText("Profile");
@@ -240,7 +230,6 @@ public class AdminDashboard extends javax.swing.JFrame {
     private javax.swing.JPanel FeedbackPanel;
     private javax.swing.JScrollPane FeedbackScroll;
     private javax.swing.JButton bookingsbtn;
-    private javax.swing.JButton discoverbtn;
     private javax.swing.JButton event_btn;
     private javax.swing.JButton feedback_btn;
     private javax.swing.JButton homebtn;
@@ -291,10 +280,6 @@ public class AdminDashboard extends javax.swing.JFrame {
 
     public void addHomeListener(ActionListener listener) {
         homebtn.addActionListener(listener);
-    }
-
-    public void addDiscoverListener(ActionListener listener) {
-        discoverbtn.addActionListener(listener);
     }
 
     public void addMyEventsListener(ActionListener listener) {

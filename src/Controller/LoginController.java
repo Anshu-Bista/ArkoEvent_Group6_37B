@@ -1,7 +1,7 @@
-package controller;
+package Controller;
 
 import model.UserData;
-import view.Login;
+import View.*;
 import dao.UserDao;
 import util.SessionUtil;
 import util.NavigationUtil;

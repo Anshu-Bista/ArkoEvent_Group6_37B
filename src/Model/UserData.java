@@ -22,7 +22,7 @@ public class UserData {
         this.password = password;
         this.confirmPassword = "";
         this.phone = phone;
-        this.imagePath = "default.png";
+        this.imagePath = imagePath;
         this.status = (status != null) ? status : "active";
         this.role = role;
         this.registrationDate = (registrationDate != null) ? registrationDate

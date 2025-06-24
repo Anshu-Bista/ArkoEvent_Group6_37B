@@ -1,14 +1,15 @@
-package controller;
+package Controller;
 
+import View.*;
 import dao.UserDao;
 import model.UserData;
-import view.Login;
-import view.Registration;
+
 
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
+
 
 public class SignUpController {
     private final UserDao userDao = new UserDao();
@@ -72,7 +73,7 @@ public class SignUpController {
                 // Try to sign up user
                 boolean success = userDao.signUp(user);
                 if (success) {
-                    // On success, open Login view and close register view
+                    // On success, open Login view and close register vie
                     Login view = new Login();
                     LoginController c = new LoginController(view);
                     c.open();

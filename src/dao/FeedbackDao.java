@@ -1,7 +1,7 @@
 package dao;
 
 import model.FeedbackData;
-import database.MySqlConnection;
+import Database.MySqlConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

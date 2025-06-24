@@ -1,4 +1,5 @@
-package controller;
+package Controller;
+import View.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,18 +10,25 @@ import java.time.format.DateTimeParseException;
 import javax.swing.JOptionPane;
 
 import dao.EventDao;
-import model.EventData;
+import Model.EventData;
+import java.awt.Image;
+import java.io.File;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import util.NavigationUtil;
 import util.SessionUtil;
-import view.CreateEvent;
+
 
 public class CreateEventController {
     private final CreateEvent createEventView;
     private EventDao eventDao; 
+    private String banner;
 
     public CreateEventController(CreateEvent view) {
         this.createEventView = view;
         this.createEventView.addLogoutListener(e -> SessionUtil.logout(createEventView));
+        this.createEventView.uploadBannerListener(new setBanner());
         
         this.createEventView.addProfileListener(e -> {
             createEventView.dispose();
@@ -38,12 +46,11 @@ public class CreateEventController {
         });
 
         this.createEventView.addMyEventsListener(e -> {
-            JOptionPane.showMessageDialog(createEventView, "My Events page is under development.");
+            createEventView.dispose();
+            NavigationUtil.goToMyEvents();
         });
 
-        this.createEventView.addDiscoverListener(e -> {
-            JOptionPane.showMessageDialog(createEventView, "Discover page is under development.");
-        });
+
 
         try {
             this.eventDao = new EventDao();
@@ -91,7 +98,9 @@ public class CreateEventController {
             LocalTime startTime = createEventView.getStartTime();
             LocalTime endTime = createEventView.getEndTime();
             LocalDate rsvpDeadline = createEventView.getRsvpDeadline();
-            double ticketPrice = createEventView.getEventPrice();
+            
+            
+            double ticketPrice = ticketType.equals("Paid")? createEventView.getEventPrice():0;
             int totalTickets = createEventView.getTicketsAvailable();
     
             // Validate date/time fields
@@ -150,7 +159,7 @@ public class CreateEventController {
                 0, eventTitle, eventLocation, eventDescription,
                 eventCategory, eventType, ticketType, eventStatus,
                 eventDate, startTime, endTime, rsvpDeadline,
-                ticketPrice, totalTickets, 0
+                ticketPrice, totalTickets, 0,banner
             );
     
             // Save event to DB
@@ -158,7 +167,7 @@ public class CreateEventController {
     
             if (success) {
                 JOptionPane.showMessageDialog(createEventView, "Event " + eventStatus.toLowerCase() + " successfully!");
-                createEventView.clearFields();
+                
             } else {
                 JOptionPane.showMessageDialog(createEventView, "Failed to save the event.");
             }
@@ -168,6 +177,36 @@ public class CreateEventController {
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(createEventView, "Error creating event: " + ex.getMessage());
         }
+    }
+
+    private class setBanner implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setDialogTitle("Choose Profile Image");
+
+            // Optional: set filter for image files only
+            FileNameExtensionFilter imageFilter = new FileNameExtensionFilter(
+                    "Image files", "jpg", "jpeg", "png", "gif");
+            fileChooser.setFileFilter(imageFilter);
+
+            int result = fileChooser.showOpenDialog(null);
+            if (result == JFileChooser.APPROVE_OPTION) {
+                File selectedFile = fileChooser.getSelectedFile();
+                String imagePath = selectedFile.getAbsolutePath();
+
+                // Set image path to user object
+               banner = imagePath;
+
+                // Load and scale the image
+                ImageIcon originalIcon = new ImageIcon(imagePath);
+                Image scaledImage = originalIcon.getImage().getScaledInstance(220, 120, Image.SCALE_SMOOTH);
+                createEventView.bannerSelector.setIcon(new ImageIcon(scaledImage));
+            }
+        }
+
+        
     }
 
     // ActionListener for the 'Add Event' button

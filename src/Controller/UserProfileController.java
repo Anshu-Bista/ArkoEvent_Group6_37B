@@ -1,4 +1,4 @@
-package controller;
+package Controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,18 +9,24 @@ import dao.UserDao;
 import model.UserData;
 import util.NavigationUtil;
 import util.SessionUtil;
-import view.UserProfile;
+import View.*;
+import java.io.File;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 
 public class UserProfileController {
     private final UserProfile profView;
     private final UserDao userDao;
     private final int userId;
+    private UserData currentUser;
+   
 
     public UserProfileController(UserProfile profileView) {
         this.profView = profileView;
 
         this.userDao = new UserDao(); // Initialize DAO and User ID from session
-        UserData currentUser = SessionUtil.getCurrentUser();
+        currentUser = SessionUtil.getCurrentUser();
 
         if (currentUser == null) {
             throw new IllegalStateException("No user is currently logged in.");
@@ -31,6 +37,7 @@ public class UserProfileController {
         this.profView.addUpdateProfileListener(new UpdateProfileListener());
         this.profView.addDeactivateListener(new DeactivateAccountListener());
         this.profView.addLogoutListener(e -> SessionUtil.logout(profileView));
+        this.profView.addDpListener(new addDP());
 
         this.profView.addHomeListener(e -> {
             profView.dispose();
@@ -95,6 +102,38 @@ public class UserProfileController {
         }
     }
 
+    private  class addDP implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+             JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setDialogTitle("Choose Profile Image");
+
+            // Optional: set filter for image files only
+            FileNameExtensionFilter imageFilter = new FileNameExtensionFilter(
+                    "Image files", "jpg", "jpeg", "png", "gif");
+            fileChooser.setFileFilter(imageFilter);
+
+            int result = fileChooser.showOpenDialog(null);
+            if (result == JFileChooser.APPROVE_OPTION) {
+                File selectedFile = fileChooser.getSelectedFile();
+                String imagePath = selectedFile.getAbsolutePath();
+
+                // Set image path to user object
+                
+                currentUser.setImagePath(imagePath);
+                boolean success = userDao.updateProfileById(currentUser);
+                if(success){
+                    loadProfile();
+                } else{
+                    JOptionPane.showMessageDialog(profView, "Couldnot update pofile picture");
+                }
+
+        }
+
+    }
+    }
+
     private class UpdateProfileListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -131,3 +170,4 @@ public class UserProfileController {
         }
     }
 }
+
