@@ -7,7 +7,7 @@ package View;
 import java.awt.Image;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
-import model.UserData;
+import Model.UserData;
 import util.SessionUtil;
 
 /**
@@ -93,9 +93,14 @@ public class AdminProfile extends javax.swing.JFrame {
 
         bookingsbtn.setBackground(new java.awt.Color(208, 202, 232));
         bookingsbtn.setText("Bookings");
+        bookingsbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bookingsbtnActionPerformed(evt);
+            }
+        });
         sidebar.add(bookingsbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 220, 50));
 
-        profilebtn.setBackground(new java.awt.Color(208, 202, 232));
+        profilebtn.setBackground(new java.awt.Color(153, 153, 255));
         profilebtn.setText("Profile");
         profilebtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -239,6 +244,10 @@ public class AdminProfile extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void bookingsbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookingsbtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bookingsbtnActionPerformed
 
     private void upload_btnActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_upload_btnActionPerformed
         // TODO add your handling code here:
@@ -408,7 +417,23 @@ public class AdminProfile extends javax.swing.JFrame {
         }
     }
     
-    //btns
+    //btns of page
+    
+    public void addUpdateProfileListener(ActionListener listener) {
+        update_btn.addActionListener(listener);
+    }
+    
+    public void addDeactivateListener(ActionListener listener) {
+        deactivate_btn.addActionListener(listener);
+    }
+    
+    public void uploadPicListener(ActionListener listener){
+        upload_btn.addActionListener(listener);
+    }
+    
+    
+    
+    //btns for admin
     public void addLogoutListener(ActionListener listener) {
         logout_btn.addActionListener(listener);
     }
@@ -429,21 +454,8 @@ public class AdminProfile extends javax.swing.JFrame {
         homebtn.addActionListener(listener);
     }
 
-
     public void addMyEventsListener(ActionListener listener) {
         myeventsbtn.addActionListener(listener);
-    }
-
-    public void addUpdateProfileListener(ActionListener listener) {
-        update_btn.addActionListener(listener);
-    }
-    
-    public void addDeactivateListener(ActionListener listener) {
-        deactivate_btn.addActionListener(listener);
-    }
-    
-    public void uploadPicListener(ActionListener listener){
-        upload_btn.addActionListener(listener);
     }
 
 }

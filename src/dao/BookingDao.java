@@ -8,6 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import Database.MySqlConnection;
+import Model.Booker;
 import Model.EventData;
 import java.util.ArrayList;
 import util.SessionUtil;
@@ -189,5 +190,38 @@ public class BookingDao {
             conn.setAutoCommit(true); // restore default
         }
     }
+
+    public ArrayList<Booker> getBookersByEventId(int eventId) {
+        ArrayList<Booker> bookers = new ArrayList<>();
+        String sql = "SELECT u.id, u.username, u.email, u.phone, u.account_status, u.profile_image, b.ticket_count "
+                + "FROM bookings b "
+                + "JOIN users u ON b.user_id = u.id "
+                + "WHERE b.event_id = ?";
+        Connection conn = mysql.openConnection();
+        
+        try ( PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, eventId);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Booker booker = new Booker(
+                            rs.getInt("id"),
+                            rs.getString("profile_image"),
+                            rs.getString("username"),
+                            rs.getString("email"),
+                            rs.getString("phone"),
+                            rs.getString("account_status"),
+                            rs.getInt("ticket_count")
+                    );
+                    bookers.add(booker);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return bookers;
+    }
+
 
 }

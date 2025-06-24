@@ -5,7 +5,7 @@ import View.*;
 import Controller.*;
 
 
-import model.UserData;
+import Model.UserData;
 
 public class NavigationUtil {
 
@@ -65,9 +65,7 @@ public class NavigationUtil {
     public static void goToUsers() {
         String role = getUserRole();
         if ("admin".equalsIgnoreCase(role)) {
-            ViewUsers userView = new ViewUsers();
-            ViewAllUsersController userController = new ViewAllUsersController(userView);
-            userController.open();
+            
         } else {
             showAccessDenied();
         }
@@ -100,6 +98,18 @@ public class NavigationUtil {
         if ("user".equalsIgnoreCase(role)) {
             myBookings view = new myBookings();
             myBookingsController c = new myBookingsController(view);
+            c.open();
+        } else {
+            showAccessDenied();
+        }
+    }
+    
+    
+        public static void gotoBookings() {
+        String role = getUserRole();
+        if ("admin".equalsIgnoreCase(role)) {
+            Bookings view = new Bookings();
+            BookingsController c = new BookingsController(view);
             c.open();
         } else {
             showAccessDenied();

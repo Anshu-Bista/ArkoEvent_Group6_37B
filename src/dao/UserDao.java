@@ -10,7 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import Database.MySqlConnection;
 
-import model.UserData;
+import Model.UserData;
 
 public class UserDao {
     private final MySqlConnection mysql = new MySqlConnection();

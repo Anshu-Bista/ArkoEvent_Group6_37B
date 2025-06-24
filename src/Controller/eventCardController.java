@@ -33,6 +33,7 @@ public class eventCardController {
     private  boolean booked = false;
     
     public eventCardController(eventCard card,EventData event){
+        System.out.println("2 params");
         this.card =  card;
         this.event = event;
         this.card.bookDeleteListener(new bookDelete());
@@ -42,6 +43,7 @@ public class eventCardController {
     }
     
     public eventCardController(eventCard card,EventData event,boolean booked){
+        System.out.println("3 params");
         this.card =  card;
         this.event = event;
         this.booked = booked;
@@ -88,9 +90,18 @@ public class eventCardController {
             card.left.setText(Integer.toString(event.getTicketsAvailable()-event.getTicketsSold())+ " Left");
         }
         
+        System.out.println(role);
+        System.out.println(booked);
+        
         if(role.equals("admin")){
+            
+            if(booked){
+                card.bookDelete.setText("View Bookings");
+            }else{
             card.bookDelete.setText("Delete");
+            }
         }else{
+            
             if (booked) {
                 if (LocalDate.now().isAfter(event.getEventDate())) {
                     card.bookDelete.setText("Give Feedback");
@@ -110,25 +121,39 @@ public class eventCardController {
         @Override
         public void actionPerformed(ActionEvent e) {
             if(role.equals("admin")){
-                int choice = JOptionPane.showConfirmDialog(
-                        card,
-                        "Are you sure you want to delete this event?",
-                        "Confirm Deletion",
-                        JOptionPane.YES_NO_OPTION,
-                        JOptionPane.WARNING_MESSAGE
-                );
+                if(booked){
+                    bookersList bookersView = new bookersList(event.getId());
+                    JDialog dialog = new JDialog((Frame) null, "Event Details", true);
+                        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 
-                if (choice == JOptionPane.YES_OPTION) {
-                    EventDao dao = new EventDao();
-                    boolean success = dao.deleteEvent(event);
+                        dialog.getContentPane().add(bookersView);
 
-                    if (success) {
-                        JOptionPane.showMessageDialog(null, "Event deleted successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
-                        close();
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Failed to delete event.", "Error", JOptionPane.ERROR_MESSAGE);
+                        dialog.pack();
+                        dialog.setLocationRelativeTo(card);
+                        dialog.setVisible(true);
+                    
+                }else{
+                    int choice = JOptionPane.showConfirmDialog(
+                            card,
+                            "Are you sure you want to delete this event?",
+                            "Confirm Deletion",
+                            JOptionPane.YES_NO_OPTION,
+                            JOptionPane.WARNING_MESSAGE
+                    );
+
+                    if (choice == JOptionPane.YES_OPTION) {
+                        EventDao dao = new EventDao();
+                        boolean success = dao.deleteEvent(event);
+
+                        if (success) {
+                            JOptionPane.showMessageDialog(null, "Event deleted successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
+                            close();
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Failed to delete event.", "Error", JOptionPane.ERROR_MESSAGE);
+                        }
                     }
                 }
+                
             } else if (role.equals("user")) {
                 if (booked) {
                     if (card.bookDelete.getText().equals("Cancel")) {
@@ -159,6 +184,7 @@ public class eventCardController {
 
                     } else if (card.bookDelete.getText().equals("Give Feedback")) {
                         FeedbackCard feedbackCard = new FeedbackCard();
+                            feedbackCard.Title.setText(event.getTitle());
 
                         int result = JOptionPane.showConfirmDialog(
                                 null,
@@ -188,22 +214,22 @@ public class eventCardController {
                                 JOptionPane.showMessageDialog(null, "Failed to submit feedback.", "Error", JOptionPane.ERROR_MESSAGE);
                             }
                         }
-                    } else{
-                    eventDetails eventPanel = new eventDetails();
-
-                    JDialog dialog = new JDialog((Frame) null, "Event Details", true);
-                    dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-
-                    dialog.getContentPane().add(eventPanel);
-
-                    EventDetailsController controller = new EventDetailsController(eventPanel, event, dialog);
-
-                    dialog.pack();
-                    dialog.setLocationRelativeTo(card);
-                    dialog.setVisible(true);
-                }
+                    }
                 
-            }
+            } else {
+                        eventDetails eventPanel = new eventDetails();
+
+                        JDialog dialog = new JDialog((Frame) null, "Event Details", true);
+                        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+
+                        dialog.getContentPane().add(eventPanel);
+
+                        EventDetailsController controller = new EventDetailsController(eventPanel, event, dialog);
+
+                        dialog.pack();
+                        dialog.setLocationRelativeTo(card);
+                        dialog.setVisible(true);
+                    }
 
         }
 

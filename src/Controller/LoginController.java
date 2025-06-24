@@ -1,6 +1,6 @@
 package Controller;
 
-import model.UserData;
+import Model.UserData;
 import View.*;
 import dao.UserDao;
 import util.SessionUtil;

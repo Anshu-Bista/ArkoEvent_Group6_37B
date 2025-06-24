@@ -2,7 +2,7 @@ package Controller;
 
 import View.*;
 import dao.UserDao;
-import model.UserData;
+import Model.UserData;
 
 
 import java.awt.HeadlessException;

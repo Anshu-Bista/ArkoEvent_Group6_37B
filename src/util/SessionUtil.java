@@ -1,7 +1,7 @@
 package util;
 
 import javax.swing.*;
-import model.UserData;
+import Model.UserData;
 
 public class SessionUtil {
     private static UserData currentUser;

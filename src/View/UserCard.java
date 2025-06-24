@@ -8,19 +8,21 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
-import model.UserData;
+import Model.Booker;
 
 /**
  *
  * @author hp
  */
 public class UserCard extends javax.swing.JPanel {
-
+ private Booker booker;
     /**
      * Creates new form UserCard
      */
-    public UserCard() {
+    public UserCard(Booker booker) {
+        this.booker = booker;
         initComponents();
+        setUser();
     }
 
     /**
@@ -32,82 +34,111 @@ public class UserCard extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        dp = new javax.swing.JLabel();
         ban_btn = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         namelbl = new javax.swing.JLabel();
+        number = new javax.swing.JLabel();
+        email = new javax.swing.JLabel();
+        tickets = new javax.swing.JLabel();
 
-        jLabel1.setText("img");
+        dp.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        dp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/Profile.png"))); // NOI18N
 
+        ban_btn.setForeground(new java.awt.Color(255, 51, 51));
         ban_btn.setText("Ban");
 
-        jButton2.setText("View Activity");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
+        namelbl.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
         namelbl.setText("name");
+
+        number.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        number.setText("number");
+
+        email.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        email.setText("Email");
+
+        tickets.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        tickets.setText("20 Tickets");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(dp, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(namelbl, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tickets, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(137, 137, 137)
-                        .addComponent(namelbl, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ban_btn, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(38, 38, 38))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(number, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(ban_btn)))
+                .addGap(5, 5, 5))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(5, 5, 5)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(ban_btn)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                         .addComponent(namelbl)
-                        .addGap(36, 36, 36))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(5, 5, 5)
+                                .addComponent(number)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(email)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(ban_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)))
+                        .addComponent(tickets))
+                    .addComponent(dp, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton ban_btn;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel namelbl;
+    public javax.swing.JButton ban_btn;
+    public javax.swing.JLabel dp;
+    public javax.swing.JLabel email;
+    public javax.swing.JLabel namelbl;
+    public javax.swing.JLabel number;
+    public javax.swing.JLabel tickets;
     // End of variables declaration//GEN-END:variables
 
-    public void setUser(UserData user) {
-    namelbl.setText("Name: " + user.getUsername());
+    public void setUser() {
+        namelbl.setText("Name: " + booker.getUsername());
+        number.setText("Number: "+ booker.getPhone());
+        email.setText("Email : "+ booker.getEmail());
+        tickets.setText((booker.getTicketCount()>0)? Integer.toString(booker.getTicketCount())+" tickets" : "");
+        
+        String path = booker.getImagePath();
+        if (path != null && !path.isEmpty()) {
+            try {
+                ImageIcon originalIcon = new ImageIcon(path);
+                Image originalImage = originalIcon.getImage();
 
-    ImageIcon icon = new ImageIcon(user.getImagePath());
-    Image img = icon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-    jLabel1.setIcon(new ImageIcon(img));
+                // Resize image to 140x140
+                Image scaledImage = originalImage.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+
+                // Set the scaled image as icon
+                dp.setIcon(new ImageIcon(scaledImage));
+            } catch (Exception e) {
+                e.printStackTrace(); 
+            }
+        }
+        
+        if(booker.getStatus().equals("banned")){
+            ban_btn.setText("Ban");
+        }else {
+            ban_btn.setText("UnBan");
+        }
     }
 
     public JButton getActionButton() {

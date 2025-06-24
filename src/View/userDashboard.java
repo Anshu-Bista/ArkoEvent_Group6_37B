@@ -58,11 +58,11 @@ public class userDashboard extends javax.swing.JFrame {
         myBookings.setText("My Bookings");
         sidebar.add(myBookings, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 200, 40));
 
-        homebtn.setBackground(new java.awt.Color(208, 202, 232));
+        homebtn.setBackground(new java.awt.Color(153, 153, 255));
         homebtn.setText("Home");
         sidebar.add(homebtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 200, 40));
 
-        profilebtn.setBackground(new java.awt.Color(180, 175, 204));
+        profilebtn.setBackground(new java.awt.Color(208, 202, 232));
         profilebtn.setText("Profile");
         sidebar.add(profilebtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, 200, 40));
 

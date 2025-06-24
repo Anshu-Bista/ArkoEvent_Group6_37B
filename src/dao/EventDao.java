@@ -97,7 +97,7 @@ public class EventDao {
 
         return events;
     }
-    
+
     public ArrayList<EventData> getEventsByTicketTypeAndSearch(String type, String searchQuery) {
         ArrayList<EventData> events = new ArrayList<>();
         String sql = "{CALL getEventsByTicketTypeAndSearch(?, ?)}";
@@ -105,7 +105,7 @@ public class EventDao {
         try (Connection conn = openConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, type);
-            stmt.setString(2, searchQuery.equals("search")? "":searchQuery);
+            stmt.setString(2, searchQuery.equals("search") ? "" : searchQuery);
 
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
@@ -140,8 +140,6 @@ public class EventDao {
 
         return events;
     }
-
-
 
     // Get event by ID
     public EventData getEventById(int eventID) {
@@ -213,6 +211,49 @@ public class EventDao {
             return false;
         }
     }
-    
-    
+
+    public ArrayList<EventData> getBookedEventsByUserId(int userId) {
+        ArrayList<EventData> events = new ArrayList<>();
+
+        String sql = "SELECT DISTINCT e.* "
+                + "FROM events e "
+                + "INNER JOIN bookings b ON e.id = b.event_id "
+                + "WHERE e.user_id = ?";
+
+        try (Connection conn = openConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, userId);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    java.sql.Date rsvpDeadlineDate = rs.getDate("rsvp_deadline");
+
+                    EventData event = new EventData(
+                            rs.getInt("id"),
+                            rs.getString("title"),
+                            rs.getString("location"),
+                            rs.getString("description"),
+                            rs.getString("category"),
+                            rs.getString("type"),
+                            rs.getString("ticket_type"),
+                            rs.getString("event_status"),
+                            rs.getDate("event_date").toLocalDate(),
+                            rs.getTime("start_time").toLocalTime(),
+                            rs.getTime("end_time").toLocalTime(),
+                            rsvpDeadlineDate != null ? rsvpDeadlineDate.toLocalDate() : null,
+                            rs.getDouble("price"),
+                            rs.getInt("tickets_available"),
+                            rs.getInt("tickets_sold"),
+                            rs.getString("banner")
+                    );
+
+                    events.add(event);
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return events;
+    }
+
 }

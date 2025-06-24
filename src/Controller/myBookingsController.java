@@ -6,7 +6,6 @@ package Controller;
 
 import Model.EventData;
 import View.eventCard;
-import View.myBookingCard;
 import View.myBookings;
 import dao.BookingDao;
 import java.sql.SQLException;

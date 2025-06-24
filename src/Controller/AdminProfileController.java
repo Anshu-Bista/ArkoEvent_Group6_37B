@@ -10,7 +10,7 @@ import dao.UserDao;
 import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import model.UserData;
+import Model.UserData;
 import util.NavigationUtil;
 import util.SessionUtil;
 
@@ -38,25 +38,29 @@ public class AdminProfileController {
         this.profileView.addDeactivateListener(new DeactivateAccountListener());
         this.profileView.uploadPicListener(new updatePic());
         this.profileView.addLogoutListener(e -> SessionUtil.logout(profileView));
-        
-
+      
         this.profileView.addProfileListener(e -> {
-            this.profileView.dispose();
+            profileView.dispose();
             NavigationUtil.goToProfile();
         });
 
         this.profileView.addCreateEventListener(e -> {
-             this.profileView.dispose();
+            profileView.dispose();
             NavigationUtil.goToCreateEvent();
         });
 
         this.profileView.addHomeListener(e -> {
-             this.profileView.dispose();
-            NavigationUtil.goToDashboard();
+            profileView.dispose();
+            NavigationUtil.goToDashboard(); // Treat dashboard as home
         });
 
         this.profileView.addMyEventsListener(e -> {
-             this.profileView.dispose();
+            profileView.dispose();
+            NavigationUtil.goToMyEvents();
+        });
+        
+        this.profileView.addBookingListener(e -> {
+            profileView.dispose();
             NavigationUtil.goToMyEvents();
         });
 

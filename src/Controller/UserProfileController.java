@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
 import dao.UserDao;
-import model.UserData;
+import Model.UserData;
 import util.NavigationUtil;
 import util.SessionUtil;
 import View.*;

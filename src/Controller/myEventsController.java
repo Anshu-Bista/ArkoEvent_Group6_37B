@@ -23,28 +23,37 @@ public class myEventsController {
     
     public myEventsController(myEvents MyEvents){
         this.MyEvents = MyEvents;
-        setCards();
         
-        
+        this.MyEvents.addLogoutListener(e -> SessionUtil.logout(MyEvents));
+      
         this.MyEvents.addProfileListener(e -> {
-            this.MyEvents.dispose();
+            MyEvents.dispose();
             NavigationUtil.goToProfile();
         });
 
         this.MyEvents.addCreateEventListener(e -> {
-             this.MyEvents.dispose();
+            MyEvents.dispose();
             NavigationUtil.goToCreateEvent();
         });
 
         this.MyEvents.addHomeListener(e -> {
-             this.MyEvents.dispose();
-            NavigationUtil.goToDashboard();
+            MyEvents.dispose();
+            NavigationUtil.goToDashboard(); // Treat dashboard as home
         });
 
         this.MyEvents.addMyEventsListener(e -> {
-             this.MyEvents.dispose();
+            MyEvents.dispose();
             NavigationUtil.goToMyEvents();
         });
+        
+        this.MyEvents.addBookingListener(e -> {
+            MyEvents.dispose();
+            NavigationUtil.gotoBookings();
+        });
+        
+        
+        setCards();
+       
     }
     
     public void open(){

@@ -133,7 +133,7 @@ public class CreateEvent extends javax.swing.JFrame {
         logout_btn.setText("Log Out");
         sidebar.add(logout_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 550, 220, 40));
 
-        plus_btn.setBackground(new java.awt.Color(208, 202, 232));
+        plus_btn.setBackground(new java.awt.Color(153, 153, 255));
         plus_btn.setFont(new java.awt.Font("Segoe UI Historic", 0, 48)); // NOI18N
         plus_btn.setText("+");
         plus_btn.addActionListener(new java.awt.event.ActionListener() {
@@ -486,9 +486,7 @@ public class CreateEvent extends javax.swing.JFrame {
         statusComboBox.addActionListener(listener);
     }
 
-
-
-    // btns
+ 
     public void addAddEventListener(ActionListener listener) {
         create_btn.addActionListener(listener);
     }
@@ -498,7 +496,7 @@ public class CreateEvent extends javax.swing.JFrame {
     }
     
 
-    
+    //btns for admin
     public void addLogoutListener(ActionListener listener) {
         logout_btn.addActionListener(listener);
     }
@@ -518,8 +516,6 @@ public class CreateEvent extends javax.swing.JFrame {
     public void addHomeListener(ActionListener listener) {
         homebtn.addActionListener(listener);
     }
-
-
 
     public void addMyEventsListener(ActionListener listener) {
         myeventsbtn.addActionListener(listener);

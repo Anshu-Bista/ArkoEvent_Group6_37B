@@ -7,7 +7,7 @@ package View;
 import java.awt.Image;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
-import model.UserData;
+import Model.UserData;
 
 /**
  *

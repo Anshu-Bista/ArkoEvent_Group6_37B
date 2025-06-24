@@ -86,7 +86,7 @@ public class myEvents extends javax.swing.JFrame {
         logout_btn.setText("Log Out");
         sidebar.add(logout_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 550, 220, 40));
 
-        myeventsbtn.setBackground(new java.awt.Color(208, 202, 232));
+        myeventsbtn.setBackground(new java.awt.Color(153, 153, 255));
         myeventsbtn.setText("My Events");
         myeventsbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -237,10 +237,10 @@ public class myEvents extends javax.swing.JFrame {
     private javax.swing.JPanel taskbar;
     // End of variables declaration//GEN-END:variables
 
+//btns for admin
     public void addLogoutListener(ActionListener listener) {
         logout_btn.addActionListener(listener);
     }
-
 
     public void addProfileListener(ActionListener listener) {
         profilebtn.addActionListener(listener);
@@ -249,7 +249,6 @@ public class myEvents extends javax.swing.JFrame {
     public void addCreateEventListener(ActionListener listener) {
         plus_btn.addActionListener(listener);
     }
-
 
     public void addBookingListener(ActionListener listener) {
         bookingsbtn.addActionListener(listener);

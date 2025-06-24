@@ -3,7 +3,7 @@ package Controller;
 import dao.EventDao;
 import dao.FeedbackDao;
 import dao.UserDao;
-import model.FeedbackData;
+
 import View.*;
 
 
@@ -24,12 +24,8 @@ public class DashboardController {
         this.userDao = new UserDao();
         this.eventDao = new EventDao();
         this.feedbackDao = new FeedbackDao();
+        this.dashboardView.addLogoutListener(e -> SessionUtil.logout(dashboardView));
         
-        this.dashboardView.addUserListener(e -> {
-            this.dashboardView.dispose();
-            NavigationUtil.goToUsers();
-        });
-
         this.dashboardView.addProfileListener(e -> {
             this.dashboardView.dispose();
             NavigationUtil.goToProfile();
@@ -42,30 +38,23 @@ public class DashboardController {
 
         this.dashboardView.addHomeListener(e -> {
             this.dashboardView.dispose();
-            NavigationUtil.goToDashboard(); // Treat dashboard as home
+            NavigationUtil.goToDashboard(); 
         });
 
         this.dashboardView.addMyEventsListener(e -> {
             this.dashboardView.dispose();
             NavigationUtil.goToMyEvents();
         });
-
-
-
-        /*
-        this.dashboardView.addEventListener(e -> {
-            dashboardView.dispose();
-            NavigationUtil.goToEvents();
-        });
-
-        this.dashboardView.addBookingListener(e -> {
-            dashboardView.dispose();
-            NavigationUtil.goToBookings();
-        });
-
-        */
         
-        this.dashboardView.addLogoutListener(e->SessionUtil.logout(dashboardView));
+         this.dashboardView.addBookingListener(e -> {
+            this.dashboardView.dispose();
+            NavigationUtil.gotoBookings();
+        });
+         
+        this.dashboardView.addUserListener(e -> {
+            this.dashboardView.dispose();
+            NavigationUtil.goToUsers();
+        });
 
         loadDashboardCounts();
 

@@ -1,7 +1,7 @@
 package Controller;
 
 import dao.UserDao;
-import model.UserData;
+import Model.UserData;
 import java.util.List;
 
 public class UserController {

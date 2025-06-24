@@ -27,9 +27,10 @@ public class CreateEventController {
 
     public CreateEventController(CreateEvent view) {
         this.createEventView = view;
-        this.createEventView.addLogoutListener(e -> SessionUtil.logout(createEventView));
         this.createEventView.uploadBannerListener(new setBanner());
-        
+          
+        this.createEventView.addLogoutListener(e -> SessionUtil.logout(createEventView));
+      
         this.createEventView.addProfileListener(e -> {
             createEventView.dispose();
             NavigationUtil.goToProfile();
@@ -46,6 +47,11 @@ public class CreateEventController {
         });
 
         this.createEventView.addMyEventsListener(e -> {
+            createEventView.dispose();
+            NavigationUtil.goToMyEvents();
+        });
+        
+        this.createEventView.addBookingListener(e -> {
             createEventView.dispose();
             NavigationUtil.goToMyEvents();
         });
