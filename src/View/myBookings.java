@@ -10,14 +10,14 @@ import java.awt.event.ActionListener;
  *
  * @author thismac
  */
-public class userDashboard extends javax.swing.JFrame {
+public class myBookings extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(userDashboard.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(myBookings.class.getName());
 
     /**
-     * Creates new form userDashboard
+     * Creates new form myBookings
      */
-    public userDashboard() {
+    public myBookings() {
         initComponents();
         eventsList.setLayout(new javax.swing.BoxLayout(eventsList, javax.swing.BoxLayout.Y_AXIS));
         eventsList.setPreferredSize(null);
@@ -42,7 +42,6 @@ public class userDashboard extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         eventsList = new javax.swing.JPanel();
-        ticketType = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -52,7 +51,7 @@ public class userDashboard extends javax.swing.JFrame {
         sidebar.setBackground(new java.awt.Color(208, 202, 232));
         sidebar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        myBookings.setBackground(new java.awt.Color(208, 202, 232));
+        myBookings.setBackground(new java.awt.Color(153, 153, 255));
         myBookings.setText("My Bookings");
         sidebar.add(myBookings, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 200, 40));
 
@@ -60,7 +59,7 @@ public class userDashboard extends javax.swing.JFrame {
         homebtn.setText("Home");
         sidebar.add(homebtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 200, 40));
 
-        profilebtn.setBackground(new java.awt.Color(180, 175, 204));
+        profilebtn.setBackground(new java.awt.Color(208, 202, 232));
         profilebtn.setText("Profile");
         sidebar.add(profilebtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, 200, 40));
 
@@ -73,7 +72,7 @@ public class userDashboard extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(229, 179, 208));
 
         jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel15.setText("Home");
+        jLabel15.setText("My Bookings");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -105,15 +104,12 @@ public class userDashboard extends javax.swing.JFrame {
         );
         eventsListLayout.setVerticalGroup(
             eventsListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 582, Short.MAX_VALUE)
+            .addGap(0, 588, Short.MAX_VALUE)
         );
 
         jScrollPane1.setViewportView(eventsList);
 
-        bg.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 84, -1, 550));
-
-        ticketType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "Paid", "Free" }));
-        bg.add(ticketType, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 50, 80, -1));
+        bg.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 44, -1, 590));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -155,7 +151,7 @@ public class userDashboard extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new userDashboard().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new myBookings().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -169,15 +165,7 @@ public class userDashboard extends javax.swing.JFrame {
     private javax.swing.JButton myBookings;
     private javax.swing.JButton profilebtn;
     private javax.swing.JPanel sidebar;
-    public javax.swing.JComboBox<String> ticketType;
     // End of variables declaration//GEN-END:variables
-    public void filterListener(ActionListener listener){
-        ticketType.addActionListener(listener);
-    }
-    
-    public void addMyEventsListener(ActionListener listener) {
-        myBookings.addActionListener(listener);
-    }
 
     public void addLogoutListener(ActionListener listener) {
         logout_btn.addActionListener(listener);

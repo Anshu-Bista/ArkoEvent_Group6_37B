@@ -36,13 +36,12 @@ public class NavigationUtil {
             DashboardController dashboardController = new DashboardController(dashboardView);
             dashboardController.open();
         } else if ("user".equalsIgnoreCase(role)) {
-            /*
-             * UserDashboard userDashboardView = new UserDashboard();
-             * UserDashboardController userDashboardController = new
-             * UserDashboardController(userDashboardView);
-             * userDashboardController.open();
-             */
-            javax.swing.JOptionPane.showMessageDialog(null, "User dashboard is under development.");
+            
+              userDashboard userDashboardView = new userDashboard();
+             userDashboardController c = new
+             userDashboardController(userDashboardView);
+             c.open();
+             
         } else {
             showAccessDenied();
         }
@@ -91,6 +90,17 @@ public class NavigationUtil {
             myEvents view = new myEvents();
             myEventsController myEvents = new myEventsController(view);
             myEvents.open();
+        } else {
+            showAccessDenied();
+        }
+    }
+    
+    public static void gotoMyBookings() {
+        String role = getUserRole();
+        if ("user".equalsIgnoreCase(role)) {
+            myBookings view = new myBookings();
+            myBookingsController c = new myBookingsController(view);
+            c.open();
         } else {
             showAccessDenied();
         }

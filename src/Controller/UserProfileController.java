@@ -51,7 +51,7 @@ public class UserProfileController {
 
         this.profView.addMyEventsListener(e -> {
             profView.dispose();
-            JOptionPane.showMessageDialog(profView, "My Events page is under development.");
+            NavigationUtil.gotoMyBookings();
         });
     }
 

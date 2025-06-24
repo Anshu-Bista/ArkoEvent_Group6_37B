@@ -33,3 +33,35 @@ CREATE TABLE events (
     banner VARCHAR(255),
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
+
+CREATE TABLE bookings (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    event_id INT NOT NULL,
+    user_id INT NOT NULL,
+    ticket_count INT NOT NULL CHECK (ticket_count > 0),
+    booking_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (event_id) REFERENCES events(id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    UNIQUE(event_id, user_id) 
+);
+
+SELECT * FROM bookings;
+
+
+
+DELIMITER //
+
+CREATE PROCEDURE getEventsByTicketType(IN event_type VARCHAR(10))
+BEGIN
+    IF event_type = 'All' THEN
+        SELECT * FROM events;
+    ELSE
+        SELECT * FROM events WHERE ticket_type = event_type;
+    END IF;
+END //
+
+DELIMITER ;
+
+
+
+

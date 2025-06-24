@@ -5,14 +5,18 @@
 package Controller;
 
 import Model.EventData;
+import View.*;
 import View.eventCard;
 import dao.EventDao;
+import java.awt.Frame;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import util.SessionUtil;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -95,8 +99,21 @@ public class eventCardController {
                         JOptionPane.showMessageDialog(null, "Failed to delete event.", "Error", JOptionPane.ERROR_MESSAGE);
                     }
                 }
+            } else if (role.equals("user")) {
+                eventDetails eventPanel = new eventDetails();
+
+                JDialog dialog = new JDialog((Frame) null, "Event Details", true); 
+                dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+
+                dialog.getContentPane().add(eventPanel);
+
+                EventDetailsController controller = new EventDetailsController(eventPanel, event,dialog);
+                
+                dialog.pack();
+                dialog.setLocationRelativeTo(card);  
+                dialog.setVisible(true);
             }
-            
+
         }
 
     }

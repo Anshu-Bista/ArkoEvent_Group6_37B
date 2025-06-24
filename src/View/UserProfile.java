@@ -67,14 +67,14 @@ public class UserProfile extends javax.swing.JFrame {
         sidebar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         myeventsbtn.setBackground(new java.awt.Color(208, 202, 232));
-        myeventsbtn.setText("My Events");
+        myeventsbtn.setText("My Bookings");
         sidebar.add(myeventsbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 200, 40));
 
         homebtn.setBackground(new java.awt.Color(208, 202, 232));
         homebtn.setText("Home");
         sidebar.add(homebtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 200, 40));
 
-        profilebtn.setBackground(new java.awt.Color(180, 175, 204));
+        profilebtn.setBackground(new java.awt.Color(153, 153, 255));
         profilebtn.setText("Profile");
         sidebar.add(profilebtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 200, 40));
 

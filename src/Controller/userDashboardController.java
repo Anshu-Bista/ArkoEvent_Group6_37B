@@ -11,6 +11,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.Box;
+import javax.swing.JOptionPane;
+import util.NavigationUtil;
 import util.SessionUtil;
 
 /**
@@ -26,6 +28,21 @@ public class userDashboardController {
         this.dash = dash;
         this.dash.filterListener(new showFiltered());
         setCards();
+        
+        this.dash.addHomeListener(e -> {
+            dash.dispose();
+            NavigationUtil.goToDashboard();
+        });
+
+        this.dash.addProfileListener(e -> {
+            dash.dispose();
+            NavigationUtil.goToProfile();
+        });
+
+        this.dash.addMyEventsListener(e -> {
+            dash.dispose();
+            NavigationUtil.gotoMyBookings();
+        });
         
     }
     public void open(){
