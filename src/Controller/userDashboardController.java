@@ -12,6 +12,8 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.Box;
 import javax.swing.JOptionPane;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import util.NavigationUtil;
 import util.SessionUtil;
 
@@ -23,10 +25,13 @@ public class userDashboardController {
     private final userDashboard dash;
     public javax.swing.JPanel eventsContainer;
     public final EventDao dao = new EventDao();
+    private String query = "";
+    private String filter = "All";
     
     public userDashboardController(userDashboard dash){
         this.dash = dash;
         this.dash.filterListener(new showFiltered());
+        this.dash.addLogoutListener(e -> SessionUtil.logout(dash));
         setCards();
         
         this.dash.addHomeListener(e -> {
@@ -44,6 +49,25 @@ public class userDashboardController {
             NavigationUtil.gotoMyBookings();
         });
         
+        dash.getSearchField().getDocument().addDocumentListener(new DocumentListener() {
+            public void insertUpdate(DocumentEvent e) {
+                search();
+            }
+
+            public void removeUpdate(DocumentEvent e) {
+                search();
+            }
+
+            public void changedUpdate(DocumentEvent e) {
+                search();
+            }
+
+            private void search() {
+                 query = dash.getSearchField().getText();
+                setCards();
+            }
+        });
+        
     }
     public void open(){
         this.dash.setVisible(true);
@@ -55,7 +79,7 @@ public class userDashboardController {
     
     public void setCards(){
         EventDao dao = new EventDao();
-        ArrayList<EventData> events = dao.getEventsByTicketType(dash.ticketType.getSelectedItem().toString());
+        ArrayList<EventData> events = dao.getEventsByTicketTypeAndSearch(filter,query);
         
         eventsContainer = dash.eventsList;
         eventsContainer.removeAll();
@@ -77,6 +101,7 @@ public class userDashboardController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            filter = dash.ticketType.getSelectedItem().toString();
             setCards();
         }
 

@@ -98,13 +98,14 @@ public class EventDao {
         return events;
     }
     
-    public ArrayList<EventData> getEventsByTicketType(String type) {
+    public ArrayList<EventData> getEventsByTicketTypeAndSearch(String type, String searchQuery) {
         ArrayList<EventData> events = new ArrayList<>();
-        String sql = "{CALL getEventsByTicketType(?)}";
+        String sql = "{CALL getEventsByTicketTypeAndSearch(?, ?)}";
 
         try (Connection conn = openConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, type);
+            stmt.setString(2, searchQuery.equals("search")? "":searchQuery);
 
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
@@ -139,6 +140,7 @@ public class EventDao {
 
         return events;
     }
+
 
 
     // Get event by ID

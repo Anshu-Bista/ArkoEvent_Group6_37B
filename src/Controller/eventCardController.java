@@ -7,11 +7,15 @@ package Controller;
 import Model.EventData;
 import View.*;
 import View.eventCard;
+import dao.BookingDao;
 import dao.EventDao;
+import dao.FeedbackDao;
 import java.awt.Frame;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.time.LocalDate;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
@@ -26,10 +30,21 @@ public class eventCardController {
     private final eventCard card;
     private final EventData event;
     private final String role;
+    private  boolean booked = false;
     
     public eventCardController(eventCard card,EventData event){
         this.card =  card;
         this.event = event;
+        this.card.bookDeleteListener(new bookDelete());
+        
+        role = SessionUtil.getCurrentUser().getRole();
+        setValues();
+    }
+    
+    public eventCardController(eventCard card,EventData event,boolean booked){
+        this.card =  card;
+        this.event = event;
+        this.booked = booked;
         this.card.bookDeleteListener(new bookDelete());
         
         role = SessionUtil.getCurrentUser().getRole();
@@ -67,11 +82,26 @@ public class eventCardController {
         card.time.setText(event.getStartTime().toString()+"-"+event.getEndTime());
         card.Description.setText(event.getDescription());
         card.price.setText("NPR "+Double.toString(event.getPrice()));
-        card.left.setText(Integer.toString(event.getTicketsAvailable()-event.getTicketsSold())+ " Left");
+        if(booked){
+            card.left.setText(Integer.toString(event.getTicketsAvailable())+" Booked");
+        }else{
+            card.left.setText(Integer.toString(event.getTicketsAvailable()-event.getTicketsSold())+ " Left");
+        }
+        
         if(role.equals("admin")){
             card.bookDelete.setText("Delete");
         }else{
-            card.bookDelete.setText("Book Now");
+            if (booked) {
+                if (LocalDate.now().isAfter(event.getEventDate())) {
+                    card.bookDelete.setText("Give Feedback");
+                } else {
+                    card.bookDelete.setText("Cancel");
+                }
+            }
+            else{
+                card.bookDelete.setText("Book Now");
+            }
+            
         }
     }
 
@@ -100,24 +130,85 @@ public class eventCardController {
                     }
                 }
             } else if (role.equals("user")) {
-                eventDetails eventPanel = new eventDetails();
+                if (booked) {
+                    if (card.bookDelete.getText().equals("Cancel")) {
 
-                JDialog dialog = new JDialog((Frame) null, "Event Details", true); 
-                dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+                        int choice = JOptionPane.showConfirmDialog(
+                                card,
+                                "Are you sure you want to cancel this booking?",
+                                "Cancel Booking",
+                                JOptionPane.YES_NO_OPTION,
+                                JOptionPane.WARNING_MESSAGE
+                        );
 
-                dialog.getContentPane().add(eventPanel);
+                        if (choice == JOptionPane.YES_OPTION) {
+                            try {
+                                BookingDao dao = new BookingDao();
+                                boolean success = dao.deleteBookingAndUpdateTickets(SessionUtil.getCurrentUser().getId(), event.getId());
 
-                EventDetailsController controller = new EventDetailsController(eventPanel, event,dialog);
+                                if (success) {
+                                    JOptionPane.showMessageDialog(null, "Booking Cancelled successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
+                                    close();
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "Failed to cancel booking.", "Error", JOptionPane.ERROR_MESSAGE);
+                                }
+                            } catch (SQLException ex) {
+                                System.getLogger(eventCardController.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                            }
+                        }
+
+                    } else if (card.bookDelete.getText().equals("Give Feedback")) {
+                        FeedbackCard feedbackCard = new FeedbackCard();
+
+                        int result = JOptionPane.showConfirmDialog(
+                                null,
+                                feedbackCard,
+                                "Submit Feedback",
+                                JOptionPane.OK_CANCEL_OPTION,
+                                JOptionPane.PLAIN_MESSAGE
+                        );
+
+                        if (result == JOptionPane.OK_OPTION) {
+                            try {
+                                int selectedRating = Integer.parseInt((String) feedbackCard.rating.getSelectedItem());
+                                String feedbackText = feedbackCard.feedBack.getText().trim();
+
+                                // Optional: ignore placeholder text
+                                if (feedbackText.equals("Your Feedback here")) {
+                                    feedbackText = null;
+                                }
+
+                                // Now update the booking table
+                                FeedbackDao dao = new FeedbackDao();
+                                dao.updateBookingFeedback(SessionUtil.getCurrentUser().getId(), event.getId(), selectedRating, feedbackText);
+
+                                JOptionPane.showMessageDialog(null, "Feedback submitted successfully.");
+                            } catch (Exception ex) {
+                                ex.printStackTrace();
+                                JOptionPane.showMessageDialog(null, "Failed to submit feedback.", "Error", JOptionPane.ERROR_MESSAGE);
+                            }
+                        }
+                    } else{
+                    eventDetails eventPanel = new eventDetails();
+
+                    JDialog dialog = new JDialog((Frame) null, "Event Details", true);
+                    dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+
+                    dialog.getContentPane().add(eventPanel);
+
+                    EventDetailsController controller = new EventDetailsController(eventPanel, event, dialog);
+
+                    dialog.pack();
+                    dialog.setLocationRelativeTo(card);
+                    dialog.setVisible(true);
+                }
                 
-                dialog.pack();
-                dialog.setLocationRelativeTo(card);  
-                dialog.setVisible(true);
             }
 
         }
 
     }
     
-    
+    }
     
 }

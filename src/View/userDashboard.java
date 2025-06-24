@@ -4,6 +4,7 @@
  */
 package View;
 
+import java.awt.Color;
 import java.awt.event.ActionListener;
 
 /**
@@ -43,6 +44,7 @@ public class userDashboard extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         eventsList = new javax.swing.JPanel();
         ticketType = new javax.swing.JComboBox<>();
+        search = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -113,7 +115,20 @@ public class userDashboard extends javax.swing.JFrame {
         bg.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 84, -1, 550));
 
         ticketType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "Paid", "Free" }));
-        bg.add(ticketType, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 50, 80, -1));
+        bg.add(ticketType, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 50, 80, -1));
+
+        search.setFont(new java.awt.Font("Lucida Grande", 0, 15)); // NOI18N
+        search.setForeground(java.awt.Color.gray);
+        search.setText("search");
+        search.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                searchFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                searchFocusLost(evt);
+            }
+        });
+        bg.add(search, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, 221, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -132,6 +147,20 @@ public class userDashboard extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void searchFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchFocusGained
+        if(search.getText().equals("search")){
+            search.setText("");
+            search.setForeground(Color.BLACK);
+        }
+    }//GEN-LAST:event_searchFocusGained
+
+    private void searchFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchFocusLost
+        if(search.getText().isEmpty()){
+            search.setText("search");
+            search.setForeground(Color.gray);
+        }
+    }//GEN-LAST:event_searchFocusLost
 
     /**
      * @param args the command line arguments
@@ -168,11 +197,16 @@ public class userDashboard extends javax.swing.JFrame {
     private javax.swing.JButton logout_btn;
     private javax.swing.JButton myBookings;
     private javax.swing.JButton profilebtn;
+    public javax.swing.JTextField search;
     private javax.swing.JPanel sidebar;
     public javax.swing.JComboBox<String> ticketType;
     // End of variables declaration//GEN-END:variables
     public void filterListener(ActionListener listener){
         ticketType.addActionListener(listener);
+    }
+    
+    public javax.swing.JTextField getSearchField() {
+        return  search;
     }
     
     public void addMyEventsListener(ActionListener listener) {

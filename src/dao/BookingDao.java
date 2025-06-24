@@ -8,7 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import Database.MySqlConnection;
-import Model.Booking;
+import Model.EventData;
 import java.util.ArrayList;
 import util.SessionUtil;
 
@@ -80,36 +80,114 @@ public class BookingDao {
 
         return success;
     }
-    
-    public ArrayList<Booking> getBookingsByUser(int userId) {
-        ArrayList<Booking> bookings = new ArrayList<>();
-        String sql = "SELECT b.id AS booking_id, b.user_id, b.event_id, b.ticket_count, e.title, u.username "
-                + "FROM bookings b "
-                + "JOIN events e ON b.event_id = e.id "
-                + "JOIN users u ON b.user_id = u.id "
-                + "WHERE b.user_id = ?";
 
-        try (Connection conn = mysql.openConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+    public ArrayList<EventData> getUserBookings() throws SQLException {
+        ArrayList<EventData> bookings = new ArrayList<>();
+        int userId = SessionUtil.getCurrentUser().getId();
+        Connection conn = mysql.openConnection();
 
+        String sql = """
+            SELECT 
+                e.id,
+                e.user_id,
+                e.title,
+                e.location,
+                e.description,
+                e.category,
+                e.type,
+                e.ticket_type,
+                e.event_status,
+                e.event_date,
+                e.start_time,
+                e.end_time,
+                e.rsvp_deadline,
+                e.price,
+                b.ticket_count AS tickets_available,
+                e.tickets_sold,
+                e.banner
+            FROM bookings b
+            JOIN events e ON b.event_id = e.id
+            WHERE b.user_id = ?
+        """;
+
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, userId);
-            ResultSet rs = stmt.executeQuery();
 
-            while (rs.next()) {
-                int bookingId = rs.getInt("booking_id");
-                int eventId = rs.getInt("event_id");
-                int ticketCount = rs.getInt("ticket_count");
-                String eventTitle = rs.getString("title");
-                String username = rs.getString("username");
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    EventData event = new EventData(
+                            rs.getInt("id"),
+                            rs.getString("title"),
+                            rs.getString("location"),
+                            rs.getString("description"),
+                            rs.getString("category"),
+                            rs.getString("type"),
+                            rs.getString("ticket_type"),
+                            rs.getString("event_status"),
+                            rs.getDate("event_date").toLocalDate(),
+                            rs.getTime("start_time").toLocalTime(),
+                            rs.getTime("end_time").toLocalTime(),
+                            rs.getDate("rsvp_deadline") != null ? rs.getDate("rsvp_deadline").toLocalDate() : null,
+                            rs.getDouble("price"),
+                            rs.getInt("tickets_available"), // ticket_count from bookings
+                            rs.getInt("tickets_sold"),
+                            rs.getString("banner")
+                    );
+                    event.setUserId(rs.getInt("user_id"));
 
-                bookings.add(new Booking(bookingId, userId, eventId, ticketCount, eventTitle, username));
+                    bookings.add(event);
+                }
             }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(BookingDao.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return bookings;
     }
 
+    public boolean deleteBookingAndUpdateTickets(int userId, int eventId) throws SQLException {
+        String selectSql = "SELECT ticket_count FROM bookings WHERE user_id = ? AND event_id = ?";
+        String deleteSql = "DELETE FROM bookings WHERE user_id = ? AND event_id = ?";
+        String updateSql = "UPDATE events SET tickets_sold = tickets_sold - ? WHERE id = ?";
+        Connection conn = mysql.openConnection();
+
+        try (PreparedStatement selectStmt = conn.prepareStatement(selectSql); PreparedStatement deleteStmt = conn.prepareStatement(deleteSql); PreparedStatement updateStmt = conn.prepareStatement(updateSql)) {
+            conn.setAutoCommit(false); // start transaction
+
+            // Step 1: Get ticket_count
+            selectStmt.setInt(1, userId);
+            selectStmt.setInt(2, eventId);
+
+            int ticketCount = 0;
+            try (ResultSet rs = selectStmt.executeQuery()) {
+                if (rs.next()) {
+                    ticketCount = rs.getInt("ticket_count");
+                } else {
+                    conn.rollback();
+                    return false; // No booking found
+                }
+            }
+
+            // Step 2: Delete booking
+            deleteStmt.setInt(1, userId);
+            deleteStmt.setInt(2, eventId);
+            int deleted = deleteStmt.executeUpdate();
+            if (deleted == 0) {
+                conn.rollback();
+                return false; // Deletion failed
+            }
+
+            // Step 3: Update events.tickets_sold
+            updateStmt.setInt(1, ticketCount);
+            updateStmt.setInt(2, eventId);
+            updateStmt.executeUpdate();
+
+            conn.commit(); // commit transaction
+            return true;
+        } catch (SQLException ex) {
+            conn.rollback(); // rollback on error
+            throw ex;
+        } finally {
+            conn.setAutoCommit(true); // restore default
+        }
+    }
 
 }

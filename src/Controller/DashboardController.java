@@ -81,19 +81,7 @@ public class DashboardController {
     }
 
     private void loadFeedbackCards() {
-        List<FeedbackData> feedbackList = feedbackDao.getAllFeedbacks();
-        JPanel feedbackPanel = dashboardView.getFeedbackPanel();
-
-        feedbackPanel.removeAll(); // Clear existing cards
-
-        for (FeedbackData feedback : feedbackList) {
-            FeedbackCard card = new FeedbackCard();
-            card.setFeedback(feedback);
-            feedbackPanel.add(card);
-        }
-
-        feedbackPanel.revalidate();
-        feedbackPanel.repaint();
+        
     }
 
     public void open() {

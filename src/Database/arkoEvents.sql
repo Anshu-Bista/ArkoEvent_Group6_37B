@@ -12,7 +12,7 @@ CREATE TABLE users (
     registration_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     role VARCHAR(10) NOT NULL DEFAULT 'user' CHECK (role IN ('user', 'admin'))
 );
-
+SELECT * FROM users;
 CREATE TABLE events (
     id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT NOT NULL,
@@ -40,10 +40,14 @@ CREATE TABLE bookings (
     user_id INT NOT NULL,
     ticket_count INT NOT NULL CHECK (ticket_count > 0),
     booking_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    rating INT CHECK (rating BETWEEN 1 AND 5),
+	feedback TEXT,
     FOREIGN KEY (event_id) REFERENCES events(id) ON DELETE CASCADE,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     UNIQUE(event_id, user_id) 
 );
+
+
 
 SELECT * FROM bookings;
 
@@ -51,17 +55,20 @@ SELECT * FROM bookings;
 
 DELIMITER //
 
-CREATE PROCEDURE getEventsByTicketType(IN event_type VARCHAR(10))
+CREATE PROCEDURE getEventsByTicketTypeAndSearch(
+    IN event_type VARCHAR(10),
+    IN search_query VARCHAR(255)
+)
 BEGIN
     IF event_type = 'All' THEN
-        SELECT * FROM events;
+        SELECT * FROM events
+        WHERE title LIKE CONCAT('%', search_query, '%');
     ELSE
-        SELECT * FROM events WHERE ticket_type = event_type;
+        SELECT * FROM events
+        WHERE ticket_type = event_type
+          AND title LIKE CONCAT('%', search_query, '%');
     END IF;
 END //
 
 DELIMITER ;
-
-
-
 

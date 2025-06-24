@@ -4,11 +4,14 @@
  */
 package Controller;
 
-import Model.Booking;
+import Model.EventData;
+import View.eventCard;
 import View.myBookingCard;
 import View.myBookings;
 import dao.BookingDao;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.swing.Box;
 import util.NavigationUtil;
 import util.SessionUtil;
 
@@ -23,7 +26,12 @@ public class myBookingsController {
     
     public myBookingsController(myBookings myBooking){
         this.myBooking = myBooking;
-        getSetBookings();
+        this.myBooking.addLogoutListener(e -> SessionUtil.logout(myBooking));
+        try {
+            getSetBookings();
+        } catch (SQLException ex) {
+            System.getLogger(myBookingsController.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
         
         this.myBooking.addHomeListener(e -> {
             myBooking.dispose();
@@ -46,17 +54,16 @@ public class myBookingsController {
         this.myBooking.setVisible(false);
     }
     
-    public void getSetBookings(){
-        ArrayList<Booking> bookings =dao.getBookingsByUser(SessionUtil.getCurrentUser().getId());
+    public void getSetBookings() throws SQLException{
+        ArrayList<EventData> bookedEvents =dao.getUserBookings();
         
         myBooking.eventsList.removeAll(); // Clear previous cards
-         int i = 1;
-        for (Booking booking : bookings) {
-            System.out.println(booking.getEventTitle());
-            myBookingCard card = new myBookingCard(Integer.toString(i)+". "+booking.getEventTitle(), booking.getTicketCount());
-            card.setVisible(true);
-            myBooking.eventsList.add(card);
-            i++;
+        
+        for (EventData event : bookedEvents) {
+            eventCard eventPanel = new eventCard();
+            new eventCardController(eventPanel, event,true);
+             myBooking.eventsList.add(eventPanel);
+             myBooking.eventsList.add(Box.createVerticalStrut(10));
         }
 
         myBooking.eventsList.revalidate();

@@ -21,8 +21,8 @@ public class UserDao {
 
     // Sign Up
     public boolean signUp(UserData user) {
-        String sql = "INSERT INTO users(username, email, password, phone, account_status, registration_date) "
-                + "VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO users(username, email, password, phone, account_status) "
+                + "VALUES (?, ?, ?, ?, ?)";
         try (Connection conn = openConnection();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, user.getUsername());
@@ -30,7 +30,6 @@ public class UserDao {
             pstmt.setString(3, user.getPassword());
             pstmt.setString(4, user.getPhone());
             pstmt.setString(5, "active");
-            pstmt.setTimestamp(6, user.getRegistrationDate());
             int rows = pstmt.executeUpdate();
             return rows > 0;
         } catch (SQLException ex) {
