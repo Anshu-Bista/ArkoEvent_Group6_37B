@@ -37,7 +37,6 @@ public class AdminProfile extends javax.swing.JFrame {
 
         bg = new javax.swing.JPanel();
         sidebar = new javax.swing.JPanel();
-        feedback_btn = new javax.swing.JButton();
         homebtn = new javax.swing.JButton();
         bookingsbtn = new javax.swing.JButton();
         profilebtn = new javax.swing.JButton();
@@ -61,7 +60,7 @@ public class AdminProfile extends javax.swing.JFrame {
         regdate_fld = new javax.swing.JTextField();
         cam_lbl = new javax.swing.JLabel();
         deactivate_btn = new javax.swing.JButton();
-        viewact_btn = new javax.swing.JButton();
+        cpw = new javax.swing.JButton();
         accstatus_box = new javax.swing.JComboBox<>();
         update_btn = new javax.swing.JButton();
 
@@ -72,15 +71,6 @@ public class AdminProfile extends javax.swing.JFrame {
 
         sidebar.setBackground(new java.awt.Color(208, 202, 232));
         sidebar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        feedback_btn.setBackground(new java.awt.Color(208, 202, 232));
-        feedback_btn.setText("Feedback");
-        feedback_btn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                feedback_btnActionPerformed(evt);
-            }
-        });
-        sidebar.add(feedback_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, 220, 50));
 
         homebtn.setBackground(new java.awt.Color(208, 202, 232));
         homebtn.setText("Home");
@@ -215,13 +205,9 @@ public class AdminProfile extends javax.swing.JFrame {
         });
         bg.add(deactivate_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 490, -1, -1));
 
-        viewact_btn.setText("View Activity");
-        viewact_btn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                viewact_btnActionPerformed(evt);
-            }
-        });
-        bg.add(viewact_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 490, -1, -1));
+        cpw.setText("Change Password");
+        
+        bg.add(cpw, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 490, -1, -1));
 
         accstatus_box.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Active", "Deactivated", "Banned" }));
         bg.add(accstatus_box, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 400, -1, -1));
@@ -347,10 +333,10 @@ public class AdminProfile extends javax.swing.JFrame {
     private javax.swing.JPanel bg;
     private javax.swing.JButton bookingsbtn;
     private javax.swing.JLabel cam_lbl;
+    private javax.swing.JButton cpw;
     private javax.swing.JButton deactivate_btn;
     private javax.swing.JTextField email_fld;
     private javax.swing.JLabel email_lbl;
-    private javax.swing.JButton feedback_btn;
     private javax.swing.JButton homebtn;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
@@ -370,7 +356,6 @@ public class AdminProfile extends javax.swing.JFrame {
     private javax.swing.JPanel taskbar;
     public javax.swing.JButton update_btn;
     private javax.swing.JButton upload_btn;
-    private javax.swing.JButton viewact_btn;
     // End of variables declaration//GEN-END:variables
 
     public void setFieldsEditable(boolean editable) {
@@ -429,6 +414,10 @@ public class AdminProfile extends javax.swing.JFrame {
     
     public void uploadPicListener(ActionListener listener){
         upload_btn.addActionListener(listener);
+    }
+    
+    public void cpwListener(ActionListener listener){
+        cpw.addActionListener(listener);
     }
     
     

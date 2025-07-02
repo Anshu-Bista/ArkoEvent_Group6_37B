@@ -33,7 +33,6 @@ public class myEvents extends javax.swing.JFrame {
     private void initComponents() {
 
         sidebar = new javax.swing.JPanel();
-        feedback_btn = new javax.swing.JButton();
         homebtn = new javax.swing.JButton();
         bookingsbtn = new javax.swing.JButton();
         profilebtn = new javax.swing.JButton();
@@ -50,15 +49,6 @@ public class myEvents extends javax.swing.JFrame {
 
         sidebar.setBackground(new java.awt.Color(208, 202, 232));
         sidebar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        feedback_btn.setBackground(new java.awt.Color(208, 202, 232));
-        feedback_btn.setText("Feedback");
-        feedback_btn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                feedback_btnActionPerformed(evt);
-            }
-        });
-        sidebar.add(feedback_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, 220, 50));
 
         homebtn.setBackground(new java.awt.Color(208, 202, 232));
         homebtn.setText("Home");
@@ -176,10 +166,6 @@ public class myEvents extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void feedback_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_feedback_btnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_feedback_btnActionPerformed
-
     private void homebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homebtnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_homebtnActionPerformed
@@ -224,7 +210,6 @@ public class myEvents extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bookingsbtn;
     public javax.swing.JPanel eventsList;
-    private javax.swing.JButton feedback_btn;
     private javax.swing.JButton homebtn;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;

@@ -40,7 +40,6 @@ public class CreateEvent extends javax.swing.JFrame {
 
         bg = new javax.swing.JPanel();
         sidebar = new javax.swing.JPanel();
-        feedback_btn = new javax.swing.JButton();
         homebtn = new javax.swing.JButton();
         bookingsbtn = new javax.swing.JButton();
         myeventsbtn = new javax.swing.JButton();
@@ -88,15 +87,6 @@ public class CreateEvent extends javax.swing.JFrame {
 
         sidebar.setBackground(new java.awt.Color(208, 202, 232));
         sidebar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        feedback_btn.setBackground(new java.awt.Color(208, 202, 232));
-        feedback_btn.setText("Feedback");
-        feedback_btn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                feedback_btnActionPerformed(evt);
-            }
-        });
-        sidebar.add(feedback_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, 220, 50));
 
         homebtn.setBackground(new java.awt.Color(208, 202, 232));
         homebtn.setText("Home");
@@ -403,7 +393,6 @@ public class CreateEvent extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> eventcategory_box;
     private javax.swing.JLabel eventtype;
     private javax.swing.JComboBox<String> eventtype_box;
-    private javax.swing.JButton feedback_btn;
     private javax.swing.JButton homebtn;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;

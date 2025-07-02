@@ -66,7 +66,7 @@ public class BookingsController {
     
     public void setCards(){
         EventDao dao = new EventDao();
-        System.out.println("adfa");
+        
         ArrayList<EventData> bookedEvents = dao.getBookedEventsByUserId(SessionUtil.getCurrentUser().getId());
         
         bookingsPage.eventsList.removeAll(); // Clear previous cards

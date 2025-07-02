@@ -13,6 +13,7 @@ import Database.MySqlConnection;
 import Model.UserData;
 
 public class UserDao {
+
     private final MySqlConnection mysql = new MySqlConnection();
 
     private Connection openConnection() {
@@ -23,8 +24,7 @@ public class UserDao {
     public boolean signUp(UserData user) {
         String sql = "INSERT INTO users(username, email, password, phone, account_status) "
                 + "VALUES (?, ?, ?, ?, ?)";
-        try (Connection conn = openConnection();
-                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try (Connection conn = openConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, user.getUsername());
             pstmt.setString(2, user.getEmail());
             pstmt.setString(3, user.getPassword());
@@ -38,13 +38,11 @@ public class UserDao {
             return false;
         }
     }
-    
 
     // Checks if the user is present
     public boolean checkUser(UserData user) {
         String sql = "SELECT * FROM users WHERE email = ? OR username = ?";
-        try (Connection conn = openConnection();
-                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try (Connection conn = openConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, user.getEmail());
             pstmt.setString(2, user.getUsername());
             try (ResultSet result = pstmt.executeQuery()) {
@@ -60,8 +58,7 @@ public class UserDao {
     public UserData login(String email, String password) {
         String sql = "SELECT * FROM users WHERE username = ? AND password = ?";
         System.out.println("Login attempt with username: '" + email + "', password: '" + password + "'");
-        try (Connection conn = openConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = openConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, email.trim());
             stmt.setString(2, password.trim());
             ResultSet rs = stmt.executeQuery();
@@ -84,14 +81,11 @@ public class UserDao {
             return null;
         }
     }
-    
-    
 
     // Forgot Password - check if email exists
     public boolean checkEmail(UserData user) {
         String sql = "SELECT id FROM users WHERE email = ?";
-        try (Connection conn = openConnection();
-                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try (Connection conn = openConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, user.getEmail());
             try (ResultSet result = pstmt.executeQuery()) {
                 return result.next();
@@ -103,13 +97,10 @@ public class UserDao {
     }
 
     // Update password and clear reset code and timestamp
-    public boolean updatePassword(String email, String newPassword, String confirmPassword) {
-        if (!newPassword.equals(confirmPassword)) {
-            return false;
-        }
+    public boolean updatePassword(String email, String newPassword) {
+        
         String sql = "UPDATE users SET password = ? WHERE email = ?";
-        try (Connection conn = openConnection();
-                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try (Connection conn = openConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, newPassword);
             pstmt.setString(2, email);
             int rowsUpdated = pstmt.executeUpdate();
@@ -123,8 +114,7 @@ public class UserDao {
     // Get user profile by ID
     public UserData getProfileById(int id) {
         String sql = "SELECT username, email, phone, account_status, profile_image, registration_date, role FROM users WHERE id = ?";
-        try (Connection conn = openConnection();
-                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try (Connection conn = openConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, id);
             try (ResultSet result = pstmt.executeQuery()) {
                 if (result.next()) {
@@ -148,8 +138,7 @@ public class UserDao {
     // Update user profile by ID
     public boolean updateProfileById(UserData user) {
         String sql = "UPDATE users SET username = ?, phone = ?, profile_image = ? WHERE id = ?";
-        try (Connection conn = openConnection();
-                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try (Connection conn = openConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, user.getUsername());
             pstmt.setString(2, user.getPhone());
             pstmt.setString(3, user.getImagePath()); // Assuming this is a String path
@@ -163,55 +152,42 @@ public class UserDao {
         return false;
     }
 
-    // Get all users
-    public List<UserData> getAllUsers() {
-        List<UserData> users = new ArrayList<>();
-        String sql = "SELECT * FROM users";
-        try (Connection conn = openConnection();
-                PreparedStatement pstmt = conn.prepareStatement(sql);
-                ResultSet rs = pstmt.executeQuery()) {
-            while (rs.next()) {
-                UserData user = new UserData();
-                user.setId(rs.getInt("id"));
-                user.setUsername(rs.getString("username"));
-                user.setImagePath(rs.getString("profile_image"));
-                user.setStatus(rs.getString("account_status"));
-                users.add(user);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return users;
-    }
 
-    // Get users filtered by status
-    public List<UserData> getUsersByStatus(String status) {
-        List<UserData> users = new ArrayList<>();
-        String sql = "SELECT * FROM users WHERE account_status = ?";
-        try (Connection conn = openConnection();
-                PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, status);
+
+    // Get all user only
+    public ArrayList<UserData> getUsersOnly() {
+        ArrayList<UserData> users = new ArrayList<>();
+        String sql = "SELECT * FROM users WHERE role = ?";
+
+        try (Connection conn = openConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, "user"); 
+
             try (ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {
                     UserData user = new UserData();
                     user.setId(rs.getInt("id"));
                     user.setUsername(rs.getString("username"));
-                    user.setImagePath(rs.getString("profile_image"));
+                    user.setEmail(rs.getString("email"));
+                    user.setPhone(rs.getString("phone"));
                     user.setStatus(rs.getString("account_status"));
+                    user.setImagePath(rs.getString("profile_image"));
                     users.add(user);
                 }
             }
+
         } catch (SQLException ex) {
             Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
         }
+
         return users;
     }
+
 
     // Ban/Unban Users
     public boolean updateUserStatus(int userId, String newStatus) {
         String sql = "UPDATE users SET account_status = ? WHERE id = ?";
-        try (Connection conn = openConnection();
-                PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = openConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, newStatus);
             stmt.setInt(2, userId);
             return stmt.executeUpdate() > 0;
@@ -224,9 +200,7 @@ public class UserDao {
     // Total Users for Admin Dashboard
     public int getUserCount() {
         String query = "SELECT COUNT(*) FROM users";
-        try (Connection conn = openConnection();
-                PreparedStatement stmt = conn.prepareStatement(query);
-                ResultSet rs = stmt.executeQuery()) {
+        try (Connection conn = openConnection(); PreparedStatement stmt = conn.prepareStatement(query); ResultSet rs = stmt.executeQuery()) {
             if (rs.next()) {
                 return rs.getInt(1);
             }

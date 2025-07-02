@@ -10,12 +10,12 @@ import java.awt.Color;
  *
  * @author hp
  */
-public class FeedbackCard extends javax.swing.JPanel {
+public class FeedbackForm extends javax.swing.JPanel {
 
     /**
      * Creates new form FeedbackCard
      */
-    public FeedbackCard() {
+    public FeedbackForm() {
         initComponents();
     }
 

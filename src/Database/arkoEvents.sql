@@ -52,7 +52,7 @@ CREATE TABLE bookings (
 
 
 
-
+-- procedure to get events by filtering
 DELIMITER //
 
 CREATE PROCEDURE getEventsByTicketTypeAndSearch(
@@ -71,4 +71,27 @@ BEGIN
 END //
 
 DELIMITER ;
+
+
+-- pocedure to get feedbacks
+DELIMITER //
+
+CREATE PROCEDURE getEventFeedbacks(IN input_event_id INT)
+BEGIN
+    SELECT 
+        b.user_id,
+        b.event_id,
+        u.username,
+        e.title AS event_name,
+        b.rating,
+        b.feedback
+    FROM bookings b
+    JOIN users u ON b.user_id = u.id
+    JOIN events e ON b.event_id = e.id
+    WHERE b.event_id = input_event_id
+      AND b.feedback IS NOT NULL;
+END //
+
+DELIMITER ;
+
 

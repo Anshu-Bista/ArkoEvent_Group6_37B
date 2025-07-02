@@ -183,7 +183,7 @@ public class eventCardController {
                         }
 
                     } else if (card.bookDelete.getText().equals("Give Feedback")) {
-                        FeedbackCard feedbackCard = new FeedbackCard();
+                        FeedbackForm feedbackCard = new FeedbackForm();
                             feedbackCard.Title.setText(event.getTitle());
 
                         int result = JOptionPane.showConfirmDialog(
@@ -217,6 +217,9 @@ public class eventCardController {
                     }
                 
             } else {
+                    if(SessionUtil.getCurrentUser().getStatus().equals("banned")){
+                        JOptionPane.showMessageDialog(card, "You have been blocked and Cannot Book !");
+                    }else{
                         eventDetails eventPanel = new eventDetails();
 
                         JDialog dialog = new JDialog((Frame) null, "Event Details", true);
@@ -230,7 +233,7 @@ public class eventCardController {
                         dialog.setLocationRelativeTo(card);
                         dialog.setVisible(true);
                     }
-
+                }
         }
 
     }

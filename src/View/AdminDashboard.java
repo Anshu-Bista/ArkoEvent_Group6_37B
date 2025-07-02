@@ -19,8 +19,8 @@ public class AdminDashboard extends javax.swing.JFrame {
      */
     public AdminDashboard() {
         initComponents();
-        
-        FeedbackPanel.setLayout(new BoxLayout(FeedbackPanel, BoxLayout.Y_AXIS));
+        eventSelector.setVisible(false);
+        listPanel.setLayout(new BoxLayout(listPanel, BoxLayout.Y_AXIS));
 
     }
 
@@ -36,7 +36,6 @@ public class AdminDashboard extends javax.swing.JFrame {
     private void initComponents() {
 
         sidebar = new javax.swing.JPanel();
-        feedback_btn = new javax.swing.JButton();
         homebtn = new javax.swing.JButton();
         bookingsbtn = new javax.swing.JButton();
         profilebtn = new javax.swing.JButton();
@@ -47,24 +46,16 @@ public class AdminDashboard extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         FeedbackScroll = new javax.swing.JScrollPane();
-        FeedbackPanel = new javax.swing.JPanel();
-        event_btn = new javax.swing.JButton();
+        listPanel = new javax.swing.JPanel();
+        fb_btn = new javax.swing.JButton();
         user_btn = new javax.swing.JButton();
+        eventSelector = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         sidebar.setBackground(new java.awt.Color(208, 202, 232));
         sidebar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        feedback_btn.setBackground(new java.awt.Color(208, 202, 232));
-        feedback_btn.setText("Feedback");
-        feedback_btn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                feedback_btnActionPerformed(evt);
-            }
-        });
-        sidebar.add(feedback_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, 220, 50));
 
         homebtn.setBackground(new java.awt.Color(153, 153, 255));
         homebtn.setText("Home");
@@ -145,16 +136,19 @@ public class AdminDashboard extends javax.swing.JFrame {
         FeedbackScroll.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         FeedbackScroll.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
-        FeedbackPanel.setLayout(new javax.swing.BoxLayout(FeedbackPanel, javax.swing.BoxLayout.LINE_AXIS));
-        FeedbackScroll.setViewportView(FeedbackPanel);
+        listPanel.setLayout(new javax.swing.BoxLayout(listPanel, javax.swing.BoxLayout.LINE_AXIS));
+        FeedbackScroll.setViewportView(listPanel);
 
-        getContentPane().add(FeedbackScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 120, 330, 490));
+        getContentPane().add(FeedbackScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 110, 520, 500));
 
-        event_btn.setText("jButton1");
-        getContentPane().add(event_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 290, 100, 40));
+        fb_btn.setText("FeedBacks");
+        getContentPane().add(fb_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 290, 130, 40));
 
-        user_btn.setText("jButton1");
-        getContentPane().add(user_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 240, 100, 40));
+        user_btn.setText("Users : 10");
+        getContentPane().add(user_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 240, 130, 40));
+
+        eventSelector.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2" }));
+        getContentPane().add(eventSelector, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 73, 520, 30));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -227,30 +221,27 @@ public class AdminDashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel FeedbackPanel;
     private javax.swing.JScrollPane FeedbackScroll;
     private javax.swing.JButton bookingsbtn;
-    private javax.swing.JButton event_btn;
-    private javax.swing.JButton feedback_btn;
+    public javax.swing.JComboBox<String> eventSelector;
+    public javax.swing.JButton fb_btn;
     private javax.swing.JButton homebtn;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    public javax.swing.JPanel listPanel;
     private javax.swing.JButton logout_btn;
     private javax.swing.JButton myeventsbtn;
     private javax.swing.JButton plus_btn;
     private javax.swing.JButton profilebtn;
     private javax.swing.JPanel sidebar;
     private javax.swing.JPanel taskbar;
-    private javax.swing.JButton user_btn;
+    public javax.swing.JButton user_btn;
     // End of variables declaration//GEN-END:variables
 
-    public void updateDashboardCounts(int userCount, int eventCount) {
-        user_btn.setText("Users: " + userCount);
-        event_btn.setText("Events: " + eventCount);
-    }
+  
 
     public JPanel getFeedbackPanel() {
-        return FeedbackPanel;
+        return listPanel;
     }
 
     //btns
@@ -258,12 +249,16 @@ public class AdminDashboard extends javax.swing.JFrame {
         user_btn.addActionListener(listener);
     }
     
-    public void addEventListener(ActionListener listener) {
-        event_btn.addActionListener(listener);
+    public void addFeedBackListener(ActionListener listener) {
+        fb_btn.addActionListener(listener);
+    }
+    
+    public void eventSelectorListener(ActionListener listener){
+        eventSelector.addActionListener(listener);
     }
 
         
-        
+    //basic btns in left side
     public void addLogoutListener(ActionListener listener) {
         logout_btn.addActionListener(listener);
     }

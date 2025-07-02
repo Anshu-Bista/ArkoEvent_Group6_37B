@@ -11,11 +11,12 @@ import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import Model.UserData;
+import javax.swing.JPasswordField;
 import util.NavigationUtil;
 import util.SessionUtil;
 
-
 public class AdminProfileController {
+
     private final AdminProfile profileView;
     private final UserDao userDao;
     private final int userId;
@@ -26,7 +27,6 @@ public class AdminProfileController {
 
         this.userDao = new UserDao();   // Directly initialize from session
         currentUser = SessionUtil.getCurrentUser();
-        
 
         if (currentUser == null) {
             throw new IllegalStateException("No user is currently logged in.");
@@ -38,7 +38,8 @@ public class AdminProfileController {
         this.profileView.addDeactivateListener(new DeactivateAccountListener());
         this.profileView.uploadPicListener(new updatePic());
         this.profileView.addLogoutListener(e -> SessionUtil.logout(profileView));
-      
+        this.profileView.cpwListener(new changePw());
+
         this.profileView.addProfileListener(e -> {
             profileView.dispose();
             NavigationUtil.goToProfile();
@@ -58,7 +59,7 @@ public class AdminProfileController {
             profileView.dispose();
             NavigationUtil.goToMyEvents();
         });
-        
+
         this.profileView.addBookingListener(e -> {
             profileView.dispose();
             NavigationUtil.goToMyEvents();
@@ -113,6 +114,40 @@ public class AdminProfileController {
         }
     }
 
+    private class changePw implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            JPasswordField passwordField = new JPasswordField();
+            JPasswordField confirmPasswordField = new JPasswordField();
+
+            Object[] message = {
+                "Enter Password:", passwordField,
+                "Confirm Password:", confirmPasswordField
+            };
+
+            int option = JOptionPane.showConfirmDialog(
+                    profileView,
+                    message,
+                    "Change Password",
+                    JOptionPane.OK_CANCEL_OPTION,
+                    JOptionPane.PLAIN_MESSAGE
+            );
+
+            if (option == JOptionPane.OK_OPTION) {
+                String password = new String(passwordField.getPassword());
+                String confirmPassword = new String(confirmPasswordField.getPassword());
+
+                if (password.equals(confirmPassword)) {
+                    userDao.updatePassword(SessionUtil.getCurrentUser().getEmail(), password);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Passwords do not match!", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+
+    }
+
     private class updatePic implements ActionListener {
 
         @Override
@@ -133,19 +168,19 @@ public class AdminProfileController {
                 // Set image path to user object
                 currentUser.setImagePath(imagePath);
                 boolean success = userDao.updateProfileById(currentUser);
-                if(success){
+                if (success) {
                     loadProfile();
-                } else{
+                } else {
                     JOptionPane.showMessageDialog(profileView, "Couldnot update pofile picture");
                 }
 
             }
         }
 
-       
     }
 
     private class UpdateProfileListener implements ActionListener {
+
         @Override
         public void actionPerformed(ActionEvent e) {
             if (!profileView.isEditable()) {
@@ -164,6 +199,7 @@ public class AdminProfileController {
     }
 
     private class DeactivateAccountListener implements ActionListener {
+
         @Override
         public void actionPerformed(ActionEvent e) {
             int confirm = JOptionPane.showConfirmDialog(profileView,

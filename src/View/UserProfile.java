@@ -54,9 +54,9 @@ public class UserProfile extends javax.swing.JFrame {
         regdate_fld = new javax.swing.JTextField();
         cam_lbl = new javax.swing.JLabel();
         deactivate_btn = new javax.swing.JButton();
-        viewact_btn = new javax.swing.JButton();
-        accstatus_box = new javax.swing.JComboBox<>();
+        cpw = new javax.swing.JButton();
         update_btn = new javax.swing.JButton();
+        accstatus_box = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -143,6 +143,7 @@ public class UserProfile extends javax.swing.JFrame {
         accstatus_lbl.setText("Account Status");
         bg.add(accstatus_lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 400, -1, -1));
 
+        name_fld.setEditable(false);
         name_fld.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 name_fldActionPerformed(evt);
@@ -150,13 +151,18 @@ public class UserProfile extends javax.swing.JFrame {
         });
         bg.add(name_fld, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 270, 220, -1));
 
+        email_fld.setEditable(false);
         email_fld.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 email_fldActionPerformed(evt);
             }
         });
         bg.add(email_fld, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 300, 220, -1));
+
+        phone_fld.setEditable(false);
         bg.add(phone_fld, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 330, 220, -1));
+
+        regdate_fld.setEditable(false);
         bg.add(regdate_fld, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 360, 220, -1));
 
         cam_lbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -171,19 +177,19 @@ public class UserProfile extends javax.swing.JFrame {
         });
         bg.add(deactivate_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 490, -1, -1));
 
-        viewact_btn.setText("View Activity");
-        viewact_btn.addActionListener(new java.awt.event.ActionListener() {
+        cpw.setText("Change Password");
+        cpw.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                viewact_btnActionPerformed(evt);
+                cpwActionPerformed(evt);
             }
         });
-        bg.add(viewact_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 490, -1, -1));
-
-        accstatus_box.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Active", "Deactivated", "Banned" }));
-        bg.add(accstatus_box, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 400, -1, -1));
+        bg.add(cpw, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 490, -1, -1));
 
         update_btn.setText("Update");
         bg.add(update_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 490, -1, -1));
+
+        accstatus_box.setText("status");
+        bg.add(accstatus_box, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 400, 150, 20));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -215,9 +221,9 @@ public class UserProfile extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_deactivate_btnActionPerformed
 
-    private void viewact_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewact_btnActionPerformed
+    private void cpwActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cpwActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_viewact_btnActionPerformed
+    }//GEN-LAST:event_cpwActionPerformed
 
     private void email_fldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_email_fldActionPerformed
         // TODO add your handling code here:
@@ -260,10 +266,11 @@ public class UserProfile extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> accstatus_box;
+    private javax.swing.JLabel accstatus_box;
     private javax.swing.JLabel accstatus_lbl;
     private javax.swing.JPanel bg;
     private javax.swing.JLabel cam_lbl;
+    private javax.swing.JButton cpw;
     private javax.swing.JButton deactivate_btn;
     private javax.swing.JTextField email_fld;
     private javax.swing.JLabel email_lbl;
@@ -285,7 +292,6 @@ public class UserProfile extends javax.swing.JFrame {
     private javax.swing.JPanel sidebar;
     private javax.swing.JButton update_btn;
     private javax.swing.JButton upload_btn;
-    private javax.swing.JButton viewact_btn;
     // End of variables declaration//GEN-END:variables
     
     public void setFieldsEditable(boolean editable) {
@@ -304,7 +310,7 @@ public class UserProfile extends javax.swing.JFrame {
         UserData user = new UserData();
         user.setUsername(name_fld.getText());
         user.setPhone(phone_fld.getText());
-        user.setStatus((String) accstatus_box.getSelectedItem());
+        user.setStatus(accstatus_box.getText());
         return user;
     }
 
@@ -326,16 +332,24 @@ public class UserProfile extends javax.swing.JFrame {
         }
         name_fld.setText(user.getUsername());
         phone_fld.setText(user.getPhone());
-        accstatus_box.setSelectedItem(user.getStatus());
+        accstatus_box.setText(user.getStatus());
         email_fld.setText(user.getEmail()); // Read-only
         regdate_fld.setText(user.getRegistrationDate().toString()); // Read-only
     }
 
+    
     //btns
     
     public void addDpListener(ActionListener listener){
         upload_btn.addActionListener(listener);
     }
+    
+    public void cpwListener(ActionListener listener){
+        cpw.addActionListener(listener);
+    }
+    
+        
+        
     
     public void addLogoutListener(ActionListener listener) {
         logout_btn.addActionListener(listener);

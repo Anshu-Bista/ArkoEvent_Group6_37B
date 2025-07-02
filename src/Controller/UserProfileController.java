@@ -12,6 +12,7 @@ import util.SessionUtil;
 import View.*;
 import java.io.File;
 import javax.swing.JFileChooser;
+import javax.swing.JPasswordField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 
@@ -38,6 +39,7 @@ public class UserProfileController {
         this.profView.addDeactivateListener(new DeactivateAccountListener());
         this.profView.addLogoutListener(e -> SessionUtil.logout(profileView));
         this.profView.addDpListener(new addDP());
+        this.profView.cpwListener(new changePw());
 
         this.profView.addHomeListener(e -> {
             profView.dispose();
@@ -100,6 +102,40 @@ public class UserProfileController {
             JOptionPane.showMessageDialog(profView, "Error updating profile: " + ex.getMessage(), "Error",
                     JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    private class changePw implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            JPasswordField passwordField = new JPasswordField();
+            JPasswordField confirmPasswordField = new JPasswordField();
+
+            Object[] message = {
+                "Enter Password:", passwordField,
+                "Confirm Password:", confirmPasswordField
+            };
+
+            int option = JOptionPane.showConfirmDialog(
+                    profView,
+                    message,
+                    "Change Password",
+                    JOptionPane.OK_CANCEL_OPTION,
+                    JOptionPane.PLAIN_MESSAGE
+            );
+
+            if (option == JOptionPane.OK_OPTION) {
+                String password = new String(passwordField.getPassword());
+                String confirmPassword = new String(confirmPasswordField.getPassword());
+
+                if (password.equals(confirmPassword)) {
+                    userDao.updatePassword(SessionUtil.getCurrentUser().getEmail(), password);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Passwords do not match!", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+
     }
 
     private  class addDP implements ActionListener {
