@@ -53,6 +53,8 @@ public class UserCard extends javax.swing.JPanel {
         email = new javax.swing.JLabel();
         tickets = new javax.swing.JLabel();
 
+        setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
         dp.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         dp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/Profile.png"))); // NOI18N
 
@@ -86,7 +88,7 @@ public class UserCard extends javax.swing.JPanel {
                     .addComponent(namelbl, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(number, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
+                            .addComponent(number, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
                             .addComponent(email, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(5, 5, 5)
                         .addComponent(ban_btn))

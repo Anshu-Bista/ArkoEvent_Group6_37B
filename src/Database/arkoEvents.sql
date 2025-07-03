@@ -94,4 +94,6 @@ END //
 
 DELIMITER ;
 
-
+SELECT * FROM users;
+SELECT * FROM events;
+SELECT * FROM bookings;
