@@ -232,15 +232,15 @@ public class AdminProfile extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bookingsbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookingsbtnActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_bookingsbtnActionPerformed
 
     private void upload_btnActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_upload_btnActionPerformed
-        // TODO add your handling code here:
+        
     }// GEN-LAST:event_upload_btnActionPerformed
 
     private void name_fldActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_name_fldActionPerformed
-        // TODO add your handling code here:
+
     }// GEN-LAST:event_name_fldActionPerformed
 
     private void save_btnActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_save_btnActionPerformed
