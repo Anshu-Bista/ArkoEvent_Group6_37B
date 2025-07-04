@@ -23,7 +23,7 @@ public class BookingsController {
     public javax.swing.JPanel eventsContainer;
     
     public BookingsController(Bookings bookings){
-        System.out.println("inBookingsControllee");
+        
         this.bookingsPage = bookings;
         
         this.bookingsPage.addLogoutListener(e -> SessionUtil.logout(bookingsPage));

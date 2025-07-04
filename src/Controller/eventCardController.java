@@ -85,7 +85,7 @@ public class eventCardController {
         card.Description.setText(event.getDescription());
         card.price.setText("NPR "+Double.toString(event.getPrice()));
         if(booked){
-            card.left.setText(Integer.toString(event.getTicketsAvailable())+" Booked");
+            card.left.setText(Integer.toString(event.getTicketsSold())+" Booked");
         }else{
             card.left.setText(Integer.toString(event.getTicketsAvailable()-event.getTicketsSold())+ " Left");
         }
