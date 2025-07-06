@@ -3,3 +3,4 @@ Added navbar
 Login page work
 Connected backend API
 Cleaned unused code
+Final polish
